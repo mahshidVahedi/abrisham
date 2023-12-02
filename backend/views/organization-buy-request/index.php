@@ -1,0 +1,50 @@
+<?php
+
+use backend\models\OrganizationBuyRequest;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+
+/** @var yii\web\View $this */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+
+$this->title = 'Organization Buy Requests';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="organization-buy-request-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Create Organization Buy Request', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'date',
+            'manager_name',
+            'manager_lname',
+            'manager_ncode',
+            'manager_phone',
+            'manager_gender',
+            'manager_email:email',
+            'org_name',
+            'org_address',
+            'org_phone',
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, OrganizationBuyRequest $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                 }
+            ],
+        ],
+    ]); ?>
+
+
+</div>
