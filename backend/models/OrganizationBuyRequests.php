@@ -58,21 +58,21 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'date' => 'Date',
-            'manager_name' => 'Manager Name',
-            'manager_lastname' => 'Manager Lastname',
-            'manager_nationality_code' => 'Manager Nationality Code',
-            'manager_mobile' => 'Manager Mobile',
-            'manager_gender' => 'Manager Gender',
-            'manager_email' => 'Manager Email',
-            'organization_name' => 'Organization Name',
-            'organixation_address' => 'Organixation Address',
-            'organization_phone' => 'Organization Phone',
+            'id' => 'شناسه',
+            'date' => 'تاریخ',
+            'manager_name' => 'نام مدیر',
+            'manager_lastname' => 'نام خانوادگی مدیر',
+            'manager_nationality_code' => 'کد ملی مدیر',
+            'manager_mobile' => 'تلفن همراه مدیر',
+            'manager_gender' => 'جنسیت مدیر',
+            'manager_email' => 'ایمیل مدیر',
+            'organization_name' => 'نام سازمان',
+            'organixation_address' => 'آدرس سازمان',
+            'organization_phone' => 'تلفن سازمان',
             'unique_key' => 'Unique Key',
             'created_at' => 'Created At',
-            'sale_date' => 'Sale Date',
-            'seller_id' => 'Seller ID',
+            'sale_date' => 'تاریخ فروش',
+            'seller_id' => 'فروشنده',
         ];
     }
 

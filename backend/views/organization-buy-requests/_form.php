@@ -8,11 +8,9 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="organization-buy-requests-form">
+<div class="organization-buy-requests-form" style="direction: rtl;">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'date')->textInput() ?>
 
     <?= $form->field($model, 'manager_name')->textInput(['maxlength' => true]) ?>
 
@@ -32,15 +30,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'organization_phone')->textInput() ?>
 
-    <?= $form->field($model, 'unique_key')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'unique_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'sale_date')->textInput() ?>
+    <?= $form->field($model, 'created_at')->textInput() ?> -->
 
     <?= $form->field($model, 'seller_id')->textInput() ?>
 
-    <div class="form-group">
+    <div class="form-group" style="float: left; margin-top: 5%;">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 

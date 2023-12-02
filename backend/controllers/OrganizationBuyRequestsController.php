@@ -82,6 +82,7 @@ class OrganizationBuyRequestsController extends Controller
 
         if ($this->request->isPost) {
             $model->date= Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->sale_date= Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
