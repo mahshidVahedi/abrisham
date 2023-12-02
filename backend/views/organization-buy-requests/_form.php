@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'manager_mobile')->textInput() ?>
 
-    <?= $form->field($model, 'manager_gender')->dropDownList([ 'female' => 'Female', 'male' => 'Male', '' => '', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'manager_gender')->dropDownList([ 'female' => 'Female', 'male' => 'Male',], ['prompt' => 'انتخاب کنید']) ?>
 
     <?= $form->field($model, 'manager_email')->textInput(['maxlength' => true]) ?>
 
@@ -30,11 +30,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'organization_phone')->textInput() ?>
 
-    <!-- <?= $form->field($model, 'unique_key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?> -->
-
-    <?= $form->field($model, 'seller_id')->textInput() ?>
 
     <div class="form-group" style="float: left; margin-top: 5%;">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'unique_key',
             'created_at',
             'sale_date',
-            'seller_id',
+            'seller_user_id',
         ],
     ]) ?>
 

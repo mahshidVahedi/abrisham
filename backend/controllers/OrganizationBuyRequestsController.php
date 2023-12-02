@@ -3,12 +3,12 @@
 namespace backend\controllers;
 
 use backend\models\OrganizationBuyRequests;
+use yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
-use yii;
 /**
  * OrganizationBuyRequestsController implements the CRUD actions for OrganizationBuyRequests model.
  */
@@ -42,15 +42,15 @@ class OrganizationBuyRequestsController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => OrganizationBuyRequests::find(),
             /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
+        'pagination' => [
+        'pageSize' => 50
+        ],
+        'sort' => [
+        'defaultOrder' => [
+        'id' => SORT_DESC,
+        ]
+        ],
+         */
         ]);
 
         return $this->render('index', [
@@ -79,12 +79,17 @@ class OrganizationBuyRequestsController extends Controller
     public function actionCreate()
     {
         $model = new OrganizationBuyRequests();
-
+        $model->scenario = 'scenarioCreate';
+        $str = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         if ($this->request->isPost) {
-            $model->date= Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-            $model->sale_date= Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->sale_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->unique_key = substr(str_shuffle($str), 0, 6);
+            $model->seller_user_id = 1;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                print_r($model->getErrors());
+                die;
             }
         } else {
             $model->loadDefaultValues();
@@ -105,8 +110,9 @@ class OrganizationBuyRequestsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->scenario = 'scenarioUpdate';
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            $model->date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -144,4 +150,5 @@ class OrganizationBuyRequestsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'organixation_address',
             'organization_phone',
             'sale_date',
-            'seller_id',
+            'seller_user_id',
             'unique_key',
             //'created_at',
             [
