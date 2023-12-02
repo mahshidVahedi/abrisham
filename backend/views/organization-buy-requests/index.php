@@ -1,6 +1,6 @@
 <?php
 
-use backend\models\OrganizationBuyRequest;
+use backend\models\OrganizationBuyRequests;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -12,12 +12,12 @@ use yii\grid\GridView;
 $this->title = 'Organization Buy Requests';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="organization-buy-request-index">
+<div class="organization-buy-requests-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Organization Buy Request', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Organization Buy Requests', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -29,17 +29,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'date',
             'manager_name',
-            'manager_lname',
-            'manager_ncode',
-            'manager_phone',
-            'manager_gender',
-            'manager_email:email',
-            'org_name',
-            'org_address',
-            'org_phone',
+            'manager_lastname',
+            'manager_nationality_code',
+            //'manager_mobile',
+            //'manager_gender',
+            //'manager_email:email',
+            //'organization_name',
+            //'organixation_address',
+            //'organization_phone',
+            //'unique_key',
+            //'created_at',
+            //'sale_date',
+            //'seller_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, OrganizationBuyRequest $model, $key, $index, $column) {
+                'urlCreator' => function ($action, OrganizationBuyRequests $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

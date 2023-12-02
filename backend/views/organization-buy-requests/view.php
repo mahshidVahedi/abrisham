@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\OrganizationBuyRequest $model */
+/** @var backend\models\OrganizationBuyRequests $model */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Organization Buy Requests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="organization-buy-request-view">
+<div class="organization-buy-requests-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -32,14 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'date',
             'manager_name',
-            'manager_lname',
-            'manager_ncode',
-            'manager_phone',
+            'manager_lastname',
+            'manager_nationality_code',
+            'manager_mobile',
             'manager_gender',
             'manager_email:email',
-            'org_name',
-            'org_address',
-            'org_phone',
+            'organization_name',
+            'organixation_address',
+            'organization_phone',
+            'unique_key',
+            'created_at',
+            'sale_date',
+            'seller_id',
         ],
     ]) ?>
 

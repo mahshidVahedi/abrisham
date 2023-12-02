@@ -2,17 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\OrganizationBuyRequest;
+use backend\models\OrganizationBuyRequests;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii;
 
+use yii;
 /**
- * OrganizationBuyRequestController implements the CRUD actions for OrganizationBuyRequest model.
+ * OrganizationBuyRequestsController implements the CRUD actions for OrganizationBuyRequests model.
  */
-class OrganizationBuyRequestController extends Controller
+class OrganizationBuyRequestsController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,14 +33,14 @@ class OrganizationBuyRequestController extends Controller
     }
 
     /**
-     * Lists all OrganizationBuyRequest models.
+     * Lists all OrganizationBuyRequests models.
      *
      * @return string
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => OrganizationBuyRequest::find(),
+            'query' => OrganizationBuyRequests::find(),
             /*
             'pagination' => [
                 'pageSize' => 50
@@ -59,8 +59,8 @@ class OrganizationBuyRequestController extends Controller
     }
 
     /**
-     * Displays a single OrganizationBuyRequest model.
-     * @param int $id شناسه
+     * Displays a single OrganizationBuyRequests model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -72,13 +72,13 @@ class OrganizationBuyRequestController extends Controller
     }
 
     /**
-     * Creates a new OrganizationBuyRequest model.
+     * Creates a new OrganizationBuyRequests model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new OrganizationBuyRequest();
+        $model = new OrganizationBuyRequests();
 
         if ($this->request->isPost) {
             $model->date= Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
@@ -95,9 +95,9 @@ class OrganizationBuyRequestController extends Controller
     }
 
     /**
-     * Updates an existing OrganizationBuyRequest model.
+     * Updates an existing OrganizationBuyRequests model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id شناسه
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -115,9 +115,9 @@ class OrganizationBuyRequestController extends Controller
     }
 
     /**
-     * Deletes an existing OrganizationBuyRequest model.
+     * Deletes an existing OrganizationBuyRequests model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id شناسه
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -129,15 +129,15 @@ class OrganizationBuyRequestController extends Controller
     }
 
     /**
-     * Finds the OrganizationBuyRequest model based on its primary key value.
+     * Finds the OrganizationBuyRequests model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id شناسه
-     * @return OrganizationBuyRequest the loaded model
+     * @param int $id ID
+     * @return OrganizationBuyRequests the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = OrganizationBuyRequest::findOne(['id' => $id])) !== null) {
+        if (($model = OrganizationBuyRequests::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
