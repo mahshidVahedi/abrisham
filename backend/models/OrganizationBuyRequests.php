@@ -21,9 +21,9 @@ use Yii;
  * @property string $unique_key
  * @property int|null $created_at
  * @property string $sale_date
- * @property int $seller_user_id
+ * @property int $seller_user_id *
  * @property string $status
- *
+ * @property string $process_status
  * @property Users $seller
  */
 class OrganizationBuyRequests extends \yii\db\ActiveRecord
@@ -31,6 +31,7 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
 {
     const SCENARIO_CREATE = 'scenarioCreate';
     const SCENARIO_UPDATE = 'scenarioUpdate';
+
     public function getCustomScenarios()
     {
         return [
@@ -71,7 +72,6 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
         return [
             [$allScenarios[self::SCENARIO_CREATE], 'required', 'on' => self::SCENARIO_CREATE],
             [$allScenarios[self::SCENARIO_UPDATE], 'required', 'on' => self::SCENARIO_UPDATE],
-            [['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'unique_key', 'sale_date', 'seller_user_id'], 'required'],
             [['date', 'sale_date'], 'safe'],
             [['manager_nationality_code', 'manager_mobile', 'organization_phone', 'created_at', 'seller_user_id'], 'integer'],
             [['manager_gender'], 'string'],
@@ -103,7 +103,8 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'sale_date' => 'تاریخ فروش',
             'seller_user_id' => 'فروشنده',
-            'status' => 'وضعیت'
+            'status' => 'وضعیت',
+            'process_status' => 'فرآیند'
         ];
     }
 

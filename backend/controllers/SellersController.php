@@ -9,9 +9,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SellerController implements the CRUD actions for Sellers model.
+ * SellersController implements the CRUD actions for Sellers model.
  */
-class SellerController extends Controller
+class SellersController extends Controller
 {
     /**
      * @inheritDoc

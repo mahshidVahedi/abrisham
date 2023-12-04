@@ -38,7 +38,8 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Partners', 'url' => ['/partners/index']],
         ['label' => 'verify comments', 'url' => ['/comment-to-home-page/index']],
-        ['label' => 'buy request', 'url' => ['/organization-buy-requests/create']],
+        ['label' => 'buy requests', 'url' => ['/organization-buy-requests/index']],
+        ['label' => 'sellers', 'url' => ['/sellers/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

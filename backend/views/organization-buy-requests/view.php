@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update by seller', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Update by customer', ['updateByCustomer', 'unique_key' => $model->unique_key], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update by customer', ['updateCustomer', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <!--
              <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

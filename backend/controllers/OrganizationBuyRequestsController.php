@@ -86,7 +86,7 @@ class OrganizationBuyRequestsController extends Controller
             $model->unique_key = substr(str_shuffle($str), 0, 6);
             $model->seller_user_id = 1;
             if ($model->load($this->request->post()) && $model->save()) {
-                $model-> status='created by admin';
+                $model->status = 'created by admin';
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 print_r($model->getErrors());
@@ -111,10 +111,8 @@ class OrganizationBuyRequestsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = 'scenarioUpdate';
+        $model->scenario='scenarioCreate';
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-            $model-> status='updated by seller';
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -123,17 +121,15 @@ class OrganizationBuyRequestsController extends Controller
         ]);
     }
 
-    public function actionUpdateByCustomer($unique_key)
+    public function actionUpdateCustomer($id)
     {
-        $model = $this->findModel($unique_key);
-        $model->scenario = 'scenarioUpdate';
+        $model = $this->findModel($id);
+        $model->scenario='scenarioUpdate';
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-            $model-> status='updated by customer';
-            return $this->redirect(['view', 'unique_key' => $model->unique_key]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->render('updateByCustomer', [
             'model' => $model,
         ]);
     }
