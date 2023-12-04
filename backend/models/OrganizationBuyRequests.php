@@ -22,6 +22,7 @@ use Yii;
  * @property int|null $created_at
  * @property string $sale_date
  * @property int $seller_user_id
+ * @property string $status
  *
  * @property Users $seller
  */
@@ -102,6 +103,7 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'sale_date' => 'تاریخ فروش',
             'seller_user_id' => 'فروشنده',
+            'status' => 'وضعیت'
         ];
     }
 

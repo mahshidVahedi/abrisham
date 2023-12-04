@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sale_date',
             'seller_user_id',
             'unique_key',
+            'status',
             //'created_at',
             [
                 'class' => ActionColumn::className(),
