@@ -16,8 +16,9 @@ use Yii;
  * @property string|null $manager_gender
  * @property string|null $manager_email
  * @property string $organization_name
- * @property string|null $organixation_address
+ * @property string|null $organization_address
  * @property string|null $organization_phone
+ * @property string $school_type
  * @property string $unique_key
  * @property int|null $created_at
  * @property string $seller_update_date
@@ -72,15 +73,15 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
     {
         return [
             [['manager_mobile', 'seller_user_id', 'seller_update_date', 'unique_key', 'organization_name'], 'required', 'on' => self::SCENARIO_CREATE],
-            [['create_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name'], 'safe', 'on' => self::SCENARIO_CREATE],
-            [['create_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name'], 'required', 'on' => self::SCENARIO_UPDATE],
+            [['create_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'safe', 'on' => self::SCENARIO_CREATE],
+            [['create_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'required', 'on' => self::SCENARIO_UPDATE],
             [['create_sale_date', 'seller_update_date'], 'safe'],
             [['manager_mobile'], 'match', 'pattern' => '/^(\+98|0)?9\d{9}$/', 'message' => 'شماره موبایل معتبر نیست.', 'on' => self::SCENARIO_CREATE] , 
             [['manager_nationality_code'], 'match', 'pattern'=>'/^\\d{10}$/', 'message'=>'کد ملی معتبر نیست.', 'on'=> self::SCENARIO_UPDATE],
             [['manager_nationality_code'], 'match', 'pattern'=>'/^\\d{10}$/', 'message'=>'کد ملی معتبر نیست.', 'on'=> self::SCENARIO_CREATE],
             [['created_at', 'seller_user_id', 'pre_school_1', 'pre_school_2', 'first', 'secound', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth_math', 'tenth_humanities', 'tenth_empirical', 'eleventh_math', 'eleventh_humanities', 'eleventh_empirical', 'twelfth_math', 'twelfth_humanities', 'twelfth_empirical'], 'integer'],
             [['manager_gender', 'status', 'process_status'], 'string'],
-            [['manager_name', 'manager_lastname', 'manager_email', 'organization_name', 'organixation_address'], 'string', 'max' => 255],
+            [['manager_name', 'manager_lastname', 'manager_email', 'organization_name', 'organization_address'], 'string', 'max' => 255],
             [['manager_nationality_code', 'organization_phone'], 'string', 'max' => 11],
             [['unique_key'], 'string', 'max' => 6],
             [['organization_name'], 'unique'],
@@ -103,8 +104,9 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
             'manager_gender' => 'جنسیت مدیر',
             'manager_email' => 'ایمیل مدیر',
             'organization_name' => 'نام سازمان',
-            'organixation_address' => 'آدرس سازمان',
+            'organization_address' => 'آدرس سازمان',
             'organization_phone' => 'تلفن سازمان',
+            'school_type' => 'نوع مدرسه',
             'unique_key' => 'کلید یکتا',
             'created_at' => 'Created At',
             'seller_update_date' => 'تاریخ به روزرسانی توسط فروشنده',

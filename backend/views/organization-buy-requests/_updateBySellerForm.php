@@ -23,9 +23,11 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'manager_email')->textInput(['maxlength' => true])?>
 
-    <?=$form->field($model, 'organixation_address')->textInput(['maxlength' => true])?>
+    <?=$form->field($model, 'organization_address')->textInput(['maxlength' => true])?>
 
     <?=$form->field($model, 'organization_phone')->textInput()?>
+
+    <?=$form->field($model, 'school_type')->dropDownList(['girl' => 'دخترانه', 'boy' => 'پسرانه'], ['prompt' => 'انتخاب کنید'])?>
 
     <?= $form->field($model, 'pre_school_1')->checkbox()?>
 

@@ -18,7 +18,7 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
     {
         return [
             [['id', 'manager_mobile', 'created_at', 'seller_user_id', 'pre_school_1', 'pre_school_2', 'first', 'secound', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth_math', 'tenth_humanities', 'tenth_empirical', 'eleventh_math', 'eleventh_humanities', 'eleventh_empirical', 'twelfth_math', 'twelfth_humanities', 'twelfth_empirical'], 'integer'],
-            [['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_gender', 'manager_email', 'organization_name', 'organixation_address', 'organization_phone', 'unique_key', 'sale_date', 'status', 'process_status'], 'safe'],
+            [['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_gender', 'manager_email', 'organization_name', 'organization_address', 'organization_phone', 'unique_key', 'sale_date', 'status', 'process_status'], 'safe'],
         ];
     }
 
@@ -93,7 +93,7 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
             ->andFilterWhere(['like', 'manager_gender', $this->manager_gender])
             ->andFilterWhere(['like', 'manager_email', $this->manager_email])
             ->andFilterWhere(['like', 'organization_name', $this->organization_name])
-            ->andFilterWhere(['like', 'organixation_address', $this->organixation_address])
+            ->andFilterWhere(['like', 'organization_address', $this->organization_address])
             ->andFilterWhere(['like', 'organization_phone', $this->organization_phone])
             ->andFilterWhere(['like', 'unique_key', $this->unique_key])
             ->andFilterWhere(['like', 'status', $this->status])

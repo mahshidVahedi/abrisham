@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Organization Buy Requests', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -38,36 +37,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'manager_gender',
             'manager_email:email',
             'organization_name',
-            'organixation_address',
+            'organization_address',
             'organization_phone',
+            'school_type',
             'unique_key',
-            //'created_at',
             'seller_update_date',
             'customer_update_date',
             'seller_user_id',
             'status',
             'process_status',
             'final_sale_date',
-            //'pre_school_1',
-            //'pre_school_2',
-            //'first',
-            //'secound',
-            //'third',
-            //'fourth',
-            //'fifth',
-            //'sixth',
-            //'seventh',
-            //'eighth',
-            //'ninth',
-            //'tenth_math',
-            //'tenth_humanities',
-            //'tenth_empirical',
-            //'eleventh_math',
-            //'eleventh_humanities',
-            //'eleventh_empirical',
-            //'twelfth_math',
-            //'twelfth_humanities',
-            //'twelfth_empirical',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, OrganizationBuyRequests $model, $key, $index, $column) {
