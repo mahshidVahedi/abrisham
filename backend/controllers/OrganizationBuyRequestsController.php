@@ -83,23 +83,15 @@ class OrganizationBuyRequestsController extends Controller
             $model->seller_user_id = 1;
 
             if ($model->load($this->request->post()) && $model->save()) {
-
                 $model->status = 'CREATED';
-
+                
                 return $this->redirect(['view', 'id' => $model->id]);
-
             } else {
-
                 print_r($model->getErrors());
-
                 die;
-
             }
-
         } else {
-
             $model->loadDefaultValues();
-
         }
 
         return $this->render('create', [
@@ -128,17 +120,17 @@ class OrganizationBuyRequestsController extends Controller
 
         $model->scenario = 'scenarioCreate';
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-
+        if ($this->request->isPost) {
+            $model->date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $model->status = 'UPDATED_BY_SELLER';
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) && $model->save()) {
 
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('updateBySeller', [
-
             'model' => $model,
-
         ]);
 
     }
@@ -149,11 +141,13 @@ class OrganizationBuyRequestsController extends Controller
 
         $model->scenario = 'scenarioUpdate';
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-
+        if ($this->request->isPost) {
+            $model->date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $model->status = 'UPDATED_BY_CUSTOMER';
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) && $model->save()) {
 
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
         return $this->render('updateByCustomer', [
 
@@ -216,6 +210,14 @@ class OrganizationBuyRequestsController extends Controller
         }
         throw new NotFoundHttpException('The requested page does not exist.');
 
+    }
+    protected function validateMobile($model)
+    {
+        if (preg_match('/^(\+98|0)?9\d{9}$/', $model->manager_mobile)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
