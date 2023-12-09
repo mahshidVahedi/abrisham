@@ -11,7 +11,7 @@ use Yii;
  * @property string $date
  * @property string $manager_name
  * @property string $manager_lastname
- * @property int $manager_nationality_code
+ * @property string $manager_nationality_code
  * @property int $manager_mobile
  * @property string $manager_gender
  * @property string|null $manager_email
@@ -32,28 +32,6 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
     const SCENARIO_CREATE = 'scenarioCreate';
     const SCENARIO_UPDATE = 'scenarioUpdate';
 
-    public function getCustomScenarios()
-    {
-        return [
-            self::SCENARIO_CREATE => ['manager_mobile', 'seller_user_id', 'sale_date', 'unique_key', 'organization_name'],
-            self::SCENARIO_UPDATE => ['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name'],
-        ];
-    }
-    // get scenarios
-    public function scenarios()
-    {
-        $scenarios = $this->getCustomScenarios();
-        return $scenarios;
-    }
-
-    // modify items required for rules
-    public function ModifyRequired()
-    {
-        $allScenarios = $this->getCustomScenarios();
-        // published not required
-        $allScenarios[self::SCENARIO_CREATE] = array_diff($allScenarios[self::SCENARIO_CREATE], ['published']);
-        return $allScenarios;
-    }
     /**
      * {@inheritdoc}
      */
@@ -67,15 +45,14 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        // get scenarios
-        $allScenarios = $this->ModifyRequired();
         return [
-            [$allScenarios[self::SCENARIO_CREATE], 'required', 'on' => self::SCENARIO_CREATE],
-            [$allScenarios[self::SCENARIO_UPDATE], 'required', 'on' => self::SCENARIO_UPDATE],
+            [['manager_mobile', 'seller_user_id', 'sale_date', 'unique_key', 'organization_name'], 'required', 'on' => self::SCENARIO_CREATE],
+            [['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name'], 'safe', 'on' => self::SCENARIO_CREATE],
+            [['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name'], 'required', 'on' => self::SCENARIO_UPDATE],
             [['date', 'sale_date'], 'safe'],
-            [['manager_nationality_code', 'manager_mobile', 'organization_phone', 'created_at', 'seller_user_id'], 'integer'],
+            [['manager_mobile', 'organization_phone', 'created_at', 'seller_user_id'], 'integer'],
             [['manager_gender'], 'string'],
-            [['manager_name', 'manager_lastname', 'manager_email', 'organization_name', 'organixation_address'], 'string', 'max' => 255],
+            [['manager_name', 'manager_lastname','manager_nationality_code', 'manager_email', 'organization_name', 'organixation_address'], 'string', 'max' => 255],
             [['unique_key'], 'string', 'max' => 6],
             [['organization_name'], 'unique'],
             [['seller_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['seller_user_id' => 'id']],
