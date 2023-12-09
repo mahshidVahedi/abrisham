@@ -17,10 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update by seller', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Update by customer', ['updateCustomer', 'unique_key' => $model->unique_key], ['class' => 'btn btn-primary']) ?>
-    </p>
-
-    <?= DetailView::widget([
+        <?= Html::a('Update by customer', ['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key], ['class' => 'btn btn-primary']) ?>    <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -39,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sale_date',
             'seller_user_id',
             'status',
+            'process_status'
         ],
     ]) ?>
 

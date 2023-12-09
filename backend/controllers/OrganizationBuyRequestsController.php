@@ -4,9 +4,10 @@ namespace backend\controllers;
 
 use backend\models\OrganizationBuyRequests;
 use backend\models\OrganizationBuyRequestsSearch;
+use yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * OrganizationBuyRequestsController implements the CRUD actions for OrganizationBuyRequests model.
@@ -69,13 +70,36 @@ class OrganizationBuyRequestsController extends Controller
     {
         $model = new OrganizationBuyRequests();
 
+        $model->scenario = 'scenarioCreate';
+
+        $str = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
         if ($this->request->isPost) {
 
+            $model->sale_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+
+            $model->unique_key = substr(str_shuffle($str), 0, 6);
+
+            $model->seller_user_id = 1;
+
             if ($model->load($this->request->post()) && $model->save()) {
+
+                $model->status = 'created by admin';
+
                 return $this->redirect(['view', 'id' => $model->id]);
+
+            } else {
+
+                print_r($model->getErrors());
+
+                die;
+
             }
+
         } else {
+
             $model->loadDefaultValues();
+
         }
 
         return $this->render('create', [
@@ -98,20 +122,18 @@ class OrganizationBuyRequestsController extends Controller
      */
 
     public function actionUpdate($id)
-
     {
 
         $model = $this->findModel($id);
 
-        $model->scenario='scenarioCreate';
+        $model->scenario = 'scenarioCreate';
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
+            $model->status = 'updated by seller';
             return $this->redirect(['view', 'id' => $model->id]);
 
         }
-
- 
 
         return $this->render('updateBySeller', [
 
@@ -121,24 +143,18 @@ class OrganizationBuyRequestsController extends Controller
 
     }
 
- 
-
-    public function actionUpdateCustomer($id)
-
+    public function actionUpdateCustomer($unique_key)
     {
+        $model = $this->findModelByUniqueKey($unique_key);
 
-        $model = $this->findModel($id);
-
-        $model->scenario='scenarioUpdate';
+        $model->scenario = 'scenarioUpdate';
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
+            $model->status = 'updated by customer';
             return $this->redirect(['view', 'id' => $model->id]);
 
         }
-
- 
-
         return $this->render('updateByCustomer', [
 
             'model' => $model,
@@ -146,8 +162,6 @@ class OrganizationBuyRequestsController extends Controller
         ]);
 
     }
-
- 
 
     /**
 
@@ -163,17 +177,14 @@ class OrganizationBuyRequestsController extends Controller
 
      */
 
-    // public function actionDelete($id)
+    public function actionDelete($id)
+    {
 
-    // {
+        $this->findModel($id)->delete();
 
-    //     $this->findModel($id)->delete();
+        return $this->redirect(['index']);
 
-    //     return $this->redirect(['index']);
-
-    // }
-
- 
+    }
 
     /**
 
@@ -190,21 +201,21 @@ class OrganizationBuyRequestsController extends Controller
      */
 
     protected function findModel($id)
-
     {
-
         if (($model = OrganizationBuyRequests::findOne(['id' => $id])) !== null) {
-
             return $model;
-
         }
-
- 
-
         throw new NotFoundHttpException('The requested page does not exist.');
 
     }
 
- 
+    protected function findModelByUniqueKey($unique_key)
+    {
+        if (($model = OrganizationBuyRequests::findOne(['unique_key' => $unique_key])) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('The requested page does not exist.');
+
+    }
 
 }
