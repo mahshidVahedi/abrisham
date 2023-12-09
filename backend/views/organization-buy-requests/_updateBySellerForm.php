@@ -11,8 +11,6 @@ use yii\widgets\ActiveForm;
 <div class="organization-buy-requests-form" style="direction: rtl;">
     <?php $form = ActiveForm::begin();?>
 
-    <?=$form->field($model, 'manager_mobile')->textInput()?>
-
     <?=$form->field($model, 'organization_name')->textInput(['maxlength' => true])?>
 
     <?=$form->field($model, 'manager_name')->textInput(['maxlength' => true])?>

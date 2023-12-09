@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'date',
+            'create_sale_date',
             'manager_name',
             'manager_lastname',
             'manager_nationality_code',
@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'organization_phone',
             'unique_key',
             'created_at',
-            'sale_date',
+            'seller_update_date',
+            'customer_update_date',
             'seller_user_id',
             'status',
             'process_status',
@@ -60,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'twelfth_math',
             'twelfth_humanities',
             'twelfth_empirical',
+            'final_sale_date',
         ],
     ]) ?>
 

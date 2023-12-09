@@ -8,90 +8,38 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="organization-buy-requests-search">
+<div class="organization-buy-requests-search d-flex justify-content-between flex-wrap " style="direction: rtl;">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => ['class' => 'row'], // Add the 'row' class to the form
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="col-md-4"> 
+        <?= $form->field($model, 'create_sale_date') ?>
+        <?= $form->field($model, 'manager_name') ?>
+        <?= $form->field($model, 'manager_lastname') ?>
+        <?= $form->field($model, 'manager_nationality_code') ?>
+        <?= $form->field($model, 'manager_gender')->dropDownList(['FEMALE' => 'خانم', 'MALE' => 'آقا'], ['prompt' => 'انتخاب کنید']) ?>
+    </div>
+    <div class="col-md-4">
+        <?php echo $form->field($model, 'unique_key') ?>
+        <?php echo $form->field($model, 'seller_update_date') ?>
+        <?php echo $form->field($model, 'customer_update_date') ?>
+        <?php echo $form->field($model, 'manager_mobile') ?>
+        <?php echo $form->field($model, 'organization_name') ?>
+    </div>
+    <div class="col-md-4"> 
+        <?php echo $form->field($model, 'seller_user_id') ?>
+        <?= $form->field($model, 'status')->dropDownList(['CREATED' => 'ایجاد شده', 'UPDATED_BY_SELLER' => 'به روز رسانی توسط فروشنده', 'UPDATED_BY_CUSTOMER' => 'به روز رسانی توسط مشتری', 'COMPLETED_BY_SELLER'=> 'کامل شده توسط فروشنده', 'ARCHIEVED' => 'آرشیو شده' ],['prompt' => 'انتخاب کنید']) ?>
+        <?= $form->field($model, 'process_status')->dropDownList(['FINAL_REGISTER' => 'ثبت نهایی', 'FINAL_DEVELOP' => 'توسعه نهایی'], ['prompt' => 'انتخاب کنید']) ?>
+        <?php echo $form->field($model, 'final_sale_date') ?>
+    </div>
 
-    <?= $form->field($model, 'date') ?>
-
-    <?= $form->field($model, 'manager_name') ?>
-
-    <?= $form->field($model, 'manager_lastname') ?>
-
-    <?= $form->field($model, 'manager_nationality_code') ?>
-
-    <?php echo $form->field($model, 'manager_mobile') ?>
-
-    <?php echo $form->field($model, 'manager_gender') ?>
-    
-    <?php echo $form->field($model, 'manager_email') ?>
-    
-    <?php echo $form->field($model, 'organization_name') ?>
-    
-    <?php echo $form->field($model, 'organixation_address') ?>
-    
-    <?php echo $form->field($model, 'organization_phone') ?>
-    
-    <?php echo $form->field($model, 'unique_key') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php echo $form->field($model, 'sale_date') ?>
-
-    <?php echo $form->field($model, 'seller_user_id') ?>
-
-    <?php echo $form->field($model, 'status') ?>
-
-    <?php echo $form->field($model, 'process_status') ?>
-
-    <?php // echo $form->field($model, 'pre_school_1') ?>
-
-    <?php // echo $form->field($model, 'pre_school_2') ?>
-
-    <?php // echo $form->field($model, 'first') ?>
-
-    <?php // echo $form->field($model, 'secound') ?>
-
-    <?php // echo $form->field($model, 'third') ?>
-
-    <?php // echo $form->field($model, 'fourth') ?>
-
-    <?php // echo $form->field($model, 'fifth') ?>
-
-    <?php // echo $form->field($model, 'sixth') ?>
-
-    <?php // echo $form->field($model, 'seventh') ?>
-
-    <?php // echo $form->field($model, 'eighth') ?>
-
-    <?php // echo $form->field($model, 'ninth') ?>
-
-    <?php // echo $form->field($model, 'tenth_math') ?>
-
-    <?php // echo $form->field($model, 'tenth_humanities') ?>
-
-    <?php // echo $form->field($model, 'tenth_empirical') ?>
-
-    <?php // echo $form->field($model, 'eleventh_math') ?>
-
-    <?php // echo $form->field($model, 'eleventh_humanities') ?>
-
-    <?php // echo $form->field($model, 'eleventh_empirical') ?>
-
-    <?php // echo $form->field($model, 'twelfth_math') ?>
-
-    <?php // echo $form->field($model, 'twelfth_humanities') ?>
-
-    <?php // echo $form->field($model, 'twelfth_empirical') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="form-group mt-4 mb-6">
+        <?= Html::submitButton('جستجو', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('ریست', ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

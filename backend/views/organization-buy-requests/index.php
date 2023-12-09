@@ -21,16 +21,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Organization Buy Requests', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'date',
+            'create_sale_date',
             'manager_name',
             'manager_lastname',
             'manager_nationality_code',
@@ -42,10 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'organization_phone',
             'unique_key',
             //'created_at',
-            'sale_date',
+            'seller_update_date',
+            'customer_update_date',
             'seller_user_id',
             'status',
             'process_status',
+            'final_sale_date',
             //'pre_school_1',
             //'pre_school_2',
             //'first',

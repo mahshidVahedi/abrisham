@@ -59,10 +59,11 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date' => $this->date,
+            'create_sale_date' => $this->create_sale_date,
             'manager_mobile' => $this->manager_mobile,
             'created_at' => $this->created_at,
-            'sale_date' => $this->sale_date,
+            'seller_update_date' => $this->seller_update_date,
+            'customer_update_date' => $this->customer_update_date,
             'seller_user_id' => $this->seller_user_id,
             'pre_school_1' => $this->pre_school_1,
             'pre_school_2' => $this->pre_school_2,

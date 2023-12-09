@@ -70,7 +70,7 @@ class OrganizationBuyRequestsController extends Controller
 
         if ($this->request->isPost) {
 
-            $model->sale_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->create_sale_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
 
             $model->unique_key = substr(str_shuffle($str), 0, 6);
 
@@ -115,11 +115,16 @@ class OrganizationBuyRequestsController extends Controller
         $model->scenario = 'scenarioCreate';
 
         if ($this->request->isPost) {
-            $model->date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->seller_update_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $model->status = 'UPDATED_BY_SELLER';
-            if ($model->load($this->request->post()) && $model->save()) {
-
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                if($model->process_status=='FINAL_REGISTER'){
+                    $model->final_sale_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+                    $model->status = 'COMPLETED_BY_SELLER';
+                }
+                if($model->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         }
 
@@ -136,7 +141,7 @@ class OrganizationBuyRequestsController extends Controller
         $model->scenario = 'scenarioUpdate';
 
         if ($this->request->isPost) {
-            $model->date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->customer_update_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $model->status = 'UPDATED_BY_CUSTOMER';
             if ($model->load($this->request->post()) && $model->save()) {
 
@@ -188,13 +193,5 @@ class OrganizationBuyRequestsController extends Controller
         }
         throw new NotFoundHttpException('The requested page does not exist.');
 
-    }
-    protected function validateMobile($model)
-    {
-        if (preg_match('/^(\+98|0)?9\d{9}$/', $model->manager_mobile)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

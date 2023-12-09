@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'manager_lastname')->textInput(['maxlength' => true])?>
 
+    <?=$form->field($model, 'manager_nationality_code')->textInput()?>
+
     <?=$form->field($model, 'manager_gender')->dropDownList(['FEMALE' => 'خانم', 'MALE' => 'آقا'], ['prompt' => 'انتخاب کنید'])?>
 
     <?=$form->field($model, 'manager_email')->textInput(['maxlength' => true])?>
