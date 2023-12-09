@@ -4,11 +4,10 @@ namespace backend\controllers;
 
 use backend\models\OrganizationBuyRequests;
 use backend\models\OrganizationBuyRequestsSearch;
-use yii;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-
+use yii\filters\VerbFilter;
+use yii;
 /**
  * OrganizationBuyRequestsController implements the CRUD actions for OrganizationBuyRequests model.
  */
@@ -50,7 +49,7 @@ class OrganizationBuyRequestsController extends Controller
 
     /**
      * Displays a single OrganizationBuyRequests model.
-     * @param int $id شناسه
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -61,11 +60,6 @@ class OrganizationBuyRequestsController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new OrganizationBuyRequests model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new OrganizationBuyRequests();
@@ -158,49 +152,33 @@ class OrganizationBuyRequestsController extends Controller
     }
 
     /**
-
      * Deletes an existing OrganizationBuyRequests model.
-
      * If deletion is successful, the browser will be redirected to the 'index' page.
-
      * @param int $id ID
-
      * @return \yii\web\Response
-
      * @throws NotFoundHttpException if the model cannot be found
-
      */
-
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-
     }
 
     /**
-
      * Finds the OrganizationBuyRequests model based on its primary key value.
-
      * If the model is not found, a 404 HTTP exception will be thrown.
-
      * @param int $id ID
-
      * @return OrganizationBuyRequests the loaded model
-
      * @throws NotFoundHttpException if the model cannot be found
-
      */
-
     protected function findModel($id)
     {
         if (($model = OrganizationBuyRequests::findOne(['id' => $id])) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException('The requested page does not exist.');
 
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     protected function findModelByUniqueKey($unique_key)
@@ -219,5 +197,4 @@ class OrganizationBuyRequestsController extends Controller
             return false;
         }
     }
-
 }

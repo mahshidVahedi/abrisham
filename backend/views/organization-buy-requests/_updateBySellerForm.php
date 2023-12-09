@@ -29,6 +29,52 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'organization_phone')->textInput()?>
 
+    <?= $form->field($model, 'pre_school_1')->checkbox()?>
+
+    <?= $form->field($model, 'pre_school_2')->checkbox() ?>
+
+    <?= $form->field($model, 'first')->checkbox() ?>
+
+    <?= $form->field($model, 'secound')->checkbox() ?>
+
+    <?= $form->field($model, 'third')->checkbox() ?>
+
+    <?= $form->field($model, 'pre_primary1_together')->checkbox() ?>
+
+    <?= $form->field($model, 'fourth')->checkbox() ?>
+
+    <?= $form->field($model, 'fifth')->checkbox() ?>
+
+    <?= $form->field($model, 'sixth')->checkbox() ?>
+
+    <?= $form->field($model, 'primary1_primary2_together')->checkbox() ?>
+
+    <?= $form->field($model, 'seventh')->checkbox() ?>
+
+    <?= $form->field($model, 'eighth')->checkbox() ?>
+
+    <?= $form->field($model, 'ninth')->checkbox() ?>
+
+    <?= $form->field($model, 'tenth_math')->checkbox() ?>
+
+    <?= $form->field($model, 'tenth_humanities')->checkbox() ?>
+
+    <?= $form->field($model, 'tenth_empirical')->checkbox() ?>
+
+    <?= $form->field($model, 'eleventh_math')->checkbox() ?>
+
+    <?= $form->field($model, 'eleventh_humanities')->checkbox() ?>
+
+    <?= $form->field($model, 'eleventh_empirical')->checkbox() ?>
+
+    <?= $form->field($model, 'twelfth_math')->checkbox() ?>
+
+    <?= $form->field($model, 'twelfth_humanities')->checkbox() ?>
+
+    <?= $form->field($model, 'twelfth_empirical')->checkbox() ?>
+
+    <?= $form->field($model, 'high1_high2_together')->checkbox() ?>
+
     <?=$form->field($model, 'process_status')->dropDownList(['FINAL_REGISTER' => 'ثبت نهایی', 'FINAL_DEVELOP' => 'توسعه نهایی'], ['prompt' => 'انتخاب کنید'])?>
 
     <div class="form-group" style="float: left; margin-top: 5%;">

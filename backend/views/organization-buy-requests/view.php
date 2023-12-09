@@ -16,8 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update by seller', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Update by customer', ['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key], ['class' => 'btn btn-primary']) ?>    <?= DetailView::widget([
+    <?= Html::a('Update by seller', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Update by customer', ['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key], ['class' => 'btn btn-primary']) ?> 
+    </p>
+
+    <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -32,11 +35,31 @@ $this->params['breadcrumbs'][] = $this->title;
             'organixation_address',
             'organization_phone',
             'unique_key',
-            // 'created_at',
+            'created_at',
             'sale_date',
             'seller_user_id',
             'status',
-            'process_status'
+            'process_status',
+            'pre_school_1',
+            'pre_school_2',
+            'first',
+            'secound',
+            'third',
+            'fourth',
+            'fifth',
+            'sixth',
+            'seventh',
+            'eighth',
+            'ninth',
+            'tenth_math',
+            'tenth_humanities',
+            'tenth_empirical',
+            'eleventh_math',
+            'eleventh_humanities',
+            'eleventh_empirical',
+            'twelfth_math',
+            'twelfth_humanities',
+            'twelfth_empirical',
         ],
     ]) ?>
 
