@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'manager_nationality_code')->textInput()?>
 
-    <?=$form->field($model, 'manager_gender')->dropDownList(['female' => 'خانم', 'male' => 'آقا'], ['prompt' => 'انتخاب کنید'])?>
+    <?=$form->field($model, 'manager_gender')->dropDownList(['FEMALE' => 'خانم', 'MALE' => 'آقا'], ['prompt' => 'انتخاب کنید'])?>
 
     <?=$form->field($model, 'manager_email')->textInput(['maxlength' => true])?>
 
@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'organization_phone')->textInput()?>
 
-    <?=$form->field($model, 'process_status')->dropDownList(['final register' => 'ثبت نهایی', 'final develop' => 'توسعه نهایی'], ['prompt' => 'انتخاب کنید'])?>
+    <?=$form->field($model, 'process_status')->dropDownList(['FINAL_REGISTER' => 'ثبت نهایی', 'FINAL_DEVELOP' => 'توسعه نهایی'], ['prompt' => 'انتخاب کنید'])?>
 
     <div class="form-group" style="float: left; margin-top: 5%;">
         <?=Html::submitButton('‌ذخیره', ['class' => 'btn btn-success'])?>

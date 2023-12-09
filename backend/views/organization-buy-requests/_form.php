@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'manager_mobile')->textInput() ?>
 
-    <?= $form->field($model, 'manager_gender')->dropDownList([ 'female' => 'خانم', 'male' => 'آقا',], ['prompt' => 'انتخاب کنید']) ?>
+    <?= $form->field($model, 'manager_gender')->dropDownList([ 'FEMALE' => 'خانم', 'MALE' => 'آقا',], ['prompt' => 'انتخاب کنید']) ?>
 
     <?= $form->field($model, 'manager_email')->textInput(['maxlength' => true]) ?>
 

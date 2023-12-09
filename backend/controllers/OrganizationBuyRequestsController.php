@@ -84,7 +84,7 @@ class OrganizationBuyRequestsController extends Controller
 
             if ($model->load($this->request->post()) && $model->save()) {
 
-                $model->status = 'created by admin';
+                $model->status = 'CREATED';
 
                 return $this->redirect(['view', 'id' => $model->id]);
 
@@ -130,7 +130,7 @@ class OrganizationBuyRequestsController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
-            $model->status = 'updated by seller';
+            $model->status = 'UPDATED_BY_SELLER';
             return $this->redirect(['view', 'id' => $model->id]);
 
         }
@@ -151,7 +151,7 @@ class OrganizationBuyRequestsController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
-            $model->status = 'updated by customer';
+            $model->status = 'UPDATED_BY_CUSTOMER';
             return $this->redirect(['view', 'id' => $model->id]);
 
         }
