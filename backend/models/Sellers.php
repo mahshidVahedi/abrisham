@@ -10,6 +10,10 @@ use Yii;
  * @property int $id
  * @property int $user_id
  * @property string $status
+ * @property int $created_forms_counts
+ * @property int $seller_updated_forms_count
+ * @property int $customer_updated_forms_count
+ * @property int $completed_by_seller_forms_count
  *
  * @property Users $user
  */
@@ -29,8 +33,8 @@ class Sellers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status'], 'required'],
-            [['user_id'], 'integer'],
+            [['user_id', 'status', 'created_forms_counts', 'seller_updated_forms_count', 'customer_updated_forms_count', 'completed_by_seller_forms_count'], 'required'],
+            [['user_id', 'created_forms_counts', 'seller_updated_forms_count', 'customer_updated_forms_count', 'completed_by_seller_forms_count'], 'integer'],
             [['status'], 'string'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -45,6 +49,10 @@ class Sellers extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'status' => 'Status',
+            'created_forms_counts' => 'Created Forms Counts',
+            'seller_updated_forms_count' => 'Seller Updated Forms Count',
+            'customer_updated_forms_count' => 'Customer Updated Forms Count',
+            'completed_by_seller_forms_count' => 'Completed By Seller Forms Count',
         ];
     }
 
