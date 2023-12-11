@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\base\Widget;
+use eddmash\yii2clipboard\Clipboard;
 /** @var yii\web\View $this */
 /** @var backend\models\OrganizationBuyRequests $model */
 
@@ -10,6 +11,11 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Organization Buy Requests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$url = \Yii::$app->urlManager->createAbsoluteUrl(['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key]);
+echo Html::button('Copy Link', [
+    'class' => 'btn btn-primary',
+    'onclick' => 'copyToClipboard("' . $url . '")'
+]);
 ?>
 <div class="organization-buy-requests-view">
 
@@ -67,3 +73,14 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert('Link copied to clipboard: ' + text);
+            })
+            .catch((error) => {
+                alert('Error copying link to clipboard. Please copy the link manually.');
+            });
+    }
+</script>
