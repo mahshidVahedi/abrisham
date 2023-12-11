@@ -10,32 +10,52 @@ use yii\grid\GridView;
 /** @var backend\models\SellersSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Sellers';
+$this->title = 'فروشندگان';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sellers-index">
+<div class="sellers-index" style="direction: rtl;">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Sellers', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('ایجاد فروشنده', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'user_id',
             'status',
-            'created_forms_counts',
-            'seller_updated_forms_count',
-            //'customer_updated_forms_count',
-            //'completed_by_seller_forms_count',
+            [
+                'lable' => 'تعداد فرم های ایجاد شده',
+                'value' => function ($model) {
+                    return $model->createdFormsCount;
+                }
+            ],
+            [
+                'attribute' => 'تعداد فرم های به روز شده توسط فروشنده',
+                'value'=> function ($model) {
+                    return $model -> sellerUpdatedFormsCount;
+                }
+            ],
+            [
+                'attribute'=> 'تعداد فرم های به روز شده توسط مشتری',
+                'value'=> function ($model) {
+                    return $model -> customerUpdatedFormsCount;
+                }
+            ],
+            [
+                'attribute' => 'تعداد فرم های کامل شده توسط فروشنده',
+                'value'=> function ($model) {
+                    return $model -> sellerCompletedFormsCount;
+                }
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Sellers $model, $key, $index, $column) {

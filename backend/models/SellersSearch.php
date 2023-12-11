@@ -17,7 +17,7 @@ class SellersSearch extends Sellers
     public function rules()
     {
         return [
-            [['id', 'user_id', 'created_forms_counts', 'seller_updated_forms_count', 'customer_updated_forms_count', 'completed_by_seller_forms_count'], 'integer'],
+            [['id', 'user_id', 'created_forms_count', 'seller_updated_forms_count', 'customer_updated_forms_count', 'completed_by_seller_forms_count'], 'integer'],
             [['status'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class SellersSearch extends Sellers
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'created_forms_counts' => $this->created_forms_counts,
+            'created_forms_count' => $this->created_forms_count,
             'seller_updated_forms_count' => $this->seller_updated_forms_count,
             'customer_updated_forms_count' => $this->customer_updated_forms_count,
             'completed_by_seller_forms_count' => $this->completed_by_seller_forms_count,

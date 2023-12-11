@@ -72,7 +72,7 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['manager_mobile', 'seller_user_id', 'seller_updated_date', 'unique_key', 'organization_name'], 'required', 'on' => self::SCENARIO_CREATE],
+            [['manager_mobile', 'seller_user_id','created_sale_date' ,'unique_key', 'organization_name'], 'required', 'on' => self::SCENARIO_CREATE],
             [['created_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'safe', 'on' => self::SCENARIO_CREATE],
             [['created_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'required', 'on' => self::SCENARIO_UPDATE],
             [['created_sale_date', 'seller_updated_date'], 'safe'],

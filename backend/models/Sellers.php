@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property int $user_id
  * @property string $status
- * @property int $created_forms_counts
+ * @property int $created_forms_count
  * @property int $seller_updated_forms_count
  * @property int $customer_updated_forms_count
  * @property int $completed_by_seller_forms_count
@@ -33,8 +33,8 @@ class Sellers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status', 'created_forms_counts', 'seller_updated_forms_count', 'customer_updated_forms_count', 'completed_by_seller_forms_count'], 'required'],
-            [['user_id', 'created_forms_counts', 'seller_updated_forms_count', 'customer_updated_forms_count', 'completed_by_seller_forms_count'], 'integer'],
+            [['user_id', 'status'], 'required'],
+            [['user_id', 'created_forms_count', 'seller_updated_forms_count', 'customer_updated_forms_count', 'completed_by_seller_forms_count'], 'integer'],
             [['status'], 'string'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -46,13 +46,13 @@ class Sellers extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'status' => 'Status',
-            'created_forms_counts' => 'Created Forms Counts',
-            'seller_updated_forms_count' => 'Seller Updated Forms Count',
-            'customer_updated_forms_count' => 'Customer Updated Forms Count',
-            'completed_by_seller_forms_count' => 'Completed By Seller Forms Count',
+            'id' => 'شناسه',
+            'user_id' => 'شناسه کاربری',
+            'status' => 'وضعیت',
+            'created_forms_count' => 'تعداد فرم های ایجاد شده',
+            'seller_updated_forms_count' => 'تعداد فرم های به روز شده توسط فروشنده',
+            'customer_updated_forms_count' => 'تعداد فرم های به روز شده توسط مشتری',
+            'completed_by_seller_forms_count' => 'تعداد فرم های کامل شده توسط فروشنده',
         ];
     }
 
@@ -64,5 +64,19 @@ class Sellers extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(Users::class, ['id' => 'user_id']);
+    }
+
+    public function getCreatedFormsCount(){
+        return $this->hasMany(OrganizationBuyRequests::class, ['seller_user_id' => 'user_id'])->count();
+    }
+
+    public function getSellerUpdatedFormsCount(){
+        return OrganizationBuyRequests::find()->where(['seller_user_id' => $this->user_id, 'status' => 'UPDATED_BY_SELLER'])->count();
+    }
+    public function getCustomerUpdatedFormsCount(){
+        return OrganizationBuyRequests::find()->where(['seller_user_id' => $this->user_id, 'status' => 'UPDATED_BY_Customer'])->count();
+    }
+    public function getSellerCompletedFormsCount(){
+        return OrganizationBuyRequests::find()->where(['seller_user_id' => $this->user_id, 'status' => 'COMPLETED_BY_SELLER'])->count();
     }
 }
