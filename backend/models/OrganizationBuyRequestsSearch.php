@@ -19,7 +19,7 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
     {
         return [
             [['id', 'manager_mobile', 'created_at', 'seller_user_id', 'pre_school_1', 'pre_school_2', 'first', 'secound', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth_math', 'tenth_humanities', 'tenth_empirical', 'eleventh_math', 'eleventh_humanities', 'eleventh_empirical', 'twelfth_math', 'twelfth_humanities', 'twelfth_empirical'], 'integer'],
-            [['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_gender', 'manager_email', 'organization_name', 'organization_address', 'organization_phone', 'unique_key', 'sale_date', 'status', 'process_status'], 'safe'],
+            [['date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_gender', 'manager_email', 'organization_name', 'organization_address', 'organization_phone', 'unique_key', 'sale_date', 'status', 'process_status','keyword'], 'safe'],
         ];
     }
 
@@ -59,7 +59,6 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'keyword' => $this ->keyword,
             'id' => $this->id,
             'created_sale_date' => $this->created_sale_date,
             'manager_mobile' => $this->manager_mobile,
@@ -88,7 +87,7 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
             'twelfth_humanities' => $this->twelfth_humanities,
             'twelfth_empirical' => $this->twelfth_empirical,
         ]);
-
+   
 
         $query 
             ->andFilterWhere(['like', 'manager_name', $this->keyword])

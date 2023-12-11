@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'status',
             [
-                'lable' => 'تعداد فرم های ایجاد شده',
+                'attribute' => 'تعداد فرم های ایجاد شده',
                 'value' => function ($model) {
                     return $model->createdFormsCount;
                 }
@@ -55,13 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=> function ($model) {
                     return $model -> sellerCompletedFormsCount;
                 }
-            ],
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Sellers $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+            ]
         ],
     ]); ?>
 
