@@ -11,6 +11,7 @@ use backend\models\OrganizationBuyRequests;
  */
 class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
 {
+    public $keyword;
     /**
      * {@inheritdoc}
      */
@@ -58,12 +59,13 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'keyword' => $this ->keyword,
             'id' => $this->id,
-            'create_sale_date' => $this->create_sale_date,
+            'created_sale_date' => $this->created_sale_date,
             'manager_mobile' => $this->manager_mobile,
             'created_at' => $this->created_at,
-            'seller_update_date' => $this->seller_update_date,
-            'customer_update_date' => $this->customer_update_date,
+            'seller_updated_date' => $this->seller_updated_date,
+            'customer_updated_date' => $this->customer_updated_date,
             'seller_user_id' => $this->seller_user_id,
             'pre_school_1' => $this->pre_school_1,
             'pre_school_2' => $this->pre_school_2,
@@ -87,7 +89,12 @@ class OrganizationBuyRequestsSearch extends OrganizationBuyRequests
             'twelfth_empirical' => $this->twelfth_empirical,
         ]);
 
-        $query->andFilterWhere(['like', 'manager_name', $this->manager_name])
+
+        $query 
+            ->andFilterWhere(['like', 'manager_name', $this->keyword])
+            ->orFilterWhere(['like', 'manager_lastname', $this->keyword])
+            ->orFilterWhere(['like', 'organization_name', $this->keyword])
+            ->andFilterWhere(['like', 'manager_name', $this->manager_name])
             ->andFilterWhere(['like', 'manager_lastname', $this->manager_lastname])
             ->andFilterWhere(['like', 'manager_nationality_code', $this->manager_nationality_code])
             ->andFilterWhere(['like', 'manager_gender', $this->manager_gender])

@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\base\Widget;
-use eddmash\yii2clipboard\Clipboard;
 /** @var yii\web\View $this */
 /** @var backend\models\OrganizationBuyRequests $model */
 
@@ -30,7 +28,7 @@ echo Html::button('Copy Link', [
         'model' => $model,
         'attributes' => [
             'id',
-            'create_sale_date',
+            'created_sale_date',
             'manager_name',
             'manager_lastname',
             'manager_nationality_code',
@@ -43,8 +41,8 @@ echo Html::button('Copy Link', [
             'school_type',
             'unique_key',
             'created_at',
-            'seller_update_date',
-            'customer_update_date',
+            'seller_updated_date',
+            'customer_updated_date',
             'seller_user_id',
             'status',
             'process_status',

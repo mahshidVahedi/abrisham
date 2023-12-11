@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "{{%organization_buy_requests}}".
  *
  * @property int $id
- * @property string|null $create_sale_date
+ * @property string|null $created_sale_date
  * @property string|null $manager_name
  * @property string|null $manager_lastname
  * @property string|null $manager_nationality_code
@@ -21,8 +21,8 @@ use Yii;
  * @property string $school_type
  * @property string $unique_key
  * @property int|null $created_at
- * @property string $seller_update_date
- * @property string $customer_update_date
+ * @property string $seller_updated_date
+ * @property string $customer_updated_date
  * @property int $seller_user_id
  * @property string $status
  * @property string|null $process_status
@@ -72,10 +72,10 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['manager_mobile', 'seller_user_id', 'seller_update_date', 'unique_key', 'organization_name'], 'required', 'on' => self::SCENARIO_CREATE],
-            [['create_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'safe', 'on' => self::SCENARIO_CREATE],
-            [['create_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'required', 'on' => self::SCENARIO_UPDATE],
-            [['create_sale_date', 'seller_update_date'], 'safe'],
+            [['manager_mobile', 'seller_user_id', 'seller_updated_date', 'unique_key', 'organization_name'], 'required', 'on' => self::SCENARIO_CREATE],
+            [['created_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'safe', 'on' => self::SCENARIO_CREATE],
+            [['created_sale_date', 'manager_name', 'manager_lastname', 'manager_nationality_code', 'manager_mobile', 'manager_gender', 'organization_name', 'school_type'], 'required', 'on' => self::SCENARIO_UPDATE],
+            [['created_sale_date', 'seller_updated_date'], 'safe'],
             [['manager_mobile'], 'match', 'pattern' => '/^(\+98|0)?9\d{9}$/', 'message' => 'شماره موبایل معتبر نیست.', 'on' => self::SCENARIO_CREATE] , 
             [['manager_nationality_code'], 'match', 'pattern'=>'/^\\d{10}$/', 'message'=>'کد ملی معتبر نیست.', 'on'=> self::SCENARIO_UPDATE],
             [['manager_nationality_code'], 'match', 'pattern'=>'/^\\d{10}$/', 'message'=>'کد ملی معتبر نیست.', 'on'=> self::SCENARIO_CREATE],
@@ -96,7 +96,7 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'شناسه',
-            'create_sale_date' => ' تاریخ فروش (ایجاد فرم)',
+            'created_sale_date' => ' تاریخ فروش (ایجاد فرم)',
             'manager_name' => 'نام مدیر',
             'manager_lastname' => 'نام خانوادگی مدیر',
             'manager_nationality_code' => 'کد ملی مدیر',
@@ -109,8 +109,8 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
             'school_type' => 'نوع مدرسه',
             'unique_key' => 'کلید یکتا',
             'created_at' => 'Created At',
-            'seller_update_date' => 'تاریخ به روزرسانی توسط فروشنده',
-            'customer_update_date' => 'تاریخ به روزرسانی توسط مشتری',
+            'seller_updated_date' => 'تاریخ به روزرسانی توسط فروشنده',
+            'customer_updated_date' => 'تاریخ به روزرسانی توسط مشتری',
             'seller_user_id' => 'فروشنده',
             'status' => 'وضعیت',
             'process_status' => 'فرآیند',

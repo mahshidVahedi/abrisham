@@ -15,9 +15,15 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
         'options' => ['class' => 'row'], // Add the 'row' class to the form
     ]); ?>
-
+    <h3>
+        جستجو   
+    </h3>
+    <?= $form->field($model,'keyword') ?>
+    <h3>
+        جستجوی پیشرفته
+    </h3>
     <div class="col-md-4"> 
-        <?= $form->field($model, 'create_sale_date') ?>
+        <?= $form->field($model, 'created_sale_date') ?>
         <?= $form->field($model, 'manager_name') ?>
         <?= $form->field($model, 'manager_lastname') ?>
         <?= $form->field($model, 'manager_nationality_code') ?>
@@ -25,8 +31,8 @@ use yii\widgets\ActiveForm;
     </div>
     <div class="col-md-4">
         <?php echo $form->field($model, 'unique_key') ?>
-        <?php echo $form->field($model, 'seller_update_date') ?>
-        <?php echo $form->field($model, 'customer_update_date') ?>
+        <?php echo $form->field($model, 'seller_updated_date') ?>
+        <?php echo $form->field($model, 'customer_updated_date') ?>
         <?php echo $form->field($model, 'manager_mobile') ?>
         <?php echo $form->field($model, 'organization_name') ?>
     </div>

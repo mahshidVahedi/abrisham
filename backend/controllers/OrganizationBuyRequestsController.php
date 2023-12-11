@@ -70,7 +70,7 @@ class OrganizationBuyRequestsController extends Controller
 
         if ($this->request->isPost) {
 
-            $model->create_sale_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->created_sale_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
 
             $model->unique_key = substr(str_shuffle($str), 0, 6);
 
@@ -115,7 +115,7 @@ class OrganizationBuyRequestsController extends Controller
         $model->scenario = 'scenarioCreate';
 
         if ($this->request->isPost) {
-            $model->seller_update_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->seller_updated_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $model->status = 'UPDATED_BY_SELLER';
             if ($model->load($this->request->post())) {
                 if($model->process_status=='FINAL_REGISTER'){
@@ -141,7 +141,7 @@ class OrganizationBuyRequestsController extends Controller
         $model->scenario = 'scenarioUpdate';
 
         if ($this->request->isPost) {
-            $model->customer_update_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $model->customer_updated_date = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $model->status = 'UPDATED_BY_CUSTOMER';
             if ($model->load($this->request->post()) && $model->save()) {
 
