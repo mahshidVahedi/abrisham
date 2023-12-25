@@ -14,12 +14,12 @@ AppAsset::register($this);
 <head>
     <meta charset="<?=Yii::$app->charset?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="../../web/nadiya_assets/css/bootstrap-rtl.min.css">
-    <link rel="stylesheet" type="text/css" href="../../web/nadiya_assets/css/core1.css">
-    <link rel="stylesheet" type="text/css" href="../../web/nadiya_assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="../../web/nadiya_assets/css/icons.css">
-    <link rel="stylesheet" type="text/css" href="../../web/nadiya_assets/css/pages.css">
-    <link rel="stylesheet" type="text/css" href="../../web/nadiya_assets/css/responsive.css">
+    <link rel="stylesheet" href="../../web/nadiya_assets/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="../../web/nadiya_assets/css/core1.css">
+    <link rel="stylesheet" href="../../web/nadiya_assets/css/components.css">
+    <link rel="stylesheet" href="../../web/nadiya_assets/css/icons.css">
+    <link rel="stylesheet" href="../../web/nadiya_assets/css/pages.css">
+    <link rel="stylesheet" href="../../web/nadiya_assets/css/responsive.css">
     <script src="../../web/nadiya_assets/js/modernizr.js"></script>
     <?php $this->registerCsrfMetaTags()?>
     <title><?=Html::encode($this->title)?></title>
