@@ -1,7 +1,7 @@
 /*****fonts*****/
-@import url('../../../../frontend/web/nadiya_assets/fonts/ERPxFonts/ERPxFonts.css');
-@import url('../../../../frontend/web/nadiya_assets/fonts/gl/192/glyphicon.css');
-@import url('../../../../frontend/web/nadiya_assets/fonts/gl/192/gl.css');
+@import url('../fonts/ERPxFonts/ERPxFonts.css');
+@import url('../fonts/gl/192/glyphicon.css');
+@import url('../fonts/gl/192/gl.css');
 /*Template Name:UBold DashboardAuthor:CoderThemesEmail:coderthemes@gmail.comFile:Core*/
 /* =============  == Core List==     - Common   - Helper classes   - Extra   - Bootstrap Custom   - Topbar, Leftbar and Rightbar   - Animation (Some loader)   - Waves effect   - Print (Invoice css)   ============= */
 /* =============   Common   ============= */
