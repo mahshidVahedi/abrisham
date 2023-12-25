@@ -129,17 +129,18 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 	public static function getNewMessage(){
-        $newMessage = Yii::$app->db->createCommand("
-                        select sum(t.count) as `count` , sum(is_reply) as is_has_reply from tbl_chat_new_message_count t
-                        inner join tbl_contents c on c.id = t.content_id and c.is_delete = 0
-                        WHERE t.organization_id = :org_id and t.user_id = :user_id
-                    ")
-            ->bindValue(':user_id', Yii::$app->user->id)
-            ->bindValue(':org_id', Yii::$app->fcore->getOrganization())
-            ->queryAll();
-        if($newMessage){
-            return $newMessage[0];
-        }
+        return [];
+        // $newMessage = Yii::$app->db->createCommand("
+        //                 select sum(t.count) as `count` , sum(is_reply) as is_has_reply from tbl_chat_new_message_count t
+        //                 inner join tbl_contents c on c.id = t.content_id and c.is_delete = 0
+        //                 WHERE t.organization_id = :org_id and t.user_id = :user_id
+        //             ")
+        //     ->bindValue(':user_id', Yii::$app->user->id)
+        //     ->bindValue(':org_id', Yii::$app->fcore->getOrganization())
+        //     ->queryAll();
+        // if($newMessage){
+        //     return $newMessage[0];
+        // }
 	}
 	public static function getFiles($id){
         $files = Files::find()->where(['comment_id' => $id , 'files_type_id' => 18])->all();

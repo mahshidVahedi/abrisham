@@ -1,41 +1,59 @@
 <?php
-
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var \common\models\LoginForm $model */
-
-use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+/* @var yii\web\View $this */
+/* @var yii\bootstrap5\ActiveForm $form */
+/* @var \common\models\LoginForm $model */
+
+$form = ActiveForm::begin(['id' => 'login-form']);
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="my-1 mx-0" style="color:#999;">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-                    <br>
-                    Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
-                </div>
-
+<div class="account-pages">
+    <div class="clearfix">
+    </div>
+    <div class="wrapper-page">
+        <div class="card-box">
+            <div class="panel-heading">
+                <h3 class="text-center">ورود  به حساب <strong class="text-custom">ابریشم</strong> </h3>
+            </div>
+            <div class="panel-body">
+                <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <div class="col-xs-12">
+                        <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder' => 'نام کاربری']) ?>
+                    </div>
                 </div>
-
-            <?php ActiveForm::end(); ?>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'پسورد']) ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="checkbox checkbox-primary">
+                            <?= $form->field($model, 'rememberMe')->checkbox(['placeholder' => 'مرا به خاطر بسپار']) ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-40">
+                    <div class="col-xs-12">
+                        <?= Html::submitButton('ورود', ['class' => 'btn btn-pink btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>
+                    </div>
+                </div>
+                <div class="form-group m-t-30 m-b-0">
+                    <div class="col-sm-12">
+                        <?= Html::a('فراموشی رمز', ['site/request-password-reset']) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <!-- <p>حساب کاربری ندارید؟ <a href="page-register.html" class="text-primary m-l-5">عضو شوید<b></b></a></p> -->
         </div>
     </div>
 </div>
+<?php
+ActiveForm::end();
+?>

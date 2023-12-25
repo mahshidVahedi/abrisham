@@ -1,0 +1,127 @@
+.steps-header,
+.steps-name {
+	color: #3498DB;
+	font-weight: 600;
+	font-size: 1em
+}
+.steps-header {
+	margin-bottom: 20px;
+	text-align: center
+}
+.steps-timeline {
+	outline: 1px dashed rgba(255, 0, 0, 0)
+}
+.steps-timeline:after {
+	content: "";
+	display: table;
+	clear: both
+}
+div[class*='-step-'] {
+	outline: 1px dashed rgba(0, 128, 0, 0);
+}
+.steps-img {
+	display: block;
+	margin: auto;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%
+}
+.steps-img .gl:first-child{
+	font-size: 200%;
+	line-height: 38px;
+	margin-right: 11px;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0,0,0,.2)
+}
+.steps-img .gl-ok{
+	color: green;
+	margin-right: 25px;
+	float: right;
+	position: absolute;
+	display: block;
+	border-radius: 50%;
+	border: 1px solid #999;
+	padding: 3px;
+	background-color: rgba(255,255,255,.8);
+	margin-top: 3px
+}
+.steps-name,
+.steps-description {
+	margin: 0
+}
+
+.steps-description {
+	overflow: hidden
+}
+@media screen and (max-width: 500px) {
+	.steps-timeline {
+		border-right: 2px solid #3498DB;
+		margin-right: 25px;
+		margin-bottom: 35px;
+	}
+	div[class*='-step-'] {
+		padding-bottom: 40px;		margin-right: -25px
+	}
+	div[class*='-step-']:last-child {
+		margin-bottom: -100%
+	}
+	.steps-img {
+		float: right;
+		margin-left: 20px
+	}
+	.steps-img .gl-ok{
+		position: static;
+		margin-top: -55px
+	}	
+}
+@media screen and (min-width: 501px) {
+	.steps-timeline {
+		border-top: 2px solid #3498DB;
+		padding-top: 23px;
+		margin-top: 40px;
+		margin-right: 7%;
+		margin-left: 7%
+	}
+	div[class*='-step-'] {
+		float: right;
+		margin-top: -50px;
+		padding: 0 5px
+	}	div[class^='9-step'] {
+		width: 12.25%;
+		margin-top: -50px;
+		padding: 0 5px
+	}
+	.steps-one {
+		margin-left: -12.25%;
+		margin-right: 12.25%;
+	}
+	div[class*='-step-']:last-child {
+		margin-left: 0
+	}
+	.steps-name {
+		text-align: center
+	}
+	.steps-description {
+		text-align: center;		font-size: smaller;		line-height: 1.8rem;
+	}	a .steps-img {
+		transition: all .5s	}	.transfer-link:hover .steps-img {
+		transition: all .2s;		transform: scale(1.14);		background-color: #444;
+	}		a:hover .steps-img.bg-green{
+		transition: all .2s;		transform: scale(.9);		background-color: #142;
+	}		.transfer-link:hover .steps-name, a:hover .steps-name {
+		color: #116BA8;
+	}
+}
+/*	Color	*/
+.gray{color:gray}
+	.bg-gray{background-color:gray}
+.green{color:green}
+	.bg-green{background-color:green}
+.red{color:#f04124}
+	.bg-red{background-color:#f04124}
+.black{color:black}
+	.bg-black{background-color:black}
+.blue{color:#5bc0de}
+	.bg-blue{background-color:#5bc0de}
+.yellow{color:#e99002}
+	.bg-yellow{background-color:#e99002}

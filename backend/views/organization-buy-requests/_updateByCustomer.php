@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="organization-buy-requests-form" style="direction: rtl;">
+<div class="organization-buy-requests-form">
 
     <?php $form = ActiveForm::begin();?>
 

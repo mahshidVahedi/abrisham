@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="organization-buy-requests-search d-flex justify-content-between flex-wrap " style="direction: rtl;">
+<div class="organization-buy-requests-search d-flex justify-content-between flex-wrap ">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

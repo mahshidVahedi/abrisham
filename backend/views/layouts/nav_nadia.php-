@@ -1,0 +1,1292 @@
+<?php 
+use yii\widgets\Menu;
+use yii\helpers\Html;
+use backend\models\Users;
+use backend\models\Organization;
+use backend\models\AcademicYear;
+use backend\models\Comment;
+use backend\models\Relationship;
+use yii\helpers\ArrayHelper;
+
+$urlPublic        =    Yii::getAlias('@yii1Url');
+$urlPublicYii2    =    Yii::getAlias('@yii2Url');
+$isPersonalAccessCurrent    =    Users::isPersonal();
+$isPersonalAccessAll        =    Users::isPersonal(0,ArrayHelper::map(AcademicYear::find()->all() , 'id' ,'id'));
+//$newMessages                =   Comment::getNewMessage();
+$orgCurrent                 =   Yii::$app->fcore->getOrganization();
+$getAllOrganization         =   Organization::getAllOrganization();
+$getAcademicYear            =   AcademicYear::getAcademicYear();
+
+$isAdmin                    =   Users::isAdmin();
+$isStudent                  =   Users::isStudent();
+
+$userAccess                 =   new Users();
+$userAccess->setAllUserAccess(Yii::$app->user->id);
+
+//if($newMessages){
+//    if($newMessages['count']){
+//        $newMessage = "<label class='label label-danger pull-left'>".Yii::$app->fstring->translateDigits($newMessages['count'])."</label>";
+//        if($newMessages['is_has_reply'])
+//            $newMessage .=  "<label class='label label-danger pull-left m-l-5'>@</label>";
+//    }
+//}
+//else
+    $newMessage = '';     
+?>
+<div id="sidebar-menu">
+    <?php
+    echo Menu::widget([
+        'items' => [
+            array(    
+                'label'    =>    'صفحه اول',
+                'url'    =>    '/site/index' ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-home"></i><span>{label}</span></a>',    
+            ),
+            array(      'label' =>  'دانش آموزان هم پایه', 
+                'url'   =>  '/academic/AllAcademicBase',
+                'visible'   =>  $isStudent  ,
+                'template'  =>  '<a href="{url}" class="href_class check-login"><i class="gl gl-search"></i><span>{label}</span></a>'
+            ),
+            array(      'label' =>  'آخرین ارسال های مدارس', 
+                'url'   =>  '/Contents/AllContentOrg',
+                'visible'   =>  $isPersonalAccessCurrent  ,
+                'template'  =>  '<a href="{url}" class="href_class check-login"><i class="gl gl-search"></i><span>{label}</span></a>'
+            ),
+            array(    
+                'label'    =>    'رخدادها',
+                'url'    =>    '/users/events' ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-bell"></i><span>{label}</span></a>',    
+            ),
+              array(    
+                'label'    =>    'آخرين پاسخ‌هاي تکاليف',
+                'url'    =>    '/users/events2' ,
+                'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'cio','consultant','teacher','teacher_assistant','guid_teacher','mange_school','mange_organization','manage_student',  'manage_workbook'
+                            )
+                        )['error']    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-bell"></i><span class="red">{label}</span></a>',    
+            ),
+            array(    
+                'label'    =>    'دوره های من',
+                'url'    =>    '/users/educationMe' ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',    
+            ),array(    
+                'label'    =>    'تکالیف من',
+                'url'    =>    '/users/workbookMe' ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',    
+            )
+            ,array(    
+                'label'    =>    'کلاس های آنلاین دانش آموزان',
+                'url'    =>    '/users/webClassStdentMe' ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',    
+            )
+             ,array(    
+                'label'    =>    'کلاس های آنلاین معلمان',
+                'url'    =>    '/users/webClassTeacherMe' ,
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                         'cio' ,
+			'mange_school' ,
+			'mange_organization' ,
+			'consultant',
+			'teacher',
+			'teacher_assistant',
+			'guid_teacher',
+			'manage_web_class'
+                    )
+                )['error']      ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',    
+            ) ,array(    
+                'label'    =>    'مدیریت کلاس های آنلاین',
+                'url'    =>    '/webClasses/admin' ,
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                         'cio' ,
+                         'manage_web_class'
+		
+                    )
+                )['error']      ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',    
+            )
+            
+            ,array(    
+                'label'    =>    'خریدهای من',
+                'url'    =>    '/users/productMe' ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-shopping-cart"></i><span>{label}</span></a>',    
+            ),
+            array(
+                'label'    =>    'اعلان‌ها',
+                'url'    =>    yii::$app->urlManager->createUrl('notifications'),
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-bullhorn"></i><span>{label}</span></a>',
+            ),
+            array(
+                'label'    =>    'ارسال پیامک',
+                'url'    =>    yii::$app->urlManager->createUrl('sms/create'),
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                        'send_sms' ,
+                    )
+                )['error']    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-comment"></i><span>{label}</span></a>',
+            ),
+            array(
+                'label'    =>    'پیشنهادهای خودکار'    ,
+                'url'    =>    '/users/pins' ,
+                'visible'    =>    !Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-pushpin"></i><span>{label}</span></a>',                                        
+            ),array(    
+                'label'    =>    'محتوا',
+                'url'    =>    'javascript:void(0);' ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-list"></i><span>{label}</span><span class="menu-arrow"></span></a>',    
+                'items'=>array(
+                    array(        
+                        'label'=>'محتوا',
+                        'url'=>'/Contents/adminnew',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-bullhorn"></i><span>{label}</span></a>'
+                    ),
+                    array(        
+                        'label'=>'دوره‌های آموزشی', 
+                        'url'=>'/Contents/admin?type=courses',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',
+                        'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'registration_and_editing_courses'
+                            )
+                        )['error']
+                    ),
+                    array(
+                        'label'=>'تکالیف',
+                        'url'=>'/Contents/admin?type=homework',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',
+                        'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'cio','consultant','teacher','teacher_assistant','guid_teacher','mange_school','mange_organization','manage_student',  'manage_workbook'
+                            )
+                        )['error']
+                    )
+                ,array(
+                        'label'=>'محصولات', 
+                        'url'=>'/Contents/admin?type=product_new',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-shopping-cart"></i><span>{label}</span></a>',
+                        'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'registration_and_editing_products'
+                            )
+                        )['error']
+                    )
+                    
+                ,array(
+                        'label'=>'مدیریت پیام‌رسان',
+                        'url'=>yii::$app->urlManager->createUrl('users/chatmanage'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-send"></i><span>{label}</span></a>',
+                        'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'chat_manage'
+                            )
+                        )['error']
+                    ),
+
+
+
+                )
+
+            ),
+            array(    
+                'label'    =>    'پیام‌رسان',
+                'url'    =>    yii::$app->urlManager->createUrl('users/chat') ,
+                'visible'=>!Yii::$app->user->isGuest    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-send"></i><span>{label}</span>'.$newMessage.'</a>',
+            ),
+            array(        
+                'label'=>'کار و بار', 
+                'url'=>'javascript:void(0);',     
+                'visible'=>$isPersonalAccessAll    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-briefcase"></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(    
+                        'label'=>'ورود و خروج', 
+                        'url'=>$urlPublic. '/personal/personalMonthlyReport',     
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-businessman"></i><span>{label}</span></a>',
+                        'visible'=>$isPersonalAccessAll
+                    ),
+                    array(    
+                        'label'=>'درخواست‌ها', 
+                        'url'=>'/personal/personalManageRequests',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-notes-2"></i><span>{label}</span></a>',
+                        'visible'=>$isPersonalAccessAll
+                    ),
+                    array(    
+                        'label'=>'برنامه هفتگی', 
+                        'url'=>'/personalSchedule/view',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-calendar"></i><span>{label}</span></a>',
+                        'visible'=>$isPersonalAccessCurrent
+                    ),
+                    array(
+                        'label'            =>    'قراردادها',
+                        'url'            =>    '/personal/ShowContracts' ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-file"></i><span>{label}</span></a>',
+                        'visible'=>$isPersonalAccessAll,
+                    ),
+                    array(    
+                        'label'=>'تغذیه', 
+                        'url'=>'/personal/personalFoodReservation',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-cutlery"></i><span>{label}</span></a>',
+                        'visible'=>$isPersonalAccessAll
+                    ),
+                )
+            ),
+
+            array(
+                'label'            =>'امور مالی', 
+                'url'=>'javascript:void(0);',
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-credit-card"></i><span>{label}</span><span class="menu-arrow"></span></a>',
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                        'cio' ,
+                        'full_access_personal' ,
+                        'personal_deduction' ,
+                        'personal_fund_deductions' ,
+                        'personal_welfare_deductions' ,
+                        'financial_manage',
+                        'financial_registration_report',
+                        'envoys',
+                        'financial_registration_students',
+                        'financial_registration_count_report',
+                        'deliverable',
+                        'manage_financial_month',
+                        'payment_admin',
+                        'follow_payment_commitment',
+                    )
+                )['error']
+                ,
+                'items'=>array(
+
+                    array(        
+                        'label'        =>    'داشبورد مدیریتی', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocuments'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-coins"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_manage' ,
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'فهرست اسناد', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocuments/list'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-list-alt"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_manage' ,
+                                'financial_registration_students',
+                            )
+                        )['error']
+                    ), 
+                    
+                    
+                    array(        
+                        'label'        =>    'پیگیری تعهدات', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocuments/paymentcommitment'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-call-traffic"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_manage' ,
+                                'financial_registration_students',
+                                'follow_payment_commitment',
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'امور تنخواه‌گردانی', 
+                        'url'        =>    yii::$app->urlManager->createUrl('bankaccountcard/index'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-usd fa-fw"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'envoys',
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'ثبت‌نام مالی دانش‌آموزان', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocuments/studentfinancialregistrationnew'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-edit"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_registration_students', 
+                                'financial_manage',
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'مدیریت شهریه‌ها', 
+                        'url'        =>    yii::$app->urlManager->createUrl('educationproducts/index'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-edit"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'manage_tuitions',
+                                'financial_manage',
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'گزارش مدیریتی ثبت‌نام', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocuments/report'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-eye fa-fw"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_manage' ,
+                                'financial_registration_report'
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'متقاضیان تخفیف', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocuments/discount'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-gift"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'students_discount_list', 
+                                'financial_registration_students',
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'چک‌های نیازمند تائید', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocumentdelivered/mylist'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-eye fa-fw"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_manage' ,
+                                'deliverable'
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'مدیریت چک‌های ارسالی به بانک', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocumentdelivered/index'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-eye fa-fw"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_manage' ,
+                                'deliverable'
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'گزارش ثبت‌نامی', 
+                        'url'        =>    yii::$app->urlManager->createUrl('financialdocuments/financialregistrationcountreport'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-eye fa-fw"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'financial_manage' ,
+                                'financial_registration_count_report',
+                            )
+                        )['error']
+                    ), 
+                    
+                    array(        
+                        'label'        =>    'فیش حقوقی', 
+                        'url'        =>        '/personal/salaryDocument',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-usd fa-fw"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                            )
+                        )['error']
+                    ),
+                    array(
+                        'label'        =>    'ماه مالی',
+                        'url'        =>        '/documentOrganizationMonth/',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-usd" style="margin-left: -15px;font-size: 11px;margin-top: -7px;"></i><i class="gl gl-moon"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'manage_financial_month' ,
+                            )
+                        )['error']
+                    ),
+                    array(
+                        'label'        =>    'ثبت کسورات',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'personal_deduction' ,
+                                'personal_fund_deductions' ,
+                                'personal_welfare_deductions' ,
+                            )
+                        )['error'],
+                        'url'        =>    '/personal/personalDeductions',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-level-down fa-fw"></i><span>{label}</span></a>',
+                    )
+                    ,
+                     array(
+                        'label'        =>    'گزارش جدول تراکنش ها',
+                        'url'        =>    yii::$app->urlManager->createUrl('payment/admin'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-usd fa-fw"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'payment_admin',
+                            )
+                        )['error']
+                    ),
+                )
+            ),
+                     array(
+                'label'            =>'امور ثبت نام', 
+                'url'=>'javascript:void(0);',
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-important-day"></i><span>{label}</span><span class="menu-arrow"></span></a>',
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                        'cio' ,
+                        'manage_base_and_field' ,
+                        'manage_financial_hours' ,
+                        'manage_register_hours' ,
+                        
+                    )
+                )['error']
+                ,
+                'items'=>array(
+
+                    array(  
+                        'label' =>  'مدیریت پایه و رشته',
+                        'url'   =>  yii::$app->urlManager->createUrl('organizationbasetofield/index') ,
+                        'visible'=> !$userAccess->userAceess2(
+                                    array(
+                                        'manage_base_and_field' 
+
+                                    )
+                                )['error']   ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-building"></i><span>{label}</span></a>',  
+                    ),
+                   array(  
+                        'label' =>  'ساعات ثبت نام',
+                        'url'   =>  yii::$app->urlManager->createUrl('registersetting/index') ,
+                        'visible'=>!$userAccess->userAceess2(
+                                    array(
+                                        'manage_register_hours'
+
+                                    )
+                                )['error']   ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-clock"></i><span>{label}</span></a>',  
+                    ),
+                
+                    array(  
+                            'label' =>  'ساعات ملاقات مالی',
+                            'url'   =>  yii::$app->urlManager->createUrl('registersetting/financial') ,
+                            'visible'=>!$userAccess->userAceess2(
+                                        array(
+                                            'manage_financial_hours' 
+
+                                        )
+                                    )['error']   ,
+                            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-clock"></i><span>{label}</span></a>',  
+                        ),
+                    )
+                ),
+            array(        'label'=>'آموزش', 
+                'url'=>'javascript:void(0);',     
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span><span class="menu-arrow"></span></a>',
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                        'cio' ,
+                        'mange_school' ,
+                        'mange_organization' ,
+                        'consultant',
+                        'teacher', 
+                        'save_lesson_to_base',
+                        'save_consept_to_lesson',
+                        'classes_management',
+                        'create_estimate_types',
+                        'lesson_estimate_type',
+                        'show_wrokbook',
+                        'groups_management',
+                        'teacher_assistant',
+                        'estimate_academic_to_score'
+                    )
+                )['error'],
+                'items'=>array(
+
+                    array(        
+                        'label'        =>    'مدیریت درس‌ها', 
+                        'url'        =>    '/lessonToBase/SaveLessonToBase',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-book-open"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant',
+                                'save_lesson_to_base'                                
+                            )
+                        )['error']
+                    ),
+
+                    array(        
+                        'label'        =>    'مدیریت مفاهیم درسی', 
+                        'url'        =>    '/conseptToLesson/SaveConseptToLesson',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-sampler"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant',
+                                'save_consept_to_lesson'    
+                            )
+                        )['error']
+                    )/*,
+                    array(        
+                    'label'        =>    'انتساب ریزمفاهیم به مفاهیم', 
+                    'url'        =>    $urlPublic.'/conseptToLesson/microAdmin', 
+                    'template' => '<a href="{url}" class="href_class"><i class="ti-pencil-alt"></i><span>{label}</span></a>',    'visible'    =>    !$userAccess->userAceess2(
+                    array(
+                    'cio' ,
+                    'mange_school' ,
+                    'mange_organization' ,
+                    'consultant' 
+                    ) ,
+                    Yii::$app->user->id,
+                    $getAllOrganization   ,
+                    AcademicYear::getAcademicYear(date('Y-m-d') )
+                    )['error']
+                    )*/,
+                    array(        
+                        'label'        =>    'مدیریت کلاس', 
+                        'url'        =>    yii::$app->urlManager->createUrl('classes'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-slideshare"></i><span>{label}</span></a>',     
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant', 
+                                'classes_management', 
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'روش‌های ارزشیابی', 
+                        'url'        =>    yii::$app->urlManager->createUrl('estimatescoretype'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-bring-to-front"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'create_estimate_types' ,
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'روش ارزشیابی دروس', 
+                        'url'        =>    yii::$app->urlManager->createUrl('estimatelessontotypescore'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-bring-forward"></i><span>{label}</span></a>', 
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant', 
+                                'lesson_estimate_type', 
+                            )
+                        )['error']
+                    )
+                    ,array(        
+                        'label'        =>    'ارزشیابی', 
+                        'url'        =>    yii::$app->urlManager->createUrl('estimateacademictoscore'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-certificate"></i><span>{label}</span></a>',  
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant',
+                                'teacher', 
+                                'estimate_academic_to_score',
+                                'teacher_assistant'
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'کارنامه پیشرفته', 
+                        'url'        =>    yii::$app->urlManager->createUrl('estimateacademictoscore/report?view=teacher') , 
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-podium"></i><span>{label}</span></a>',     
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant',
+                                'teacher', 
+                                'show_wrokbook',
+                                'teacher_assistant'
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'کارنامه دوره‌ای', 
+                        'url'        =>    yii::$app->urlManager->createUrl('estimateacademictoscore/educationworkbooknew?view=teacher') , 
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-flowchart"></i><span>{label}</span></a>',     
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant',
+                            )
+                        )['error'] and ($orgCurrent == 28)
+                    ),
+                    array(        
+                        'label'        =>    'کارنامه تجمیعی', 
+                        'url'        =>    yii::$app->urlManager->createUrl('estimateacademictoscore/reports') , 
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-podium"></i><span>{label}</span></a>',     
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant',
+                                'teacher', 
+                                'show_wrokbook', 
+                            )
+                        )['error']
+                    ),
+                    
+                    array(        
+                        'label'        =>    'گروهبندی', 
+                        'url'        =>    yii::$app->urlManager->createUrl('organizationgroups'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-filter"></i><span>{label}</span></a>',      
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant', 
+                                'groups_management', 
+                            )
+                        )['error']
+                    ),array(        
+                        'label'        =>    'تنظیمات', 
+                        'url'        =>    yii::$app->urlManager->createUrl('moduledetailassign'),
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-cog"></i><span>{label}</span></a>',      
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'consultant',
+                                'workbook_setting',
+                                'estimate_setting' 
+                            )
+                        )['error']
+                    ) 
+                )
+            ),
+            array(    
+                'label'    =>    'کاربران',
+                'url'    =>    'javascript:void(0);' ,
+                'visible'    =>    !$userAccess->userAceess2(
+                    array(
+                        'cio' ,
+                        'consultant' ,
+                        'mange_school' ,
+                        'mange_organization' ,
+                        'manage_student'
+                    )
+                )['error'],
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="gl gl-user"></i><span>{label}</span><span class="menu-arrow"></span></a>',    
+                'items'=>array(
+                    array(        
+                        'label'=>'کاربران', 
+                        'url'=>'/user/admin',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-user"></i><span>{label}</span></a>',
+                        'visible'    =>    $isAdmin,                        
+                    ),
+                    array(        
+                        'label'    =>'دانش آموزان', 
+                        'url'    => yii::$app->urlManager->createUrl('academic/index'),     
+                        'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'consultant' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'manage_student'
+                            )
+                        )['error']    ,
+                        'template'    => '<a href="{url}" class="href_class check-login"><i class="gl gl-user"></i>{label}</a>'
+
+                    ),
+  
+                    array(        
+                        'label'=>'والدین', 
+                        'url'=>'/academic/parent',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-parents"></i><span>{label}</span></a>',
+                        'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'cio' ,
+                                'consultant' ,
+                                'mange_school' ,
+                                'mange_organization' ,
+                                'parent_list'
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'=>'خروجی اکسل', 
+                        'url'=>'/users/export',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-file-excel-o"></i><span>{label}</span></a>',
+                        'visible'=>!$userAccess->userAceess2(
+                            array(
+                                'consultant' ,
+                                'personal_list' ,
+                                'student_list' ,
+                                'full_access_personal' ,
+                            )
+                        )['error']
+                    ),
+
+
+
+                )
+
+            ),
+            array(    
+                'label'    =>    'امور دانش‌آموزی',
+                'url'    =>    'javascript:void(0);' ,
+                'visible'    =>    $isStudent    ,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(        
+                        'label'=>'رزرو غذا', 
+                        'url'=>'/personal/personalFoodReservation',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-cutlery"></i><span>{label}</span></a>',
+                        'visible'    =>    $isStudent    ,
+                    ),
+
+
+
+                )
+
+            ),
+            array(    
+                'label'    =>    'رزرو غذا دانش‌آموز',
+                'url'    =>    '/personal/personalFoodReservation?parent=tru' ,
+                'visible'=>    Relationship::_getStudentRelation(),
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-cutlery"></i>{label}</a>',    
+            ),
+
+            array(    
+                'label'    =>    'مدیریت دسترسی‌ها',
+                'url'    =>    'javascript:void(0);' ,
+                'visible'    =>    !$userAccess->userAceess2(
+                    array(
+                        'full_access_personal' 
+                    )
+                )['error']    ,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="gl gl-keys"></i><span>{label}</span><span class="menu-arrow"></span></a>',    
+                'items'=>array(
+                    array(        
+                        'label'=>'ثبت پیش‌فرض‌ها', 
+                        'url'=>'/jobToJob/create',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-floppy-saved"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' 
+                            )
+                        )['error']    
+                    ),array(        
+                        'label'=>'لیست پیش‌فرض‌ها', 
+                        'url'=>'/jobToJob/defaultJobAccess',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' 
+                            )
+                        )['error']    
+                    ),array(        
+                        'label'=>'دسترسی‌ کاربران', 
+                        'url'=>'/jobToJob/defaultJobAccess',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-user-key"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' 
+                            )
+                        )['error']    
+                    )
+
+
+                )
+
+            ),
+            array(        
+                'label'=>'مدیریت تغذیه', 
+                'url'=>'javascript:void(0);', 
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-plate-of-food"></i><span>{label}</span><span class="menu-arrow"></span></a>',                            
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                        'full_access_personal' ,
+                        'food_reservatore' ,
+                        'food_submiter' ,
+                        'food_exporter' ,
+                    )
+                )['error'],
+                'items'=>array(
+                    array(        
+                        'label'        =>    'رزرو غذا', 
+                        'url'        =>    '/personal/personalFoodReservation?admin=true',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-cutlery"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'food_reservatore' ,
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'ثبت غذا', 
+                        'url'        =>    '/personal/personalFood',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-floppy-saved"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'food_submiter' ,
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'گزارش', 
+                        'url'        =>    '/personal/personalFoodExport',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-file-text"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'food_exporter' ,
+                            )
+                        )['error']
+                    ),
+                    array(
+                        'label'        =>    'تنظیمات',
+                        'url'        =>    '/food/paymentType',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-adjust-alt"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                            )
+                        )['error']
+                    ),
+                )
+            ),
+            array(        
+                'label'=>'مدیریت پرسنلی', 
+                'url'=>'javascript:void(0);',     
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-group"></i><span>{label}</span><span class="menu-arrow"></span></a>',
+                'visible'=>!$userAccess->userAceess2(
+                    array(
+                        'full_access_personal' ,
+                        'attendance' ,
+                        'attendance_print' ,
+                        'confirm_reject_mission' ,
+                        'confirm_reject_leave' ,
+                        'confirm_reject_overtime' ,
+                        'confirm_reject_lowtimework' ,
+                        'attendance_report_lock' ,
+                        'attendance_report_unlock' ,
+                        'attendance_report_refresh' ,
+                        'monthly_work_time' ,
+                        'holiday_manage' ,
+                        'personal_time_sheet' ,
+                        'personal_manage' ,
+                    )
+                )['error'],
+                'items'=>array(
+                    // array(        
+                    // 'label'        =>    'ثبت پرسنل', 
+                    // 'url'        =>    '/registration/PersonalRegister',
+                    // 'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-user-add"></i><span>{label}</span></a>',
+                    // 'visible'    =>    !$userAccess->userAceess2(
+                    // array(
+                    // 'full_access_personal' ,
+                    // 'personal_register' ,
+                    // ) ,
+                    // Yii::$app->user->id,
+                    // $getAllOrganization   ,
+                    // $getAcademicYear
+                    // )['error']
+                    // ),
+                    // array(        
+                    // 'label'        =>    'مدیریت پرسنل', 
+                    // 'url'        =>    '/personal/PersonalManage',
+                    // 'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-user-asterisk"></i><span>{label}</span></a>',
+                    // 'visible'    =>    !$userAccess->userAceess2(
+                    // array(
+                    // 'full_access_personal' ,
+                    // 'attendance' ,
+                    // 'personal_register' ,
+                    // ) ,
+                    // Yii::$app->user->id,
+                    // $getAllOrganization   ,
+                    // $getAcademicYear
+                    // )['error']
+                    // ),
+                    array(        
+                        'label'        =>    'مدیریت پرسنلی', 
+                        'url'        =>    '/personal/createContract',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-user-asterisk"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal',
+                                'personal_manage',
+
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'نمایش قراردادها', 
+                        'url'        =>    '/personal/showContracts?admin=true',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-file"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'show_contract' ,
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'مدیریت درخواست‌ها', 
+                        'url'        =>    '/personal/personalManageRequests',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-notes-2"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'attendance' ,
+                                'confirm_reject_mission',
+                                'confirm_reject_leave' ,
+                                'confirm_reject_overtime',
+                                'confirm_reject_lowtimework',
+                            )
+                        )['error']
+                    ),array(
+                        'label'        =>    'لیست برنامه هفتگی',
+                        'url'        =>    '/personalSchedule/list',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-calendar"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'attendance',
+                                'personal_time_sheet',
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'گزارش کارکرد ماهانه', 
+                        'url'        =>    '/personal/personalWorkTimeReport',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-list-alt"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'attendance_report_lock' ,
+                                'attendance_report_unlock' ,
+                                'attendance_report_refresh' ,
+                                'monthly_work_time' ,
+                            )
+                        )['error']
+                    ),
+//                    array(
+//                        'label'        =>    'ثبت برنامه هفتگی',
+//                        'url'        =>    '/personalSchedule/manage',
+//                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-calendar"></i><span>{label}</span></a>',    'visible'    =>    !$userAccess->userAceess2(
+//                            array(
+//                                'full_access_personal' ,
+//                                'personal_time_sheet'
+//                            ) ,
+//                            Yii::$app->user->id,
+//                            $getAllOrganization   ,
+//                            $getAcademicYear
+//                        )['error']
+//                    ),
+                    array(        
+                        'label'        =>    'ثبت تعطیلات', 
+                        'url'        =>    '/personal/personalHoliday',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-important-day"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'attendance' ,
+                                'holiday_manage'
+                            )
+                        )['error']
+                    ),
+
+                    array(        
+                        'label'        =>    'گزارش ورود و خروج',
+                        'url'        =>    '/personal/personalPrintMonthlyReport',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-businessman"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'attendance' ,
+                                'print_attendance'
+                            )
+                        )['error']
+                    ),
+                    array(        
+                        'label'        =>    'پرینت کارت',
+                        'url'        =>    '/profile/card',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-vcard"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal' ,
+                                'personal_card_print' ,
+                            )
+                        )['error']
+                    ),
+                    array(
+                        'label'        =>    'ثبت اطلاعات ساعت‌زن',
+                        'url'        =>    '/personal/ImportTimeData',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-fingerprint"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'full_access_personal'
+
+                            )
+                        )['error']
+                    ),
+                )
+            ),
+         
+            array(        'label'    =>    'کارنامه پیشرفته', 
+                'url'    => yii::$app->urlManager->createUrl('estimateacademictoscore/report?view=student'),
+                'visible'    =>    Users::isExsiteAcademic()   ,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="fa fa-user fa-fw"></i><span>{label}</span></a>'
+            ),  
+            array(        'label'    =>     'کارنامه دوره‌ای', 
+                'url'    =>(Users::isExsiteAcademic())?    yii::$app->urlManager->createUrl('estimateacademictoscore/educationworkbooknew?view=student'):'#',     
+                'visible'    =>    Users::isExsiteAcademic() and ($orgCurrent == 28)    ,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="fa fa-user fa-fw"></i><span class="text-danger">{label}</span></a>'
+            ),
+             
+            array(        'label'    =>    'فرزندان من', 
+                'url'    =>'/academic/student',
+                'visible'    =>    Relationship::_getStudentRelation(),
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="fa fa-user fa-fw red"></i><span class="red">{label}</span></a>'
+            ),             
+            array(        
+                'label'=>'شخصی‌سازی',  
+                'url'=>'javascript:void(0);', 
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-wrench"></i><span>{label}</span><span class="menu-arrow"></span></a>',                            
+                'visible'=>!Yii::$app->user->isGuest,
+                'items'=>array(
+                    array(    
+                        'label'    =>    'پیگیری‌ها',
+                        'url'    =>    '/users/follow' ,
+                        'visible'=>!Yii::$app->user->isGuest    ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="ti-tag"></i><span>{label}</span></a>',    
+                    ),
+                    array(    
+                        'label'    =>    'پیگیرها',
+                        'url'    =>    '/users/following' ,
+                        'visible'=>!Yii::$app->user->isGuest    ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="ti-infinite"></i><span>{label}</span></a>',    
+                    ),
+                    array(        
+                        'label'    =>    'تغییر گذرواژه', 
+                        'url'    =>    '/user/ChangePassword',
+                        'visible'    =>    !Yii::$app->user->isGuest    ,
+                        'template'    =>    '<a href="{url}" class="href_class check-login check-login"><i class="gl gl-keys fa-fw"></i><span>{label}</span></a>'
+                    ),
+                    array(        'label'    =>    'مشخصات فردی', 
+                        'url'    =>    yii::$app->urlManager->createUrl('users/panelnew'),     
+                        'visible'    =>    !Yii::$app->user->isGuest    ,
+                        'template'    =>    '<a href="{url}" class="href_class check-login"><i class="fa fa-user fa-fw"></i><span>{label}</span></a>'
+                    ),
+                )
+            ),
+             array(        'label'    =>    'اجازه نمایش محتوا در میزان', 
+                'url'    =>    '/Contents/ContentApprove',
+                'visible'    =>    !$userAccess->userAceess2(
+                    array(
+                        'content_approve' 
+                    )
+                )['error'] and Yii::$app->user->id == 941,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="ti-search"></i><span>{label}</span></a>'
+            ),
+            array(    
+                'label'    =>    'آمار',
+                'url'    =>    'javascript:void(0);' ,
+                'visible'    =>    !$userAccess->userAceess2(
+                    array(
+                        'statistical_reports',
+                        'statistics_student_list',
+                        'statistics_personal_list'
+                        
+                    )
+                )['error']    ,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="gl  gl-charts"></i><span>{label}</span><span class="menu-arrow"></span></a>',    
+                'items'=>array(
+                    array(        
+                        'label'=>'آمار کلی', 
+                        'url'=>'/Statistics/total',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-stats"></i><span>{label}</span></a>',    
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'statistical_reports' 
+                            )
+                        )['error']    ,
+                    ),
+                    array(        
+                        'label'=>'آمار تحلیلی', 
+                        'url'=>'/Statistics/index',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-pie-chart"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'statistical_reports' 
+                            )
+                        )['error']    ,
+                    ),
+                    array(        
+                        'label'=>'آمار محتوای پرسنل', 
+                        'url'=>'/users/statistics',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-pie-chart"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'statistics_personal_list' 
+                            )
+                        )['error']    ,
+                    ),array(        
+                        'label'=>'آمار محتوای دانش آموزان', 
+                        'url'=>'/users/statistics',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-pie-chart"></i><span>{label}</span></a>',
+                        'visible'    =>    !$userAccess->userAceess2(
+                            array(
+                                'statistics_student_list' 
+                            )
+                        )['error']    ,
+                    ),
+
+
+                )
+
+            ),
+            array(
+                'label'=>'سلامت',
+                'url'=>'javascript:void(0);',
+                'visible'=>$isAdmin    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-heartbeat"></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(
+                        'label'=>'وضعیت ایمن‌سازی',
+                        'url'=>$urlPublicYii2.'/backend/web/health/safety',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-shield"></i><span>{label}</span></a>',
+                        'visible'=>$isAdmin
+                    ),
+                    array(
+                        'label'=>'تنظیمات وضعیت ایمن سازی',
+                        'url'=>$urlPublicYii2.'/backend/web/health/safetysetting',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-adjust-alt"></i><span>{label}</span></a>',
+                        'visible'=>$isAdmin
+                    ),
+                    array(
+                        'label'            =>    'سوابق بیماری',
+                        'url'            =>    $urlPublicYii2.'/backend/web/health/diseaserecords' ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-nameplate"></i><span>{label}</span></a>',
+                        'visible'=>$isAdmin,
+                    ),
+                    array(
+                        'label'=>'تنظیمات سوابق بیماری',
+                        'url'=>$urlPublicYii2.'/backend/web/health/diseaserecordsdetail',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-adjust-alt"></i><span>{label}</span></a>',
+                        'visible'=>$isAdmin
+                    ),
+                )
+            ),
+            array(        'label'    =>    'مدیریت سرویس مدرسه', 
+                'url'    =>    $urlPublicYii2.'/backend/web/schoolservice/driverregistration',
+                'visible'    =>    !$userAccess->userAceess2(
+                    array(
+                        'service_school_management' 
+                    )
+                )['error'] ,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="gl gl-taxi"></i><span>{label}</span></a>'
+            ),            
+            array(        'label'    =>    'مدیریت سفر', 
+                'url'    =>    $urlPublicYii2.'/backend/web/schoolservice/driverpage',
+                'visible'    =>    !$userAccess->userAceess2(
+                    array(
+                        'service_driver' 
+                    )
+                )['error'] ,
+                'template'    =>    '<a href="{url}" class="href_class check-login"><i class="gl gl-taxi"></i><span>{label}</span></a>'
+            ),
+            array(
+                'label'=>'تنظیمات خاص',
+                'url'=>'javascript:void(0);',
+                'visible'=>yii::$app->fuser->userAccessOnly(array( 'approve_tag_cv') ,1)    ,
+                'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-settings"></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(
+                        'label'=>'تایید برچسب افراد',
+                        'url'=>$urlPublicYii2.'/backend/web/tagcv',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-check"></i><span>{label}</span></a>',
+                        'visible'=>yii::$app->fuser->userAccessOnly(array( 'approve_tag_cv') ,1)
+                    ),
+                   
+                )
+            ),
+
+
+            
+    
+
+        ],
+
+
+    ]);
+  ?>
+
+
+
+    <div class="clearfix"></div>
+</div>
+
+
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+
+
+
+
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-static-side -->
+</nav>

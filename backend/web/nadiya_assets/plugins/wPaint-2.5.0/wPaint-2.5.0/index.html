@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  
+
+  <!-- filestart -->
+  <link rel="icon" type="image/vnd.microsoft.icon"  href="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/demo/img/favicon.ico" />
+  <link rel="Stylesheet" type="text/css" href="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/demo/demo.css" />
+  <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/lib/jquery.1.10.2.min.js"></script>
+  <!-- fileend -->
+  <style>
+  html .wPaint-menu-style{
+	/*width : auto !important;*/
+	position:absolute !important;
+	max-width:90vw;
+    left: 0;
+  }
+  .wPaint-canvas , .wPaint-canvas-bg , #wPaint{
+	left: unset !important;
+	top: 50% !important;
+	right: 50% !important;
+	transform: translate(50%,-50%) !important;
+	<!-- max-height:70vh !important; -->
+	<!-- max-width:80vw !important; -->
+  }
+  .wColorPicker-palette-mixed{
+      margin: 0 !important;
+  }
+  .wColorPicker-palette-simple{
+      margin-left: 5px !important;
+      margin-right: 7px !important;
+  }
+  .wColorPicker-palettes-holder,.wColorPicker-holder{
+      height: 181px !important;
+      width: 230px !important;
+  }
+      .wPaint-menu-icon-name-text .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-9-text.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-eraser .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-10-eraser.png') !important;          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+
+      }
+      .wPaint-menu-icon-name-pencil .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-8-pen.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-line .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-7-line.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-save .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-12-ok.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-undo .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-2-back.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-redo .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-3-next.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-clear .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-4-close.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-strokeStyle .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-11-colorDrop.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-rotateRight .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-rotate-cw.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon-name-rotateLeft .wPaint-menu-icon-img{
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-rotate-ucw.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+          /*scale : 1.8;*/
+
+      }
+      .wPaint-menu-icon:not(.wPaint-menu-icon-select , .wPaint-menu-colorpicker){
+          overflow: hidden;
+      }
+      .wPaint-menu-icon{
+          border-radius: 4px !important;
+          border-color: #25619d !important;
+          background-color: #245c9b !important;
+          -webkit-box-shadow:none !important;
+          box-shadow:none !important;
+      }
+      .wPaint-menu-icon.active{
+          background-color: rgba(36, 92, 155, 0.72) !important;
+      }
+      .wPaint-menu-icon-img{
+          color: white !important;
+          width: 57px !important;
+          height: 57px !important;
+          line-height: 54px !important;
+          font-size: 20px !important;
+          margin: 0px !important;
+      }
+      .wPaint-menu-icon-name-bold::after{
+          background-image: none !important;
+          content: "B";
+          line-height: 54px !important;
+          font-size: 20px !important;
+          margin: 0px !important;
+      }
+      .wPaint-menu-icon-name-italic::after{
+          background-image: none !important;
+          content: "I";
+          font-style: italic;
+          line-height: 54px !important;
+          font-size: 20px !important;
+          margin: 0px !important;
+      }
+      .wPaint-menu-icon-name-bold,.wPaint-menu-icon-name-italic{
+          width: 57px !important;
+          height: 57px !important;
+          text-align: center;
+          color: white;
+      }
+      .wPaint-menu-icon-name-bold .wPaint-menu-icon-img,
+      .wPaint-menu-icon-name-italic .wPaint-menu-icon-img{
+          display: none;
+      }
+      .wPaint-menu-holder {
+          border-color: #0c396c !important;
+          background-color: #a0c1e6 !important;
+      }
+      .wPaint-menu-holder{
+          padding-left: 5px !important;
+      }
+      .wPaint-menu-handle{
+          color: white !important;
+          width: 57px !important;
+          height: 57px !important;
+          line-height: 54px !important;
+          font-size: 20px !important;
+          margin: 0px !important;
+          margin-top: 5px !important;
+          margin-right: 5px !important;
+          border-radius: 4px !important;
+          background-color: transparent !important;
+          border: none !important;
+          box-shadow : none !important;
+          background-image: url('/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/icon/toolbox-1-move.png') !important;
+          background-position: center  !important;
+          background-repeat: no-repeat  !important;
+          background-size: cover  !important;
+
+      }
+  </style>
+</head>
+<body>
+  <!-- headstart -->
+
+<img id="scream"
+src="https://hedayatmizan.ir/server/php/files/593/37529/images/5f81b67b4bc7a.jpg" >
+<img id="tempImg"
+class="hide">
+      <!-- jQuery UI -->
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/lib/jquery.ui.core.1.10.3.min.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/lib/jquery.ui.widget.1.10.3.min.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/lib/jquery.ui.mouse.1.10.3.min.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/lib/jquery.ui.draggable.1.10.3.min.js"></script>
+      
+      <!-- wColorPicker -->
+      <link rel="Stylesheet" type="text/css" href="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/lib/wColorPicker.min.css" />
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/lib/wColorPicker.min.js"></script>
+
+      <!-- wPaint -->
+      <link rel="Stylesheet" type="text/css" href="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/wPaint.min.css" />
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/src/wPaint.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/src/wPaint.utils.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/plugins/main/src/wPaint.menu.main.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/plugins/text/wPaint.menu.text.min.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/plugins/shapes/wPaint.menu.main.shapes.min.js"></script>
+      <script type="text/javascript" src="/backend/web/nadiya_assets/plugins/wPaint-2.5.0/wPaint-2.5.0/plugins/file/wPaint.menu.main.file.min.js"></script>
+
+
+
+
+      <script type="text/javascript">
+
+        function saveImg(image) {
+          var _this = this;
+          $('#tempImg').attr('src',image);
+          $('#wPaint2').hide();
+            $('#wPaint2').remove();
+        }
+        function rotateImg(_this , degree) {
+            var canvas=_this.canvas;
+            var canvasBg=_this.canvasBg;
+            var ctx=canvas.getContext("2d");
+            var ctxBg=canvasBg.getContext("2d");
+            var bg = document.createElement('img')
+            bg.src = _this.getBg();
+            var img = document.createElement('img')
+            img.src = _this.getImage();
+
+            var w = _this.width;
+            var h = _this.height;
+            if($(window).height()*1.2 < $(window).width()){
+                h = ($(window).height() * 0.8 * h/w).toString();
+                w = $(window).height() * 0.8;
+            }
+            else{
+                w = ($(window).width() * 0.9 * w/h).toString();
+                h = $(window).width() * 0.9;
+            }
+
+            $('#wPaint').css('width' , h).css('height' , w);
+            $('#wPaint').wPaint('resize').hide();
+            setTimeout(function () {
+                canvas.width = h;
+                canvas.height = w;
+                canvasBg.width = h;
+                canvasBg.height = w;
+                if(degree == -90)
+                    ctx.translate(w-h, w);
+                else
+                    ctx.translate(h, 0);
+                ctx.rotate( (degree * Math.PI) / 180);
+                if(degree == -90)
+                    ctx.translate(0,-(w-h));
+                ctx.drawImage(img,0,0,w,h);
+
+                ctx.save();
+                if(degree == -90)
+                    ctxBg.translate(w-h, w);
+                else
+                    ctxBg.translate(h, 0);
+                ctxBg.rotate( (degree * Math.PI) / 180);
+                if(degree == -90)
+                    ctxBg.translate(0,-(w-h));
+                ctxBg.drawImage(bg,0,0,w,h);
+
+                ctxBg.save();
+                $('#wPaint').wPaint('resize').show();
+            },50);
+        }
+
+
+
+        // init wPaint
+		$('img').click(function(){
+            const toDataURL = url => fetch(url)
+                .then(response => response.blob())
+        .then(blob => new Promise((resolve, reject) => {
+                const reader = new FileReader()
+                reader.onloadend = () => resolve(reader.result)
+            reader.onerror = reject
+            reader.readAsDataURL(blob)
+        }))
+
+        $('body').on('click' , '#close-wPaint' , function () {
+            $('#wPaint2').remove();
+        });
+            toDataURL(this.src)
+                .then(dataUrl => {
+
+                    $('#tempImg').attr('src' , dataUrl);
+                const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                var height = this.height;
+                var width = this.width;
+                if($(window).height()*1.2 < $(window).width()){
+                    width = ($(window).height() * 0.8 * width/height).toString();
+                    height = $(window).height() * 0.8;
+                }
+                else{
+                    height = ($(window).width() * 0.9 * height/width).toString();
+                    width = $(window).width() * 0.9;
+                }
+                $('body').append(`<div id="wPaint2" style=" position:fixed; top:0; bottom:0; left:0; right:0; z-index:2000000; background-color:rgba(0,0,0,0.88);"><b id="close-wPaint" style="border-radius: 5px; cursor: pointer; position:absolute; top: 10px; left: 10px; padding: 20px; background: rgba(230,230,230,0.5)">بستن</b><div id="wPaint" style=" position:absolute; height:100%; width:100%;"></div></div>`);
+                $('#wPaint').css('width' , width).css('height' , height);
+                $('#wPaint').wPaint({
+                    menuOffsetLeft: '50%',
+                    menuOffsetBottom: 50,
+                    saveImg: saveImg,
+                    theme: 'standard classic'
+                });
+
+                $('.wPaint-canvas , .wPaint-canvas-bg').each(function(){
+
+                    this.width = width;
+                    this.height = height;
+                    var ctx = this.getContext("2d");
+//                    if($(this).hasClass('wPaint-canvas-bg'))
+                    ctx.drawImage(img, 0, 0 , width , height);
+                });
+            }
+            img.src = dataUrl;
+        });
+
+
+
+		});
+
+		$(window).resize(function(){
+		   const img = new Image();
+			img.onload = function() {
+                var height = this.height;
+                var width = this.width;
+                if($(window).height()*1.2 < $(window).width()){
+                    width = ($(window).height() * 0.8 * width/height).toString();
+                    height = $(window).height() * 0.8;
+                }
+                else{
+                    height = ($(window).width() * 0.9 * height/width).toString();
+                    width = $(window).width() * 0.9;
+                }
+			   $('#wPaint').css('width' , width).css('height' , height);
+                $("#wPaint").wPaint('resize');
+			}
+			img.src = $('img')[0].src;
+		});
+      </script>
+    </div>
+  </div>
+
+</body>
+</html>

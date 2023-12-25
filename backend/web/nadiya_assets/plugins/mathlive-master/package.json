@@ -1,0 +1,137 @@
+{
+    "name": "mathlive",
+    "version": "0.34.0",
+    "description": "Render and edit beautifully typeset math",
+    "license": "MIT",
+    "funding": {
+        "type": "patreon",
+        "url": "https://patreon.com/arnog"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/arnog/mathlive.git"
+    },
+    "keywords": [
+        "math",
+        "editor",
+        "javascript",
+        "math-editing",
+        "latex",
+        "tex",
+        "mathjax",
+        "katex",
+        "mathquill"
+    ],
+    "files": [
+        "/dist"
+    ],
+    "main": "./dist/mathlive.js",
+    "types": "./dist/mathlive.d.ts",
+    "scripts": {
+        "clean": "rimraf build dist docs",
+        "build-js": "rollup --config",
+        "watch-js": "rollup --config --watch",
+        "build-corecss": "lessc css/mathlive.core.less dist/mathlive.core.css",
+        "build-othercss": "lessc css/mathlive.less dist/mathlive.css",
+        "build-postcss": "postcss dist/*.css -d dist",
+        "build-css": "npm-run-all -s build-corecss build-othercss build-postcss",
+        "watch-css": "chokidar \"css/*.less\" --initial -c \"npm run build-css -s\"",
+        "build-ts-types": "jsdoc -t node_modules/tsd-jsdoc/dist -d ./build -a public -r ./src/",
+        "build": "npm-run-all build-css build-ts-types build-js",
+        "watch": "npm-run-all -p watch-*",
+        "http-server": "http-server . -c-1 --cors='*' -o examples/index.html",
+        "start": "npm-run-all -p watch-js watch-css http-server",
+        "lint": "prettier --ignore-path ./.prettierignore --write \"**/*.{ts,js,css,md,yml,json}\" \"!dist/**\" \"!docs/**\" \"!examples/**\"",
+        "test": "tape -r @babel/register test/* | tap-spec",
+        "watch-test": "chokidar \"src/*.js\" -c \"npm run test -s\" ",
+        "coverage": "nyc npm run babel-node ./test/test.js && nyc report",
+        "coverage:report": "nyc report",
+        "prepare": "",
+        "docs": "jsdoc -c ./jsdoc.conf.json && printf \"docs.mathlive.io\" > docs/CNAME",
+        "watch-docs": "chokidar \"src/*.js\" \"tutorials/*.md\" \"examples/*.md\" -c \"npm run docs -s\"",
+        "dist": "npm-run-all -s clean build docs",
+        "deploy": "bash ./scripts/deploy",
+        "deploy-ci": "bash ./scripts/deploy-ci"
+    },
+    "prettier": "@cortex-js/prettier-config",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "/src/**/*.js": [
+            "eslint --fix",
+            "git add"
+        ],
+        "/src/**/*.{js,css,json,less}": [
+            "prettier --write",
+            "git add"
+        ],
+        "/*.md": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "nyc": {
+        "exclude": [
+            "test",
+            "**/debug.js",
+            "dist",
+            "build"
+        ],
+        "report-dir": "./build/coverage",
+        "reporter": "html"
+    },
+    "engines": {
+        "npm": ">=6.13",
+        "node": ">=10.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "maintained node versions",
+        "not dead"
+    ],
+    "author": "Arno Gourdol <arno@arno.org>",
+    "contributors": [
+        "Louis Larpin (lilfaf.github.io)",
+        "Neil Soiffer (https://github.com/NSoiffer)",
+        "Jason Boxman (https://github.com/jboxman)",
+        "Synergy Codes (https://www.synergycodes.com/)",
+        "Rafał Piekarski (https://github.com/rpdiss)"
+    ],
+    "bugs": "https://github.com/arnog/mathlive/issues/",
+    "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.8.7",
+        "@babel/preset-env": "^7.8.7",
+        "@babel/register": "^7.8.6",
+        "@cortex-js/prettier-config": "^1.0.0",
+        "autoprefixer": "^9.7.4",
+        "chokidar-cli": "^2.1.0",
+        "cssnano": "^4.1.10",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-watch": "^6.0.1",
+        "http-server": "^0.12.1",
+        "husky": "^4.2.3",
+        "jsdoc": "^3.6.3",
+        "less": "^3.11.1",
+        "lint-staged": "^10.0.8",
+        "npm-run-all": "^4.1.5",
+        "nyc": "^15.0.0",
+        "postcss-cli": "^7.1.0",
+        "prettier": "^1.19.1",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.0.6",
+        "rollup-plugin-copy": "^3.3.0",
+        "rollup-plugin-terser": "^5.3.0",
+        "sutro-jsdoc-theme": "^1.0",
+        "tap-spec": "^5.0.0",
+        "tape": "^4.13.2",
+        "tsd-jsdoc": "^2.4.0"
+    },
+    "dependencies": {}
+}

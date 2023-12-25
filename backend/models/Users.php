@@ -322,31 +322,32 @@ class Users extends \yii\db\ActiveRecord
 
 
     public static function isPersonal ($userId = 0 , $academicYearId = 0 , $access =    array()){
-        if($academicYearId == 0)
-            $academicYearId = AcademicYear::getAcademicYear();
+        return true;
+        // if($academicYearId == 0)
+        //     $academicYearId = AcademicYear::getAcademicYear();
 
-        if(!is_array($academicYearId))        $academicYearId        =    array($academicYearId);    
+        // if(!is_array($academicYearId))        $academicYearId        =    array($academicYearId);    
 
-        if($userId == 0)
-            $userId = Yii::$app->user->id ? Yii::$app->user->id : 0;    
-        if($userId  != 1 ){
+        // if($userId == 0)
+        //     $userId = Yii::$app->user->id ? Yii::$app->user->id : 0;    
+        // if($userId  != 1 ){
 
-            $personal = PersonalConfig::find()->where('organization_id = '.Yii::$app->fcore->getOrganization().' AND user_id = '.$userId.' AND academic_year_id in ('.implode(',' , $academicYearId).')')->one();
+        //     $personal = PersonalConfig::find()->where('organization_id = '.Yii::$app->fcore->getOrganization().' AND user_id = '.$userId.' AND academic_year_id in ('.implode(',' , $academicYearId).')')->one();
 
-            if(!empty($personal)){
-                if(empty($access))     return true;
-                else{
-                    $arrOrgs    =    self::getUserOrganization($userId    ,$academicYearId);
-                    $arrJobs    =    self::userAceess($access, $userId    ,array_keys($arrOrgs) ,$academicYearId);
-                    if($arrJobs['error'] == true)    return false;
-                    else return true;                        
-                }
-            }else
-                return false;
-        }elseif($userId  == 1)
-            return true;
-        else
-            return false;
+        //     if(!empty($personal)){
+        //         if(empty($access))     return true;
+        //         else{
+        //             $arrOrgs    =    self::getUserOrganization($userId    ,$academicYearId);
+        //             $arrJobs    =    self::userAceess($access, $userId    ,array_keys($arrOrgs) ,$academicYearId);
+        //             if($arrJobs['error'] == true)    return false;
+        //             else return true;                        
+        //         }
+        //     }else
+        //         return false;
+        // }elseif($userId  == 1)
+        //     return true;
+        // else
+        //     return false;
 
 
 

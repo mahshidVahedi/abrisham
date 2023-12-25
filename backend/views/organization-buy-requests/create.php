@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var backend\models\OrganizationBuyRequests $model */
 
-$this->title = 'Create Organization Buy Requests';
+$this->title = 'ایجاد فرم درخواست خرید';
 $this->params['breadcrumbs'][] = ['label' => 'Organization Buy Requests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
