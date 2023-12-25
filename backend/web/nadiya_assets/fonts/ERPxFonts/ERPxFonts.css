@@ -1,0 +1,117 @@
+﻿@font-face {
+	font-family: ERPx;
+	font-style: normal;
+	font-weight: bold;
+	src: url('ERPx-B/ERPx-B.eot');
+	src: url('ERPx-B/ERPx-B.eot?#iefix') format('embedded-opentype'),
+		 url('ERPx-B/ERPx-B.woff2') format('woff2'),
+		 url('ERPx-B/ERPx-B.woff') format('woff'),
+		 url('ERPx-B/ERPx-B.ttf') format('truetype');
+}
+@font-face {
+	font-family:ERPxfaNum;
+	font-style: normal;
+	font-weight: 600;
+	src: url('faNum/ERPx-faNum-B.eot');
+	src: url('faNum/ERPx-faNum-B.eot?#iefix') format('embedded-opentype'),
+		 url('faNum/ERPx-faNum-B.woff2') format('woff2'),
+		 url('faNum/ERPx-faNum-B.woff') format('woff'),
+		 url('faNum/ERPx-faNum-B.ttf') format('truetype');
+}
+@font-face {
+	font-family: ERPx;
+	font-style: normal;
+	font-weight: 500;
+	src: url('ERPx-M/ERPx-M.eot');
+	src: url('ERPx-M/ERPx-M.eot?#iefix') format('embedded-opentype'),
+		 url('ERPx-M/ERPx-M.woff2') format('woff2'),
+		 url('ERPx-M/ERPx-M.woff') format('woff'),
+		 url('ERPx-M/ERPx-M.ttf') format('truetype');
+}
+@font-face {
+	font-family:ERPxfaNum;
+	font-style: normal;
+	font-weight: 500;
+	src: url('faNum/ERPx-faNum-M.eot');
+	src: url('faNum/ERPx-faNum-M.eot?#iefix') format('embedded-opentype'),
+		 url('faNum/ERPx-faNum-M.woff2') format('woff2'),
+		 url('faNum/ERPx-faNum-M.woff') format('woff'),
+		 url('faNum/ERPx-faNum-M.ttf') format('truetype');
+}
+@font-face {
+	font-family: ERPx;
+	font-style: normal;
+	font-weight: 300;
+	src: url('ERPx-L/ERPx-L.eot');
+	src: url('ERPx-L/ERPx-L.eot?#iefix') format('embedded-opentype'),
+		 url('ERPx-L/ERPx-L.woff2') format('woff2'),
+		 url('ERPx-L/ERPx-L.woff') format('woff'),
+		 url('ERPx-L/ERPx-L.ttf') format('truetype');
+}
+@font-face {
+	font-family:ERPxfaNum;
+	font-style: normal;
+	font-weight: 300;
+	src: url('faNum/ERPx-faNum-L.eot');
+	src: url('faNum/ERPx-faNum-L.eot?#iefix') format('embedded-opentype'),
+		 url('faNum/ERPx-faNum-L.woff2') format('woff2'),
+		 url('faNum/ERPx-faNum-L.woff') format('woff'),
+		 url('faNum/ERPx-faNum-L.ttf') format('truetype');
+}
+@font-face {
+	font-family: ERPx;
+	font-style: normal;
+	font-weight: 200;
+	src: url('ERPx-UL/ERPx-UL.eot');
+	src: url('ERPx-UL/ERPx-UL.eot?#iefix') format('embedded-opentype'),
+		 url('ERPx-UL/ERPx-UL.woff2') format('woff2'),
+		 url('ERPx-UL/ERPx-UL.woff') format('woff'),
+		 url('ERPx-UL/ERPx-UL.ttf') format('truetype');
+}
+@font-face {
+	font-family:ERPxfaNum;
+	font-style: normal;
+	font-weight: 200;
+	src: url('faNum/ERPx-faNum-UL.eot');
+	src: url('faNum/ERPx-faNum-UL.eot?#iefix') format('embedded-opentype'),
+		 url('faNum/ERPx-faNum-UL.woff2') format('woff2'),
+		 url('faNum/ERPx-faNum-UL.woff') format('woff'),
+		 url('faNum/ERPx-faNum-UL.ttf') format('truetype');
+}
+@font-face {
+	font-family: ERPx;
+	font-style: normal;
+	font-weight: normal;
+	src: url('ERPx/ERPx.eot');
+	src: url('ERPx/ERPx.eot?#iefix') format('embedded-opentype'),
+		 url('ERPx/ERPx.woff2') format('woff2'),
+		 url('ERPx/ERPx.woff') format('woff'),
+		 url('ERPx/ERPx.ttf') format('truetype');
+}
+@font-face {
+	font-family: ERPxfaNum;
+	font-style: normal;
+	font-weight: normal;
+	src: url('faNum/ERPx-faNum.eot');
+	src: url('faNum/ERPx-faNum.eot?#iefix') format('embedded-opentype'),
+		 url('faNum/ERPx-faNum.woff2') format('woff2'),
+		 url('faNum/ERPx-faNum.woff') format('woff'),
+		 url('faNum/ERPx-faNum.ttf') format('truetype');
+}
+body{
+	font-family: ERPx;
+	font-weight: 300;
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, input, textarea, p, div {
+	font-family: ERPx; 
+ }
+ .fa, .gl{
+	font-weight: normal !important;
+	font-style:normal !important;
+ }
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, b, bold, strong {
+	font-weight: 600;
+}
+.fa-num{
+	font-family: ERPxfaNum !important;
+}
