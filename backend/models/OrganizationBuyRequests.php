@@ -50,6 +50,7 @@ use Yii;
  * @property int $twelfth_empirical
  * @property int $high1_high2_together 
  * @property string $final_sale_date
+ * @property string $domain
  *
  * @property Users $sellerUser
  */
@@ -81,7 +82,7 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
             [['manager_nationality_code'], 'match', 'pattern'=>'/^\\d{10}$/', 'message'=>'کد ملی معتبر نیست.', 'on'=> self::SCENARIO_CREATE],
             [['created_at', 'seller_user_id', 'pre_school_1', 'pre_school_2', 'first', 'secound', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth_math', 'tenth_humanities', 'tenth_empirical', 'eleventh_math', 'eleventh_humanities', 'eleventh_empirical', 'twelfth_math', 'twelfth_humanities', 'twelfth_empirical'], 'integer'],
             [['manager_gender', 'status', 'process_status'], 'string'],
-            [['manager_name', 'manager_lastname', 'manager_email', 'organization_name', 'organization_address'], 'string', 'max' => 255],
+            [['manager_name', 'manager_lastname', 'manager_email', 'organization_name', 'organization_address', 'domain'], 'string', 'max' => 255],
             [['manager_nationality_code', 'organization_phone'], 'string', 'max' => 11],
             [['unique_key'], 'string', 'max' => 6],
             [['organization_name'], 'unique'],
@@ -137,7 +138,8 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
             'pre_primary1_together'=> 'پیش دبستانی و دبستان دوره اول با هم هستند.',
             'primary1_primary2_together'=>'دبستان دوره اول و دبستان دوره دوم با هم هستند.',
             'high1_high2_together'=>'دبیرستان متوسطه اول و دبیرستان متوسطه دوم با هم هستند.',
-            'final_sale_date' => 'تاریخ ثبت نهایی'
+            'final_sale_date' => 'تاریخ ثبت نهایی',
+            'domain' => 'دامنه'
         ];
     }
 

@@ -75,6 +75,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'high1_high2_together')->checkbox() ?>
 
+    <?=$form->field($model, 'domain')->textInput(['maxlength' => true])?>
+
+
     <?=$form->field($model, 'process_status')->dropDownList(['FINAL_REGISTER' => 'ثبت نهایی', 'FINAL_DEVELOP' => 'توسعه نهایی'], ['prompt' => 'انتخاب کنید'])?>
 
     <div class="form-group" style="float: left; margin-top: 5%;">

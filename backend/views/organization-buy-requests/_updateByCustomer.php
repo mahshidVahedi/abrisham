@@ -76,6 +76,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'high1_high2_together')->checkbox() ?>
 
+    <?=$form->field($model, 'domain')->textInput(['maxlength' => true])?>
+
 
     <div class="form-group" style="float: left; margin-top: 5%;">
         <?=Html::submitButton('Save', ['class' => 'btn btn-success'])?>
