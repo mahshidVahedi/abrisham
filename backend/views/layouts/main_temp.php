@@ -80,10 +80,10 @@ $urlPublicYii2    =    Yii::getAlias('@yii2Url');
                             </ul>
 
                             
-                            <form role="search" class="navbar-right app-search pull-right hidden-xs" id="search-form-theme" method="get" action = "<?php echo $urlPublic.'/Contents/admin';?>">
+                            <!-- <form role="search" class="navbar-right app-search pull-right hidden-xs" id="search-form-theme" method="get" action = "<?php //echo $urlPublic.'/Contents/admin';?>">
                                  <input type="text" placeholder="جستجو در محتوا" class="form-control" name="Contents[title]">
                                  <a href="javascript:document.getElementById('search-form-theme').submit();""><i class="fa fa-search"></i></a>
-                            </form>
+                            </form> -->
                         
 
                             <ul class="nav navbar-nav navbar-left pull-left">
@@ -129,41 +129,7 @@ $urlPublicYii2    =    Yii::getAlias('@yii2Url');
                     <?php $this->beginContent('@app/views/layouts/nav_nadia.php'); ?>
                     <?php $this->endContent(); ?>
                     <!--<div id="sidebar-menu">
-                        <ul>
-
-                            <li class="text-muted menu-title">اصلی</li>
-
-                            <li class="has_sub">
-                                <a href="index.html" class="waves-effect"><i class="ti-home"></i> <span> داشبورد </span> <span class="menu-arrow"></span></a>
-                            </li>
-
-                            <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-paint-bucket"></i> <span> کیت UI  </span> <span class="menu-arrow"></span> </a>
-                                <ul class="list-unstyled">
-                                    <li><a href="ui-buttons.html">دکمه ها</a></li>
-                                    <li><a href="ui-panels.html">پنل ها</a></li>
-                                    <li><a href="ui-portlets.html">پورتلت</a></li>
-                                    <li><a href="ui-checkbox-radio.html">چک باکس</a></li>
-                                    <li><a href="ui-tabs.html">تب ها</a></li>
-                                    <li><a href="ui-modals.html">مودال ها</a></li>
-                                    <li><a href="ui-progressbars.html">پروگرس بار</a></li>
-                                    <li><a href="ui-notification.html">اطلاعیه ها</a></li>
-                                    <li><a href="ui-images.html">تصاویر</a></li>
-                                    <li><a href="ui-bootstrap.html">رابط بوت استرپ</a></li>
-                                    <li><a href="ui-typography.html">تایپوگرافی</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-light-bulb"></i><span class="label label-primary pull-right">5</span><span> اجزا </span> </a>
-                                <ul class="list-unstyled">
-                                    <li><a href="{url route='field/index'}">رشته‌ها</a></li>
-                                    <li><a href="{url route='registerstatus/index'}">وضعیت‌ها</a></li>
-                                    <li><a href="{url route='workflow/index'}">روند کاری</a></li>
-                                    <li><a href="{url route='module/index'}">بخش‌ها</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                       
                         <div class="clearfix"></div>
                     </div>-->
                     <div class="clearfix"></div>
@@ -197,112 +163,6 @@ $urlPublicYii2    =    Yii::getAlias('@yii2Url');
             <!-- Right Sidebar -->
             <?php echo $this->render('//layouts/_following_me');?>
             <!--<div class="side-bar right-bar nicescroll">
-                <h4 class="text-center">چت</h4>
-                <div class="contact-list nicescroll">
-                    <ul class="list-group contacts-list">
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                </div>
-                                <span class="name">چانجل</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                </div>
-                                <span class="name">توماس</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                </div>
-                                <span class="name">دیوید</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                </div>
-                                <span class="name">کارتینا</span>
-                                <i class="fa fa-circle online"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="{yii::$app->request->BaseUrl}/nadiya_assets/images/users/avatar-5.jpg" alt="">
-                                </div>
-                                <span class="name">شادا</span>
-                                <i class="fa fa-circle away"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="{yii::$app->request->BaseUrl}/nadiya_assets/images/users/avatar-6.jpg" alt="">
-                                </div>
-                                <span class="name">ادیمنه</span>
-                                <i class="fa fa-circle away"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="{yii::$app->request->BaseUrl}/nadiya_assets/images/users/avatar-7.jpg" alt="">
-                                </div>
-                                <span class="name">اوکا</span>
-                                <i class="fa fa-circle away"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="{yii::$app->request->BaseUrl}/nadiya_assets/images/users/avatar-8.jpg" alt="">
-                                </div>
-                                <span class="name">دانا</span>
-                                <i class="fa fa-circle offline"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="{yii::$app->request->BaseUrl}/nadiya_assets/images/users/avatar-9.jpg" alt="">
-                                </div>
-                                <span class="name">جان</span>
-                                <i class="fa fa-circle offline"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">
-                                <div class="avatar">
-                                    <img src="{yii::$app->request->BaseUrl}/nadiya_assets/images/users/avatar-10.jpg" alt="">
-                                </div>
-                                <span class="name">سورتو</span>
-                                <i class="fa fa-circle offline"></i>
-                            </a>
-                            <span class="clearfix"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
             <!-- /Right-bar -->
 
         </div>

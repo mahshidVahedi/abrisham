@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var backend\models\Sellers $model */
 
-$this->title = 'Create Sellers';
+$this->title = 'ایجاد فروشنده';
 $this->params['breadcrumbs'][] = ['label' => 'Sellers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

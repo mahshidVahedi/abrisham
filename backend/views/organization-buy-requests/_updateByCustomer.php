@@ -80,7 +80,7 @@ use yii\widgets\ActiveForm;
 
 
     <div class="form-group" style="float: left; margin-top: 5%;">
-        <?=Html::submitButton('Save', ['class' => 'btn btn-success'])?>
+        <?=Html::submitButton('ذخیره', ['class' => 'btn btn-success'])?>
     </div>
 
     <?php ActiveForm::end();?>

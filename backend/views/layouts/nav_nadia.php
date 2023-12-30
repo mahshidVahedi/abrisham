@@ -11,70 +11,30 @@ $isPersonalAccessAll = true;
 $isGuest = true;
 $_SESSION['nadia'] = Menu::widget([
     'items' => [
-        array('label' => 'آخرین ارسال‌های مدارس',
-            'url' => '/Contents/AllContentOrg',
+        array('label' => 'لیست فروشندگان',                          
+
+            'url' => 'index.php?r=sellers%2Findex',
             'visible' => $isPersonalAccessCurrent,
             'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-search"></i><span>{label}</span></a>',
         ),
         array(
-            'label' => 'رخدادها',
-            'url' => '/users/events',
-            'visible' => !Yii::$app->user->isGuest,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-bell"></i><span>{label}</span></a>',
-        ),
-        array('label' => 'فرزندان من',
-            'url' => '/academic/student',
-            'visible' => !$isStudent and !$isStudentNewYear,
-            //'visible'    =>    Relationship::_getStudentRelation(),
-            'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-user fa-fw red"></i><span class="red">{label}</span></a>',
-        ),
-        array(
-            'label' => 'دوره‌های من',
-            'url' => '/users/educationMe',
-            'visible' => !Yii::$app->user->isGuest,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-education"></i><span>{label}</span></a>',
-        ),
-
-        array(
-            'label' => 'تکالیف من',
-            'url' => '/users/workbookMe',
-            'visible' => !Yii::$app->user->isGuest,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForWorkbookMe___</a>',
-        ),
-        array(
-            'label' => 'محتوای درسی من',
-            'url' => '/users/lessonMe',
+            'label' => 'لیست درخواست ها',
+            'url' => 'index.php?r=organization-buy-requests%2Findex',
             'visible' => $isStudent || $isStudentNewYear || $isPersonalAccessAll,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForLessonMe___</a>'),
-
-        array(
-            'label' => 'تکالیف',
-            'url' => 'javascript:void(0);',
-            'visible' => true,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
-            'items' => array(
-                array(
-                    'label' => 'مدیریت تکالیف',
-                    'url' => '/Contents/admin?type=homework',
-                    'template' => '<a href="{url}" class="href_class check-login"><i class="fa fa-cog"></i><span>{label}</span></a>',
-                    'visible' => true,
-                ),
-                array(
-                    'label' => 'آخرین پاسخ‌های تکالیف',
-                    'url' => '/users/events2',
-                    'visible' => true,
-                    'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span class="">{label}</span></a>',
-                ),
-                array(
-                    'label' => 'گزارش انجام تکالیف',
-                    'url' => '/academic/WorkbookManage',
-                    'visible' => true,
-                    'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span class="">{label}</span></a>',
-                ),
-
-            ),
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForLessonMe___</a>'
         ),
-
+        array(
+            'label' => 'ایجاد درخواست',
+            'url' => 'index.php?r=organization-buy-requests%2Fcreate',
+            'visible' => $isStudent || $isStudentNewYear || $isPersonalAccessAll,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForLessonMe___</a>'
+        ),
+        array(
+            'label' => 'ایجاد فروشنده',
+            'url' => 'index.php?r=sellers%2Fcreate',
+            'visible' => $isStudent || $isStudentNewYear || $isPersonalAccessAll,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForLessonMe___</a>'
+        ),
     ],
 
 ]);
