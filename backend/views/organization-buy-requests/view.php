@@ -9,21 +9,24 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Organization Buy Requests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
-$url = \Yii::$app->urlManager->createAbsoluteUrl(['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key]);
-echo Html::button('Copy Link', [
-    'class' => 'btn btn-primary',
-    'onclick' => 'copyToClipboard("' . $url . '")'
-]);
 ?>
 <div class="organization-buy-requests-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-    <?= Html::a('Update by seller', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    <?= Html::a('Update by customer', ['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key], ['class' => 'btn btn-primary']) ?> 
+    <?= Html::a('به روزرسانی توسط فروشنده', ['update', 'id' => $model->id], ['class' => 'btn btn-info waves-effect waves-light btn-lg']) ?>
+    <?= Html::a('به روزرسانی توسط مشتری', ['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key], ['class' => 'btn btn-info waves-effect waves-light btn-lg']) ?> 
     </p>
-
+    <p>
+    <?php 
+    $url = \Yii::$app->urlManager->createAbsoluteUrl(['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key]);
+    echo Html::button('کپی لینک', [
+    'class' => 'btn btn-default waves-effect waves-light btn-lg',
+    'onclick' => 'copyToClipboard("' . $url . '")'
+    ]);?>
+    </p>
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -46,39 +49,47 @@ echo Html::button('Copy Link', [
             'seller_user_id',
             'status',
             'process_status',
-            'pre_school_1',
-            'pre_school_2',
-            'first',
-            'secound',
-            'third',
-            'fourth',
-            'fifth',
-            'sixth',
-            'seventh',
-            'eighth',
-            'ninth',
-            'tenth_math',
-            'tenth_humanities',
-            'tenth_empirical',
-            'eleventh_math',
-            'eleventh_humanities',
-            'eleventh_empirical',
-            'twelfth_math',
-            'twelfth_humanities',
+            // 'pre_school_1',
+            // 'pre_school_2',
+            // 'first',
+            // 'secound',
+            // 'third',
+            // 'fourth',
+            // 'fifth',
+            // 'sixth',
+            // 'seventh',
+            // 'eighth',
+            // 'ninth',
+            // 'tenth_math',
+            // 'tenth_humanities',
+            // 'tenth_empirical',
+            // 'eleventh_math',
+            // 'eleventh_humanities',
+            // 'eleventh_empirical',
+            // 'twelfth_math',
+            // 'twelfth_humanities',
             'twelfth_empirical',
             'final_sale_date',
         ],
     ]) ?>
+    <div>
+        <?=Html::a('بازگشت', ['index'], ['class' => 'btn btn-outline-secondary btn-lg'])?>
+    </div>
+    
 
 </div>
 <script>
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text)
-            .then(() => {
-                alert('Link copied to clipboard: ' + text);
+        .then(() => {
+                swal("کپی شد", "قابل ارسال برای مشتری" ,"success");                
             })
             .catch((error) => {
-                alert('Error copying link to clipboard. Please copy the link manually.');
+                Swal({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",});
             });
+    
     }
 </script>

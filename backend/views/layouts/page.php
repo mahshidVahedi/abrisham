@@ -14,6 +14,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?=Yii::$app->charset?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/css/bootstrap-rtl.min.css">
     <link rel="stylesheet" type="text/css" href="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/css/core1.css">
     <link rel="stylesheet" type="text/css" href="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/css/components.css">
@@ -21,7 +22,6 @@ AppAsset::register($this);
     <link rel="stylesheet" type="text/css" href="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/css/pages.css">
     <link rel="stylesheet" type="text/css" href="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/css/responsive.css">
     <script src="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/js/modernizr.min.js"></script>
-    <title>ورود</title>
     <?php $this->registerCsrfMetaTags()?>
     <?php $this->head()?>
 </head>
@@ -45,6 +45,8 @@ AppAsset::register($this);
         <script src="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/js/jquery.scrollTo.min.js"></script>
         <script src="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/js/jquery.core.js"></script>
         <script src="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/js/jquery.app.js"></script>
+        <script src="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+        <script src="<?=yii::$app->request->BaseUrl;?>/nadiya_assets/pages/jquery.sweet-alert.init.js"></script>
 <?php $this->endBody()?>
 </body>
 </html>

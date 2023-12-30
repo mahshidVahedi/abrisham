@@ -2,6 +2,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 $form = ActiveForm::begin(['id' => 'login-form']);
+$this->title = 'login';
 ?>
 <div class="account-pages w-100 h-100"></div>
     <div class="clearfix"></div>

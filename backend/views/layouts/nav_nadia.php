@@ -4,36 +4,40 @@ use yii\widgets\Menu;
 //if(false) {
 $urlPublic = 'test'; //Yii::getAlias('@yii1Url');
 $urlPublicYii2 = 'test'; //Yii::getAlias('@yii2Url');
-$isStudent = true;
-$isStudentNewYear = true;
-$isPersonalAccessCurrent = true;
-$isPersonalAccessAll = true;
+$isSeller = true;
+$isManager = true;
 $isGuest = true;
 $_SESSION['nadia'] = Menu::widget([
     'items' => [
         array('label' => 'لیست فروشندگان',                          
 
             'url' => 'index.php?r=sellers%2Findex',
-            'visible' => $isPersonalAccessCurrent,
+            'visible' => $isManager,
             'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-search"></i><span>{label}</span></a>',
         ),
         array(
             'label' => 'لیست درخواست ها',
             'url' => 'index.php?r=organization-buy-requests%2Findex',
-            'visible' => $isStudent || $isStudentNewYear || $isPersonalAccessAll,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForLessonMe___</a>'
+            'visible' => $isSeller || $isManager,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
         ),
         array(
             'label' => 'ایجاد درخواست',
             'url' => 'index.php?r=organization-buy-requests%2Fcreate',
-            'visible' => $isStudent || $isStudentNewYear || $isPersonalAccessAll,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForLessonMe___</a>'
+            'visible' => $isSeller || $isManager,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
         ),
         array(
             'label' => 'ایجاد فروشنده',
             'url' => 'index.php?r=sellers%2Fcreate',
-            'visible' => $isStudent || $isStudentNewYear || $isPersonalAccessAll,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span>___appendCountForLessonMe___</a>'
+            'visible' => $isSeller || $isManager,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
+        ),
+        array(
+            'label' => 'ورود',
+            'url' => 'index.php?r=site%2Flogin',
+            'visible' => $isGuest,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
         ),
     ],
 

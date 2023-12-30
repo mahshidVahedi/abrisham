@@ -27,10 +27,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'manager_name') ?>
         <?= $form->field($model, 'manager_lastname') ?>
         <?= $form->field($model, 'manager_nationality_code') ?>
-        <?= $form->field($model, 'manager_gender')->dropDownList(['FEMALE' => 'خانم', 'MALE' => 'آقا'], ['prompt' => 'انتخاب کنید']) ?>
+        <?php echo $form->field($model, 'unique_key') ?>
     </div>
     <div class="col-md-4">
-        <?php echo $form->field($model, 'unique_key') ?>
+
         <?php echo $form->field($model, 'seller_updated_date') ?>
         <?php echo $form->field($model, 'customer_updated_date') ?>
         <?php echo $form->field($model, 'manager_mobile') ?>
@@ -43,9 +43,9 @@ use yii\widgets\ActiveForm;
         <?php echo $form->field($model, 'final_sale_date') ?>
     </div>
 
-    <div class="form-group mt-4 mb-6">
-        <?= Html::submitButton('جستجو', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('ریست', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="form-group mt-4 mb-6" style="float: left;">
+        <?= Html::submitButton('جستجو', ['class' => 'btn btn-primary btn-lg']) ?>
+        <?= Html::resetButton('ریست', ['class' => 'btn btn-outline-secondary btn-lg']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

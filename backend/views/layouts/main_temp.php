@@ -61,25 +61,6 @@ $urlPublicYii2    =    Yii::getAlias('@yii2Url');
                                 </button>
                                 <span class="clearfix"></span>
                             </div>
-
-                            <ul class="nav navbar-nav hidden-xs">
-                                <li><a href="<?php echo '/Contents/admin?type=weblog';?>" class="waves-effect waves-light">وبلاگ های من</a></li>
-                                <?php if(Users::isPersonal()){ ?>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
-                                       role="button" aria-haspopup="true" aria-expanded="false">امور پرسنلی<span
-                                            class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="<?php echo '/personal/personalMonthlyReport';?>">ورود و خروج</a></li>
-                                        <li><a href="<?php echo '/personal/personalManageRequests'; ?>">درخواست‌ها</a></li>
-                                        <li><a href="<?php echo '/personal/ShowContract';?>">نمایش قرارداد</a></li>
-                                        <li><a href="<?php echo '/personal/personalFoodReservation';?>">رزرو غذا</a></li>
-                                    </ul>
-                                </li>
-                                <?php } ?>
-                            </ul>
-
-                            
                             <!-- <form role="search" class="navbar-right app-search pull-right hidden-xs" id="search-form-theme" method="get" action = "<?php //echo $urlPublic.'/Contents/admin';?>">
                                  <input type="text" placeholder="جستجو در محتوا" class="form-control" name="Contents[title]">
                                  <a href="javascript:document.getElementById('search-form-theme').submit();""><i class="fa fa-search"></i></a>
@@ -172,10 +153,10 @@ $urlPublicYii2    =    Yii::getAlias('@yii2Url');
     </body>
 </html>
 
-<?php //$this->beginContent('@app/views/layouts/footer.php'); ?> 
-<?php //$this->endContent(); ?>
-<?php //$this->beginContent('@app/views/layouts/_ajax_login.php'); ?>
+<?php $this->beginContent('@app/views/layouts/footer.php'); ?> 
+<?php $this->endContent(); ?>
+<?php $this->beginContent('@app/views/layouts/_ajax_login.php'); ?>
 
-<?php //$this->endContent(); ?>
-<?php //$this->registerJsFile('@web/nadiya_assets/js/vis-network.min.js', [$this::POS_END]) ?>
+<?php $this->endContent(); ?>
+<?php $this->registerJsFile('@web/nadiya_assets/js/vis-network.min.js', [$this::POS_END]) ?>
 <?= $this->endPage() ?>
