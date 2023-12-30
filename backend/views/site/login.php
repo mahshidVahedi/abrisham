@@ -1,28 +1,16 @@
 <?php
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
-
-/* @var yii\web\View $this */
-/* @var yii\bootstrap5\ActiveForm $form */
-/* @var \common\models\LoginForm $model */
-$this->title = 'ورود';
 $form = ActiveForm::begin(['id' => 'login-form']);
-$this->registerCssFile('@web/nadiya_assets/css/bootstrap-rtl.min.css');
-$this->registerCssFile('@web/nadiya_assets/css/core1.css');
-$this->registerCssFile('@web/nadiya_assets/css/components.css');
-$this->registerCssFile('@web/nadiya_assets/css/icons.css');
-$this->registerCssFile('@web/nadiya_assets/css/pages.css');
-$this->registerCssFile('@web/nadiya_assets/css/responsive.css');
-$this->registerJsFile('@web/nadiya_assets/js/modernizr.min.js');
 ?>
-<div class="account-pages"></div>
+<div class="account-pages w-100 h-100"></div>
     <div class="clearfix"></div>
-    <div class="wrapper-page">
-        <div class="card-box">
+    <div class="wrapper-page w-50 h-50">
+        <div class="card-box ">
             <div class="panel-heading">
                 <h3 class="text-center"> ورود  به حساب کاربری <strong class="text-custom">ابریشم</strong> </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body ">
                 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <div class="form-group">
                     <div class="col-xs-12">
@@ -51,16 +39,4 @@ $this->registerJsFile('@web/nadiya_assets/js/modernizr.min.js');
     </div>
 <?php ActiveForm::end();?>
 <?php
-$this->registerJsFile('@web/nadiya_assets/js/jquery.min.js');
-$this->registerJsFile('@web/nadiya_assets/js/bootstrap-rtl.min.js');
-$this->registerJsFile('@web/nadiya_assets/js/detect.js');
-$this->registerJsFile('@web/nadiya_assets/js/fastclick.js');
-$this->registerJsFile('@web/nadiya_assets/js/jquery.slimscroll.js');
-$this->registerJsFile('@web/nadiya_assets/js/jquery.blockUI.js');
-$this->registerJsFile('@web/nadiya_assets/js/waves.js');
-$this->registerJsFile('@web/nadiya_assets/js/wow.min.js');
-$this->registerJsFile('@web/nadiya_assets/js/jquery.nicescroll.js');
-$this->registerJsFile('@web/nadiya_assets/js/jquery.scrollTo.min.js');
-$this->registerJsFile('@web/nadiya_assets/js/jquery.core.js');
-$this->registerJsFile('@web/nadiya_assets/js/jquery.app.js');
 ?>
