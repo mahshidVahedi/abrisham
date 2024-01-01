@@ -2,17 +2,29 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Breadcrumbs;
+
 /** @var yii\web\View $this */
 /** @var backend\models\OrganizationBuyRequests $model */
 
 $this->title = $model->organization_name;
-$this->params['breadcrumbs'][] = ['label' => 'Organization Buy Requests', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'فرم های درخواست خرید', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="organization-buy-requests-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?= Html::encode($this->title) ?></h2>
+
+    <p>
+        <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => 'صفحه اصلی',
+                'url' => 'index.php'
+            ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    </p>
 
     <p>
     <?= Html::a('به روزرسانی توسط فروشنده', ['update', 'id' => $model->id], ['class' => 'btn btn-info waves-effect waves-light btn-lg']) ?>

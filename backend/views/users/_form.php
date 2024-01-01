@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="users-form">
+<div class="users-form" style="width:30%; margin: auto; margin-top: 5%;">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'lname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'gender')->dropDownList([ 'FEMALE' => 'FEMALE', 'MALE' => 'MALE', 'OTHER' => 'OTHER', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'gender')->dropDownList([ 'FEMALE' => 'خانم', 'MALE' => 'آقا', 'OTHER' => 'دیگر', ], ['prompt' => 'انتخاب کنید']) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
@@ -26,22 +26,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'activkey')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'create_at')->textInput() ?>
+    <?= $form->field($model, 'superuser')->checkbox() ?>
 
-    <?= $form->field($model, 'lastvisit_at')->textInput() ?>
+    <?= $form->field($model, 'status')->checkbox() ?>
 
-    <?= $form->field($model, 'superuser')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'fault_count')->textInput() ?>
-
-    <?= $form->field($model, 'fault_at')->textInput() ?>
-
-    <?= $form->field($model, 'unique_key')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="form-group" dir="ltr">
+        <?= Html::submitButton('ذخیره', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

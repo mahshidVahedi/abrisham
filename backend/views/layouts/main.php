@@ -55,15 +55,6 @@ $urlPublicYii2 = 'test'; //Yii::getAlias('@yii2Url');
         <?php $this->endContent();?>
     </head>
     <body>
-        <?=
-            Breadcrumbs::widget([
-                'homeLink' => [
-                    'label' => Yii::t('yii', 'صفحه اصلی'),
-                    'url' => Yii::$app->homeUrl,
-                ],
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ])
-        ?>
         <?=$this->beginBody()?>
         <?php //$this->beginContent('@app/views/layouts/_float_messenger.php'); ?>
         <?php // $this->endContent(); ?>
@@ -91,7 +82,7 @@ $urlPublicYii2 = 'test'; //Yii::getAlias('@yii2Url');
                             <!-- <img src="<?//php echo $urlPublicNew; ?>/frontend_theme/<?//php echo $themeOrganizationId; ?>/images/logo-mini-admin.png" class="logo-favicon hidden-print"/>                        </a> -->
 
                         <!-- Image Logo here -->
-                        <a href="index.php" class="logo">
+                        <a href="index.php" class="logo" style="float: right; margin-right:3%;">
                             <!-- <i class="icon-c-logo"> <img src="<?=yii::$app->request->BaseUrl?>/nadiya_assets/images/logo_dark.png" height="42"/> </i> -->
                             <span><img src="<?=yii::$app->request->BaseUrl?>/nadiya_assets/images/logo_sm.png" height="50"/></span>
                         </a>

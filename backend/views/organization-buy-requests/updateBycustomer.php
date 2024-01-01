@@ -1,19 +1,30 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
+
 
 /** @var yii\web\View $this */
 /** @var backend\models\OrganizationBuyRequests $model */
 
 $this->title = 'به روزرسانی اطلاعات توسط مشتری';
-$this->params['breadcrumbs'][] = ['label' => 'Organization Buy Requests', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->unique_key, 'url' => ['view', 'unique_key' => $model->unique_key]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => 'فرم های درخواست خرید', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'به روز رسانی اطلاعات توسط مشتری';
 ?>
 <div class="organization-buy-requests-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?= Html::encode($this->title) ?></h2>
 
+    <p>
+        <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => 'صفحه اصلی',
+                'url' => 'index.php'
+            ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    </p>
     <?= $this->render('_updateByCustomer', [
         'model' => $model,
     ]) ?>

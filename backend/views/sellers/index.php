@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-
+use yii\widgets\Breadcrumbs;
 /** @var yii\web\View $this */
 /** @var backend\models\SellersSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -16,6 +16,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="sellers-index" style="width:80%; margin: auto; margin-top:10px;">
 
     <h2><?= Html::encode($this->title) ?></h2>
+
+    <p>
+        <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => 'صفحه اصلی',
+                'url' => 'index.php'
+            ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    </p>
+
     <p style="float:left;">
         <?= Html::a('ایجاد فروشنده', ['create'], ['class' => 'btn btn-success']) ?>
     </p>

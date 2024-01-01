@@ -55,7 +55,8 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'primary1_primary2_together')->checkbox()?>
 </div>
-<div class="col-md-4">
+
+<div class="col-md-3">
 
     <?=$form->field($model, 'seventh')->checkbox()?>
 

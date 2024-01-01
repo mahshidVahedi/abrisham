@@ -63,13 +63,13 @@ $_SESSION['nadia'] = Menu::widget([
                 'items'=>array(
                     array(
                         'label'=>'لیست',
-                        'url'=>'index.php?r=organization-buy-requests%2Findex',
+                        'url'=>'index.php?r=users%2Findex',
                         'template' => '<a href="{url}" class="href_class check-login"><i class="gl glyphicon-list"></i><span>{label}</span></a>',
                         'visible'=>$isManager,
                     ),
                     array(
                         'label'    =>    'جدید',
-                        'url'    =>    'index.php?r=organization-buy-requests%2Fcreate' ,
+                        'url'    =>    'index.php?r=users%2Fcreate' ,
                         'visible'=>$isManager,
                         'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-circle-arrow-left "></i><span class="">{label}</span></a>',
                     ),

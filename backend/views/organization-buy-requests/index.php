@@ -5,18 +5,29 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
+use yii\widgets\Breadcrumbs;
 /** @var yii\web\View $this */
 /** @var backend\models\OrganizationBuyRequestsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'فرم های درخواست خرید';
-// $this->params['breadcrumbs'][] = $this->title;
+ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="organization-buy-requests-index" style="width:80%; margin: auto; margin-top:10px;">
 
     <h2><?=Html::encode($this->title)?></h2>
+
+    <p>
+        <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => 'صفحه اصلی',
+                'url' => 'index.php'
+            ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    </p>
+
     <p style="float:left;">
         <?= Html::a('ایجاد درخواست', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
