@@ -13,11 +13,10 @@ use yii\grid\GridView;
 $this->title = 'فروشندگان';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sellers-index" style="direction: rtl;">
+<div class="sellers-index" style="width:80%; margin: auto; margin-top:10px;">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
+    <h2><?= Html::encode($this->title) ?></h2>
+    <p style="float:left;">
         <?= Html::a('ایجاد فروشنده', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -29,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'user_id',
             'status',
             [
@@ -55,7 +54,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=> function ($model) {
                     return $model -> sellerCompletedFormsCount;
                 }
-            ]
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}', // Only show the "view" button
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        return Html::a('<span class="gl glyphicon-eye-open"></span>', $url, [
+                            'title' => Yii::t('yii', 'View'),
+                        ]);
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

@@ -2,9 +2,8 @@
 //$organizationInfo           =   Yii::$app->fcore->getOrganization(true);
 $currentOrganizationId = 1; //$organizationInfo['organization_id'];
 $themeOrganizationId = 1; //$organizationInfo['theme_organization_id'];
-use backend\models\Users;
 use yii\helpers\Html;
-use yii\web\UrlManager;
+use yii\widgets\Breadcrumbs;
 $this->beginPage();
 $urlPublic = 'test'; //yii::getAlias('@yii1Url');
 $urlPublicNew = 'test'; //yii::getAlias('@yii2Url');
@@ -40,24 +39,31 @@ $urlPublicYii2 = 'test'; //Yii::getAlias('@yii2Url');
         <?php $this->beginContent('@app/views/layouts/header.php');?>
 
             <?php
-if (!empty($_SESSION['isLoginByApp'])) {
-    echo $this->registerCss(<<<CSS
+                if (!empty($_SESSION['isLoginByApp'])) {
+                    echo $this->registerCss(<<<CSS
 
-#float-messenger,.topbar,.side-menu,.page-title{
-    display: none;
-}
-
-.content-page > .content{
-    margin-top: 0 !important;
-}
-CSS
-        ,[$this::POS_HEAD]);
-
-}
-?>
+                    #float-messenger,.topbar,.side-menu,.page-title{
+                        display: none;
+                    }
+                    .content-page > .content{
+                        margin-top: 0 !important;
+                    }
+                    CSS
+                    ,[$this::POS_HEAD]);
+                }
+            ?>
         <?php $this->endContent();?>
     </head>
     <body>
+        <?=
+            Breadcrumbs::widget([
+                'homeLink' => [
+                    'label' => Yii::t('yii', 'صفحه اصلی'),
+                    'url' => Yii::$app->homeUrl,
+                ],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ])
+        ?>
         <?=$this->beginBody()?>
         <?php //$this->beginContent('@app/views/layouts/_float_messenger.php'); ?>
         <?php // $this->endContent(); ?>
@@ -98,7 +104,7 @@ CSS
                         <div class="">
                             <div class="pull-right">
                                 <button class="button-menu-mobile open-left waves-effect waves-light">
-                                    <i class="md md-menu"></i>
+                                    <i class="md  md-view-headline"></i>
                                 </button>
                                 <span class="clearfix"></span>
                             </div>

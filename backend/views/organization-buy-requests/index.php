@@ -11,15 +11,18 @@ use yii\helpers\Url;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'فرم های درخواست خرید';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="organization-buy-requests-index" style="width:80%; margin: auto; margin-top:10px;">
 
-    <h1><?=Html::encode($this->title)?></h1>
+    <h2><?=Html::encode($this->title)?></h2>
+    <p style="float:left;">
+        <?= Html::a('ایجاد درخواست', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-    
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    
+
     <?=GridView::widget([
     'dataProvider' => $dataProvider,
     // 'filterModel' => $searchModel,
@@ -34,29 +37,37 @@ $this->params['breadcrumbs'][] = $this->title;
         'status',
         'process_status',
         'final_sale_date',
+        // [
+        //     'class' => ActionColumn::className(),
+        //     'urlCreator' => function ($action, OrganizationBuyRequests $model, $key, $index, $column) {
+        //         return Url::toRoute([$action, 'id' => $model->id]);
+        //     },
+        // ],
         [
-            'class' => ActionColumn::className(),
-            'urlCreator' => function ($action, OrganizationBuyRequests $model, $key, $index, $column) {
-                return Url::toRoute([$action, 'id' => $model->id]);
-            },
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view}', // Only show the "view" button
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+                    return Html::a('<span class="gl glyphicon-eye-open"></span>', $url, [
+                        'title' => Yii::t('yii', 'View'),
+                    ]);
+                },
+            ],
         ],
         [
             'format' => 'raw',
-            'value' => function($model) {
+            'value' => function ($model) {
                 $url = \Yii::$app->urlManager->createAbsoluteUrl(['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key]);
-                return Html::button('کپی لینک', [
+                return Html::button('کپی لینک <span class="gl  glyphicon-share "></span>', [
                     'class' => 'btn btn-default waves-effect waves-lights',
                     'id' => 'sa-success',
-                    'onclick' => 'copyToClipboard("' . $url . '")'
+                    'onclick' => 'copyToClipboard("' . $url . '")',
                 ]);
             },
         ],
     ],
-]); ?>
-    <div style="float:left;">
-        <?=Html::a('بازگشت', [''], ['class' => 'btn btn-outline-secondary mt-4 btn-lg'])?>
-        <?=Html::a('ایجاد فرم درخواست خرید', ['create'], ['class' => 'btn btn-outline-success mt-4 btn-lg'])?>
-    </div>
+]);?>
+
 
 </div>
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
@@ -64,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text)
             .then(() => {
-                swal("کپی شد", "قابل ارسال برای مشتری" ,"success");                
+                swal("کپی شد", "قابل ارسال برای مشتری" ,"success");
             })
             .catch((error) => {
                 Swal({

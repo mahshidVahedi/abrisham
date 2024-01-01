@@ -8,9 +8,10 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="organization-buy-requests-form" style="direction: rtl;">
+<div class="organization-buy-requests-form" style="width:80%; margin: auto; margin-top:10px; margin-bottom:100px">
     <?php $form = ActiveForm::begin();?>
-
+    <div class="col-md-6"> 
+    
     <?=$form->field($model, 'organization_name')->textInput(['maxlength' => true])?>
 
     <?=$form->field($model, 'manager_name')->textInput(['maxlength' => true])?>
@@ -20,7 +21,8 @@ use yii\widgets\ActiveForm;
     <?=$form->field($model, 'manager_nationality_code')->textInput()?>
 
     <?=$form->field($model, 'manager_gender')->dropDownList(['FEMALE' => 'خانم', 'MALE' => 'آقا'], ['prompt' => 'انتخاب کنید'])?>
-
+</div>
+<div class="col-md-6"> 
     <?=$form->field($model, 'manager_email')->textInput(['maxlength' => true])?>
 
     <?=$form->field($model, 'organization_address')->textInput(['maxlength' => true])?>
@@ -28,6 +30,10 @@ use yii\widgets\ActiveForm;
     <?=$form->field($model, 'organization_phone')->textInput()?>
 
     <?=$form->field($model, 'school_type')->dropDownList(['GIRL' => 'دخترانه', 'BOY' => 'پسرانه'], ['prompt' => 'انتخاب کنید'])?>
+
+    <?=$form->field($model, 'domain')->textInput(['maxlength' => true])?>
+</div>
+<div class="col-md-4"> 
 
     <?= $form->field($model, 'pre_school_1')->checkbox()?>
 
@@ -48,6 +54,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sixth')->checkbox() ?>
 
     <?= $form->field($model, 'primary1_primary2_together')->checkbox() ?>
+</div>
+<div class="col-md-4"> 
 
     <?= $form->field($model, 'seventh')->checkbox() ?>
 
@@ -55,6 +63,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ninth')->checkbox() ?>
 
+
+
+</div>
+<div class="col-md-4">
     <?= $form->field($model, 'tenth_math')->checkbox() ?>
 
     <?= $form->field($model, 'tenth_humanities')->checkbox() ?>
@@ -74,13 +86,12 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'twelfth_empirical')->checkbox() ?>
 
     <?= $form->field($model, 'high1_high2_together')->checkbox() ?>
-
-    <?=$form->field($model, 'domain')->textInput(['maxlength' => true])?>
-
+</div>
 
     <?=$form->field($model, 'process_status')->dropDownList(['FINAL_REGISTER' => 'ثبت نهایی', 'FINAL_DEVELOP' => 'توسعه نهایی'], ['prompt' => 'انتخاب کنید'])?>
 
-    <div class="form-group" style="float: left; margin-top: 5%;">
+
+    <div class="form-group" style="float: left;">
         <?=Html::submitButton('‌ذخیره', ['class' => 'btn btn-success'])?>
     </div>
 

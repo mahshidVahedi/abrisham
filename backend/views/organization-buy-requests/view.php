@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var backend\models\OrganizationBuyRequests $model */
 
-$this->title = $model->id;
+$this->title = $model->organization_name;
 $this->params['breadcrumbs'][] = ['label' => 'Organization Buy Requests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
     <?php 
     $url = \Yii::$app->urlManager->createAbsoluteUrl(['organization-buy-requests/update-customer', 'unique_key' => $model->unique_key]);
-    echo Html::button('کپی لینک', [
+    echo Html::button('کپی لینک  <span class="gl  glyphicon-share "></span>', [
     'class' => 'btn btn-default waves-effect waves-light btn-lg',
     'onclick' => 'copyToClipboard("' . $url . '")'
     ]);?>
@@ -72,9 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'final_sale_date',
         ],
     ]) ?>
-    <div>
-        <?=Html::a('بازگشت', ['index'], ['class' => 'btn btn-outline-secondary btn-lg'])?>
-    </div>
     
 
 </div>

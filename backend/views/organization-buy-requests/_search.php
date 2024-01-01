@@ -15,25 +15,25 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
         'options' => ['class' => 'row'], // Add the 'row' class to the form
     ]); ?>
-    <h3>
-        جستجو   
-    </h3>
-    <?= $form->field($model,'keyword') ?>
-    <h3>
+    <div style="margin-right: 10px;"> 
+        <h5 >
+            جستجو   
+        </h5>
+        <?php echo $form->field($model,'keyword') ?>
+    </div>
+    <h5 style="margin-right: 10px;">
         جستجوی پیشرفته
-    </h3>
+    </h5>
     <div class="col-md-4"> 
         <?= $form->field($model, 'created_sale_date') ?>
         <?= $form->field($model, 'manager_name') ?>
         <?= $form->field($model, 'manager_lastname') ?>
-        <?= $form->field($model, 'manager_nationality_code') ?>
-        <?php echo $form->field($model, 'unique_key') ?>
+        <?= $form->field($model, 'manager_nationality_code') ?> 
     </div>
     <div class="col-md-4">
-
+        <?php echo $form->field($model, 'unique_key') ?>
         <?php echo $form->field($model, 'seller_updated_date') ?>
         <?php echo $form->field($model, 'customer_updated_date') ?>
-        <?php echo $form->field($model, 'manager_mobile') ?>
         <?php echo $form->field($model, 'organization_name') ?>
     </div>
     <div class="col-md-4"> 
@@ -43,9 +43,9 @@ use yii\widgets\ActiveForm;
         <?php echo $form->field($model, 'final_sale_date') ?>
     </div>
 
-    <div class="form-group mt-4 mb-6" style="float: left;">
-        <?= Html::submitButton('جستجو', ['class' => 'btn btn-primary btn-lg']) ?>
-        <?= Html::resetButton('ریست', ['class' => 'btn btn-outline-secondary btn-lg']) ?>
+    <div class="form-group mt-8 mb-6" style="float: left; margin-top: 10px;">
+        <?= Html::submitButton('جستجو', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('ریست', ['class' => 'btn btn-inverse waves-effect waves-light']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

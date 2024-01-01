@@ -496,51 +496,48 @@ $(document).on('keypress' , 'input.input-time', function(e){
 
 
 
-if($('#sidebar-menu').length){
-    $('#sidebar-menu').append(`
-    <div id="sidebar_menu_search_box" class="clearfix">
-        <input id="sidebar_menu_search" placeholder="جستجو در منو" class="form-control input-lg text-center">
-    </div>
-`);
-    $('#sidebar_menu_search').keyup(function () {
-        var _this = $(this);
-        var searchResult = [];
-        $('#sidebar_menu_search_results').remove();
-        if(_this.val().length < 1){
-            return false;
-        }
-        $('#side-menu a').each(function () {
-            if(!$(this).find('.menu-arrow').length){
-                if(!$(this).next('.menu-arrow').length){
-                    var has_sub = $(this).closest('.has_sub');
-                    var parentTitle = '';
-                    if(has_sub.prev('a').length){
-                        parentTitle = has_sub.prev('a').children('span:not(.menu-arrow)').text();
-                    }
-                    if($(this).text().indexOf(_this.val()) >= 0){
-                        searchResult.push({
-                            href : $(this).attr('href'),
-                            title : (parentTitle ? parentTitle+' / ' : '') + $(this).text(),
-                            icon : $(this).find('.gl,.fa').attr('class')
-                        });
-                    }
-                }
-            }
-        });
-        $('#sidebar_menu_search_box').prepend('<div id="sidebar_menu_search_results"></div>')
-        $('#sidebar_menu_search_results').html('');
-        searchResult.slice(0,10).forEach(function (item) {
-            console.log(item)
-            $('#sidebar_menu_search_results').append(`
-                    <a href="${item.href}">
-                        <span class="${item.icon} m-l-10"></span> ${item.title}
-                    </a>
-                `);
-        })
-    });
+// if($('#sidebar-menu').length){
+//     $('#sidebar-menu').append(`
+// `);
+//     $('#sidebar_menu_search').keyup(function () {
+//         var _this = $(this);
+//         var searchResult = [];
+//         $('#sidebar_menu_search_results').remove();
+//         if(_this.val().length < 1){
+//             return false;
+//         }
+//         $('#side-menu a').each(function () {
+//             if(!$(this).find('.menu-arrow').length){
+//                 if(!$(this).next('.menu-arrow').length){
+//                     var has_sub = $(this).closest('.has_sub');
+//                     var parentTitle = '';
+//                     if(has_sub.prev('a').length){
+//                         parentTitle = has_sub.prev('a').children('span:not(.menu-arrow)').text();
+//                     }
+//                     if($(this).text().indexOf(_this.val()) >= 0){
+//                         searchResult.push({
+//                             href : $(this).attr('href'),
+//                             title : (parentTitle ? parentTitle+' / ' : '') + $(this).text(),
+//                             icon : $(this).find('.gl,.fa').attr('class')
+//                         });
+//                     }
+//                 }
+//             }
+//         });
+//         $('#sidebar_menu_search_box').prepend('<div id="sidebar_menu_search_results"></div>')
+//         $('#sidebar_menu_search_results').html('');
+//         searchResult.slice(0,10).forEach(function (item) {
+//             console.log(item)
+//             $('#sidebar_menu_search_results').append(`
+//                     <a href="${item.href}">
+//                         <span class="${item.icon} m-l-10"></span> ${item.title}
+//                     </a>
+//                 `);
+//         })
+//     });
 
 
-}
+// }
 
 
 //ABALERT MH&RM

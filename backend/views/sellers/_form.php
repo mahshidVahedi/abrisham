@@ -16,9 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList([ 'ACTIVE' => 'فعال', 'INACTIVE' => 'غیرفعال', ], ['prompt' => 'انتخاب کنید']) ?>
 
-    <div class="form-group">
-    <?= Html::submitButton('ذخیره', ['class' => 'btn btn-outline-success btn-lg']) ?>      
-    <?=Html::a('بازگشت', ['index'], ['class' => 'btn btn-outline-secondary btn-lg'])?>
+    <div class="form-group" dir="ltr">
+    <?= Html::submitButton('ذخیره', ['class' => 'btn btn-primary waves-effect waves-light btn-lg']) ?>      
     </div>
 
     <?php ActiveForm::end(); ?>

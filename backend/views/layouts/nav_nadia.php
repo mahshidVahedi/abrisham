@@ -9,35 +9,77 @@ $isManager = true;
 $isGuest = true;
 $_SESSION['nadia'] = Menu::widget([
     'items' => [
-        array('label' => 'لیست فروشندگان',                          
-
-            'url' => 'index.php?r=sellers%2Findex',
+        array(
+            'label' => 'صفحه اصلی',
+            'url' => 'index.php',
+            'visible' => $isSeller || $isManager || $isGuest,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-home "></i><span>{label}</span></a>'
+        ),
+        array(
+            'label' => ' فروشندگان',
+            'url' => 'javascript:void(0);',
             'visible' => $isManager,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-search"></i><span>{label}</span></a>',
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-briefcase "></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(
+                        'label'=>'لیست',
+                        'url'=>'index.php?r=sellers%2Findex',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl glyphicon-list"></i><span>{label}</span></a>',
+                        'visible'=>$isManager
+                    ),
+                    array(
+                        'label'    =>    'جدید',
+                        'url'    =>    'index.php?r=sellers%2Fcreate' ,
+                        'visible'=>$isManager ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-circle-arrow-left "></i><span class="">{label}</span></a>',
+                    ),
+                ),
         ),
         array(
-            'label' => 'لیست درخواست ها',
-            'url' => 'index.php?r=organization-buy-requests%2Findex',
-            'visible' => $isSeller || $isManager,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
+            'label' => ' درخواست ها',
+            'url' => 'javascript:void(0);',
+            'visible' => $isManager || $isSeller,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-inbox "></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(
+                        'label'=>'لیست',
+                        'url'=>'index.php?r=organization-buy-requests%2Findex',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl glyphicon-list"></i><span>{label}</span></a>',
+                        'visible'=>$isManager|| $isSeller,
+                    ),
+                    array(
+                        'label'    =>    'جدید',
+                        'url'    =>    'index.php?r=organization-buy-requests%2Fcreate' ,
+                        'visible'=>$isSeller   ,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-circle-arrow-left "></i><span class="">{label}</span></a>',
+                    ),
+                ),
         ),
         array(
-            'label' => 'ایجاد درخواست',
-            'url' => 'index.php?r=organization-buy-requests%2Fcreate',
-            'visible' => $isSeller || $isManager,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
-        ),
-        array(
-            'label' => 'ایجاد فروشنده',
-            'url' => 'index.php?r=sellers%2Fcreate',
-            'visible' => $isSeller || $isManager,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
+            'label' => 'کاربران',
+            'url' => 'javascript:void(0);',
+            'visible' => $isManager,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-user "></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(
+                        'label'=>'لیست',
+                        'url'=>'index.php?r=organization-buy-requests%2Findex',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl glyphicon-list"></i><span>{label}</span></a>',
+                        'visible'=>$isManager,
+                    ),
+                    array(
+                        'label'    =>    'جدید',
+                        'url'    =>    'index.php?r=organization-buy-requests%2Fcreate' ,
+                        'visible'=>$isManager,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-circle-arrow-left "></i><span class="">{label}</span></a>',
+                    ),
+                ),
         ),
         array(
             'label' => 'ورود',
             'url' => 'index.php?r=site%2Flogin',
             'visible' => $isGuest,
-            'template' => '<a href="{url}" class="href_class check-login"><i class="gl gl-log-book"></i><span>{label}</span></a>'
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-log-in "></i><span>{label}</span></a>'
         ),
     ],
 
@@ -63,7 +105,5 @@ echo str_replace(['___appendCountForWorkbookMe___', '___appendCountForLessonkMe_
         <ul class="nav" id="side-menu">
         </ul>
     </div>
-    <!-- /.sidebar-collapse -->
 </div>
-<!-- /.navbar-static-side -->
 </nav>

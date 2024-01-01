@@ -40,7 +40,7 @@ class OrganizationBuyRequestsController extends Controller
     {
         $searchModel = new OrganizationBuyRequestsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $this->layout = 'page';
+        // $this->layout = 'page';
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -56,7 +56,7 @@ class OrganizationBuyRequestsController extends Controller
      */
     public function actionView($id)
     {
-        $this->layout = 'page';
+        // $this->layout = 'page';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,7 +67,7 @@ class OrganizationBuyRequestsController extends Controller
         $model = new OrganizationBuyRequests();
 
         $model->scenario = 'scenarioCreate';
-        $this->layout = 'page';
+        // $this->layout = 'page';
 
         $str = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 

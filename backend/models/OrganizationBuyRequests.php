@@ -139,7 +139,8 @@ class OrganizationBuyRequests extends \yii\db\ActiveRecord
             'primary1_primary2_together'=>'دبستان دوره اول و دبستان دوره دوم با هم هستند.',
             'high1_high2_together'=>'دبیرستان متوسطه اول و دبیرستان متوسطه دوم با هم هستند.',
             'final_sale_date' => 'تاریخ ثبت نهایی',
-            'domain' => 'دامنه'
+            'domain' => 'دامنه',
+            'keyword' => 'نام سازمان / نام مدیر / نام خانوادگی مدیر / کد ملی مدیر '
         ];
     }
 
