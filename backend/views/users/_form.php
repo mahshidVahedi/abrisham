@@ -24,8 +24,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'activkey')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'superuser')->checkbox() ?>
 
     <?= $form->field($model, 'status')->checkbox() ?>
