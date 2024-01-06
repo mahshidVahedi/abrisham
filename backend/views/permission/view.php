@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => 'سطوح دسترسی', 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="permission-view">
+<div class="permission-view" style="width:80%; margin: auto; margin-top:10px;">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,13 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p style="float:left;">
         <?= Html::a('ویرایش', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <!-- <?= Html::a('حذف', ['delete', 'id' => $model->id], [
+        <?= Html::a('حذف', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'حذف شود؟',
                 'method' => 'post',
             ],
-        ]) ?> -->
+        ]) ?>
     </p>
 
     <?= DetailView::widget([
@@ -43,23 +43,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'sellers-list',
-            'sellers-create',
-            'sellers-edit',
-            'sellers-delete',
-            'users-list',
-            'users-create',
-            'users-edit',
-            'users-delete',
-            'request-list',
-            'request-create',
-            'request-edit',
-            'request-delete',
-            'permission-list',
-            'permission-create',
-            'permission-edit',
-            'permission-delete',
-            'assign-permission',
+            'sellers_list',
+            'sellers_create',
+            'sellers_edit',
+            'sellers_delete',
+            'users_list',
+            'users_create',
+            'users_edit',
+            'users_delete',
+            'request_list',
+            'request_create',
+            'request_edit',
+            'request_delete',
+            'permission_list',
+            'permission_create',
+            'permission_edit',
+            'permission_delete',
+            'assign_permission',
         ],
     ]) ?>
 

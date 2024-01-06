@@ -23,13 +23,13 @@ $this->title = 'login';
                         <?= $form->field($model, 'password')->passwordInput(['class' => 'form-control']) ?>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <div class="col-xs-12">
                         <div class="checkbox checkbox-primary">
                             <?= $form->field($model, 'rememberMe')->checkbox() ?>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group text-center m-t-40">
                     <div class="col-xs-12">
                         <?= Html::submitButton('ورود', ['class' => 'btn btn-pink btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'انتساب سطح دسترسی �
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="assign-permission-to-user-view">
+<div class="assign-permission-to-user-view" style="width:80%; margin: auto; margin-top:10px;">
 
     <h1><?=Html::encode($this->title)?></h1>
     <p>
