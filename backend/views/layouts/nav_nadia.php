@@ -76,6 +76,45 @@ $_SESSION['nadia'] = Menu::widget([
                 ),
         ),
         array(
+            'label' => 'سطح دسترسی',
+            'url' => 'javascript:void(0);',
+            'visible' => $isManager,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-user "></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(
+                        'label'=>'لیست',
+                        'url'=>'index.php?r=permission%2Findex',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl glyphicon-list"></i><span>{label}</span></a>',
+                        'visible'=>$isManager,
+                    ),
+                    array(
+                        'label'    =>    'جدید',
+                        'url'    =>    'index.php?r=permission%2Fcreate' ,
+                        'visible'=>$isManager,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-circle-arrow-left "></i><span class="">{label}</span></a>',
+                    ),
+                ),
+        ),array(
+            'label' => 'انتساب سطح دسترسی',
+            'url' => 'javascript:void(0);',
+            'visible' => $isManager,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-user "></i><span>{label}</span></span><span class="menu-arrow"></span></a>',
+                'items'=>array(
+                    array(
+                        'label'=>'لیست',
+                        'url'=>'index.php?r=assign-permission-to-user%2Findex',
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl glyphicon-list"></i><span>{label}</span></a>',
+                        'visible'=>$isManager,
+                    ),
+                    array(
+                        'label'    =>    'جدید',
+                        'url'    =>    'index.php?r=assign-permission-to-user%2Fcreate' ,
+                        'visible'=>$isManager,
+                        'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-circle-arrow-left "></i><span class="">{label}</span></a>',
+                    ),
+                ),
+        ),
+        array(
             'label' => 'ورود',
             'url' => 'index.php?r=site%2Flogin',
             'visible' => $isGuest,
