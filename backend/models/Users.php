@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "{{%users}}".
@@ -22,15 +23,17 @@ use Yii;
  * @property int $fault_count
  * @property string $fault_at
  * @property string $unique_key
+
  *
  * @property OrganizationBuyRequests[] $organizationBuyRequests
  * @property Sellers[] $sellers
  */
-class Users extends \yii\db\ActiveRecord
+class Users extends \yii\db\ActiveRecord  implements IdentityInterface
 {
     /**
      * {@inheritdoc}
      */
+
     public static function tableName()
     {
         return '{{%users}}';
@@ -46,8 +49,8 @@ class Users extends \yii\db\ActiveRecord
             [['username', 'superuser', 'status', 'fault_count'], 'integer'],
             [['gender'], 'string'],
             [['create_at', 'lastvisit_at', 'fault_at'], 'safe'],
-            [['name', 'lname'], 'string', 'max' => 255],
-            [['password', 'email', 'activkey'], 'string', 'max' => 128],
+            [['password','name', 'lname'], 'string', 'max' => 255],
+            [[ 'email', 'activkey'], 'string', 'max' => 128],
             [['unique_key'], 'string', 'max' => 6],
             [['username'], 'unique'],
             [['unique_key'], 'unique'],
@@ -77,7 +80,39 @@ class Users extends \yii\db\ActiveRecord
             'unique_key' => 'Unique Key',
         ];
     }
+    public static function findByUsername($username){
+        return static::findOne(['username' => $username]);
+    }
 
+    public function validatePassword($password){
+        return Yii::$app->getSecurity()->validatePassword($password, Yii::$app->getSecurity()->generatePasswordHash($this->password));
+    }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        // Implement if needed
+    }
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        // Implement if needed
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        // Implement if needed
+    }
     /**
      * Gets query for [[OrganizationBuyRequests]].
      *
