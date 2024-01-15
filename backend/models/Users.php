@@ -30,6 +30,10 @@ use yii\web\IdentityInterface;
  */
 class Users extends \yii\db\ActiveRecord  implements IdentityInterface
 {
+    public $currentPassword;
+    public $newPassword;
+    public $newPasswordRepeat;
+
     /**
      * {@inheritdoc}
      */
@@ -45,7 +49,7 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'create_at', 'lastvisit_at', 'fault_at'], 'required'],
+            [['username', 'password'], 'required'],
             [['username', 'superuser', 'status', 'fault_count'], 'integer'],
             [['gender'], 'string'],
             [['create_at', 'lastvisit_at', 'fault_at'], 'safe'],
@@ -54,6 +58,7 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
             [['unique_key'], 'string', 'max' => 6],
             [['username'], 'unique'],
             [['unique_key'], 'unique'],
+            [['currentPassword','newPassword','newPasswordRepeat'], 'string'],
         ];
     }
 
@@ -78,15 +83,19 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
             'fault_count' => 'Fault Count',
             'fault_at' => 'Fault At',
             'unique_key' => 'Unique Key',
+            'newPasswordRepeat' => 'تکرار رمز جدید',
+            'currentPassword' => 'رمز فعلی',
+            'newPassword' => 'رمز جدید',
         ];
     }
     public static function findByUsername($username){
         return static::findOne(['username' => $username]);
     }
 
-    public function validatePassword($password){
-        return Yii::$app->getSecurity()->validatePassword($password, Yii::$app->getSecurity()->generatePasswordHash($this->password));
-    }
+    public function validatePassword($password)
+{
+    return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+}
 
     public static function findIdentity($id)
     {
@@ -122,6 +131,9 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
     {
         return $this->hasMany(OrganizationBuyRequests::class, ['seller_user_id' => 'id']);
     }
+    public function setPassword($new_password) {
+        $this->password = Yii::$app->security->generatePasswordHash($new_password);
+      }
 
     /**
      * Gets query for [[Sellers]].
@@ -132,4 +144,5 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
     {
         return $this->hasMany(Sellers::class, ['user_id' => 'id']);
     }
+
 }

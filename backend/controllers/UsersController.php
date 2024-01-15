@@ -4,9 +4,12 @@ namespace backend\controllers;
 
 use backend\models\Users;
 use backend\models\UsersSearch;
+use yii;
+use yii\base\Security;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\bootstrap\Alert;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -68,13 +71,11 @@ class UsersController extends Controller
     public function actionCreate()
     {
         $model = new Users();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->password = Yii::$app->security->generatePasswordHash($model->password);
+            if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -130,5 +131,26 @@ class UsersController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionChangePassword($id)
+    {
+        $model = $this->findModel($id);
+        $this->layout = 'page';
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->validatePassword($model->currentPassword)) {
+                $model->setPassword($model->newPassword);
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Password changed successfully.');
+                    $this->goHome();
+                } else {
+                    Yii::$app->session->setFlash('error', 'Error changing password.');
+                }
+            } else {
+                $model->addError('currentPassword', 'Incorrect password.');
+            }
+        }
+        return $this->render('changePassword', [
+            'model' => $model,
+        ]);
     }
 }
