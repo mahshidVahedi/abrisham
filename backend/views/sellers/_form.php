@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="sellers-form " style="width:30%; margin: auto; margin-top: 5%;">
+<div class="sellers-form " style="width:50%; margin: auto; margin-top: 5%;">
 
     <?php $form = ActiveForm::begin(); ?>
 

@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?> -->
     </p>
+    <div style="display:flex;">
 
     <?= DetailView::widget([
         'model' => $model,
@@ -45,17 +46,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'lname',
             'gender',
-            'password',
+            // 'password',
             'email:email',
-            'activkey',
-            'create_at',
-            'lastvisit_at',
+            // 'activkey',
+            // 'create_at',
+            // 'lastvisit_at',
             'superuser',
             'status',
-            'fault_count',
-            'fault_at',
-            'unique_key',
+            // 'fault_count',
+            // 'fault_at',
+            // 'unique_key',
         ],
     ]) ?>
-
+</div>
 </div>

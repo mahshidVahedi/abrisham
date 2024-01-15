@@ -9,7 +9,6 @@ use yii\base\Security;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\bootstrap\Alert;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -138,16 +137,17 @@ class UsersController extends Controller
         $this->layout = 'page';
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->validatePassword($model->currentPassword)) {
-                $model->setPassword($model->newPassword);
-                if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Password changed successfully.');
-                    $this->goHome();
+                if ($model->newPassword == $model->newPasswordRepeat) { 
+                    $model->setPassword($model->newPassword);
+                    if ($model->save()) {
+                        Yii::$app->session->setFlash('success', 'Password changed successfully.');
+                        $this->goHome();
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Error changing password.');
+                    }
                 } else {
-                    Yii::$app->session->setFlash('error', 'Error changing password.');
-                }
-            } else {
-                $model->addError('currentPassword', 'Incorrect password.');
-            }
+                    $model->addError('currentPassword', 'Incorrect password.');
+                }}
         }
         return $this->render('changePassword', [
             'model' => $model,

@@ -33,7 +33,7 @@ $this->title = 'فرم های درخواست خرید';
     </p>
 
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <div class="organization-buy-requests-index" style="width:80%; margin: auto; margin-top:10px;">
     <?=GridView::widget([
     'dataProvider' => $dataProvider,
     // 'filterModel' => $searchModel,
@@ -78,6 +78,7 @@ $this->title = 'فرم های درخواست خرید';
         ],
     ],
 ]);?>
+    </div>
 
 
 </div>

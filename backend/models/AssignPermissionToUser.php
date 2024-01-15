@@ -66,4 +66,8 @@ class AssignPermissionToUser extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::class, ['id' => 'uid']);
     }
+    public function check ($userid,$sellers_list){
+
+    }
+
 }
