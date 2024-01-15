@@ -137,7 +137,7 @@ class UsersController extends Controller
         $this->layout = 'page';
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->validatePassword($model->currentPassword)) {
-                if ($model->newPassword == $model->newPasswordRepeat) { 
+                if ($model->newPassword == $model->newPasswordRepeat) {
                     $model->setPassword($model->newPassword);
                     if ($model->save()) {
                         Yii::$app->session->setFlash('success', 'Password changed successfully.');
@@ -146,8 +146,12 @@ class UsersController extends Controller
                         Yii::$app->session->setFlash('error', 'Error changing password.');
                     }
                 } else {
-                    $model->addError('currentPassword', 'Incorrect password.');
-                }}
+                    $model->addError('newPasswordRepeat', 'رمز مطابقت ندارد');
+                }
+            }
+            else{
+                $model->addError('currentPassword', 'رمز اشتباه است');
+            }
         }
         return $this->render('changePassword', [
             'model' => $model,
