@@ -39,8 +39,8 @@ $urlPublicYii2 = 'test'; //Yii::getAlias('@yii2Url');
         <?php $this->beginContent('@app/views/layouts/header.php');?>
 
             <?php
-                if (!empty($_SESSION['isLoginByApp'])) {
-                    echo $this->registerCss(<<<CSS
+if (!empty($_SESSION['isLoginByApp'])) {
+    echo $this->registerCss(<<<CSS
 
                     #float-messenger,.topbar,.side-menu,.page-title{
                         display: none;
@@ -49,9 +49,9 @@ $urlPublicYii2 = 'test'; //Yii::getAlias('@yii2Url');
                         margin-top: 0 !important;
                     }
                     CSS
-                    ,[$this::POS_HEAD]);
-                }
-            ?>
+        ,[$this::POS_HEAD]);
+}
+?>
         <?php $this->endContent();?>
     </head>
     <body>
@@ -123,8 +123,7 @@ $urlPublicYii2 = 'test'; //Yii::getAlias('@yii2Url');
                                     <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" title="
 									<?php //= yii::$model["profile"]->name . $model["profile"]->lname ?>"><img src="<?php // yii::$app->fuser->getUserProfileImage(yii::$app->user->id ? yii::$app->user->id : 0); ?>" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="<?php echo '/user/ChangePassword'; ?>"><i class="gl gl-keys m-l-10 text-custom"></i> تغییر گذرواژه</a></li>
-										<!--li><a href="<?php echo '/Contents/admin?type=ticket'; ?>"><i class="gl gl-headset m-l-10 text-custom"></i> پشتیبانی</a></li-->
+                                    <li><?= Html::a('تغییر گذرواژه', ['users/change-password', 'id' => yii::$app->user->id]) ?></li>
                                         <li class="divider"></li>
                                         <li><a href="<?=yii::$app->urlManager->createUrl('site/logout')?>"><i class="gl gl-power m-l-10 text-danger"></i> خروج</a></li>
                                     </ul>
