@@ -31,7 +31,6 @@ class VerifyCodeController extends \yii\web\Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 $model->username    =   Yii::$app->request->post()['VerifyCode']['username'];
-                print_r( $model->username );
                 $user = $model->getUserByUsername();
                 if ($user !== null) {
                     $model->user_id = $user->id;
@@ -58,6 +57,7 @@ class VerifyCodeController extends \yii\web\Controller
     {
         $this->layout = 'page';
         $model = $this->findModel($id);
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->code == $model->otp) {
                 return $this->render('passwordRegister', ['id' => $model->id]);
