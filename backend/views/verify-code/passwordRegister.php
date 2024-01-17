@@ -17,7 +17,7 @@ $form = ActiveForm::begin(['id' => 'passwordRegister-form']);
 			<?=$form->field($model, 'newPasswordRepeat')->passwordInput(['required' => true])?>
 
 			<div class="form-group text-center" style="margin-top: 10px;" >
-    		<?=Html::submitButton('تغییر رمز عبور ', ['class' => 'btn btn-pink  text-uppercase waves-effect waves-light '])?>
+    		<?=Html::submitButton('ثبت رمز عبور ', ['class' => 'btn btn-pink  text-uppercase waves-effect waves-light '])?>
 		</div>
 		<?php ActiveForm::end();?>
 	</div>

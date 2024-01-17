@@ -91,6 +91,12 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
     public static function findByUsername($username){
         return static::findOne(['username' => $username]);
     }
+    public function findUser($username){
+        if (($model = Users::findOne(['username' => $username])) !== null) {
+            return $model;
+        }
+    }
+    
 
     public function validatePassword($password)
 {

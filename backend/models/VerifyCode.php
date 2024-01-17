@@ -3,7 +3,6 @@
 namespace backend\models;
 
 use Yii;
-
 /**
  * This is the model class for table "{{%verify_code}}".
  *
@@ -15,6 +14,11 @@ use Yii;
  */
 class VerifyCode extends \yii\db\ActiveRecord
 {
+    public $username;
+    public $code;
+    public $newPassword;
+    public $newPasswordRepeat;
+    public $_user;
     /**
      * {@inheritdoc}
      */
@@ -29,7 +33,6 @@ class VerifyCode extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'otp'], 'required'],
             [['user_id', 'otp'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -44,6 +47,8 @@ class VerifyCode extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'شماره همراه',
             'otp' => 'کد تایید',
+            'username' => 'تلفن همراه',
+            'code' => 'کد ارسالی'
         ];
     }
 
@@ -55,5 +60,16 @@ class VerifyCode extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(Users::class, ['id' => 'user_id']);
+    }
+    public function findById($id){
+        return static::findOne($id);
+    }
+    public function getUserByUsername()
+    {
+        if ($this->_user === null) {
+            $this->_user = Users::findByUsername($this->username);
+        }
+
+        return $this->_user;
     }
 }
