@@ -35,6 +35,9 @@ class VerifyCodeController extends \yii\web\Controller
                 if ($user !== null) {
                     $model->user_id = $user->id;
                     $model->otp = substr(str_shuffle($str), 0, 6);
+                    print_r($model->user_id);
+                    print_r($model->id);
+                    die();
                     return $this->render('otpCheck', ['id' => $model->id]);
                 } else {
                     $model->addError('username', 'شماره همراه اشتباه است');

@@ -33,7 +33,8 @@ class VerifyCode extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'otp'], 'integer'],
+            [['user_id'], 'integer'],
+            [['otp'], 'string'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
