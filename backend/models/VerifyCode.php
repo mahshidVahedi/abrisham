@@ -49,7 +49,9 @@ class VerifyCode extends \yii\db\ActiveRecord
             'user_id' => 'شماره همراه',
             'otp' => 'کد تایید',
             'username' => 'تلفن همراه',
-            'code' => 'کد ارسالی'
+            'code' => 'کد ارسالی',
+            'newPassword' => 'رمز جدید',
+            'newPasswordRepeat' => 'تکرار رمز جدید'
         ];
     }
 
@@ -73,4 +75,13 @@ class VerifyCode extends \yii\db\ActiveRecord
 
         return $this->_user;
     }
+    public function getUserById()
+    {
+        if ($this->_user === null) {
+            $this->_user = Users::findById($this->user_id);
+        }
+
+        return $this->_user;
+    }
+
 }

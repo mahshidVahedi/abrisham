@@ -5,7 +5,7 @@ $form = ActiveForm::begin(['id' => 'passwordRegister-form']);
 ?>
 <div class="account-pages"></div>
 		<div class="clearfix"></div>
-		<div class="wrapper-page">
+		<div class="wrapper-page h-100 mt-5" style="margin:auto; width:50%;">
 			<div class=" card-box">
 				<div class="panel-heading">
 					<h3 class="text-center"> ثبت کلمه عبور </h3>

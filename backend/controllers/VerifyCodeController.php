@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\Users;
 use backend\models\VerifyCode;
 use yii;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 class VerifyCodeController extends \yii\web\Controller
@@ -29,63 +30,66 @@ class VerifyCodeController extends \yii\web\Controller
         $this->layout = 'page';
         $str = '0123456789';
         if ($this->request->isPost) {
+            $model->otp = substr(str_shuffle($str), 0, 6);
+            $model->username = Yii::$app->request->post()['VerifyCode']['username'];
+            $user = $model->getUserByUsername();
+            $model->user_id = $user->id;
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->username    =   Yii::$app->request->post()['VerifyCode']['username'];
-                $user = $model->getUserByUsername();
                 if ($user !== null) {
-                    $model->user_id = $user->id;
-                    $model->otp = substr(str_shuffle($str), 0, 6);
-                    print_r($model->user_id);
-                    print_r($model->id);
-                    die();
-                    return $this->render('otpCheck', ['id' => $model->id]);
+                    // print_r($model->id );
+                    // print_r($model->user_id);
+                    // print_r($model);
+                    // die();
+                    return $this->redirect(['otp-check', 'id' => $model->id]);
                 } else {
                     $model->addError('username', 'شماره همراه اشتباه است');
                 }
             }
         }
-        // if ($model->load($this->request->post()) && $model->validate()) {
-        //    // $model->username    =   Yii::$app->request->post()['VerifyCode']['username'];
-        //     print_r( $model->username );
-        //     die;
-        //     //print_r( Yii::$app->request->post());
-        //     //die;
-
-        // }
         return $this->render('passwordRecovery', [
             'model' => $model,
         ]);
     }
     public function actionOtpCheck($id)
     {
-        $this->layout = 'page';
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->code == $model->otp) {
-                return $this->render('passwordRegister', ['id' => $model->id]);
+        $this->layout = 'page';
+        // print_r($model->otp);
+        // die();
+        // print_r($model);
+        // die();
+        if ($this->request->isPost) {
+            $sentCode = Yii::$app->request->post()['VerifyCode']['code'];
+            if ($model->load($this->request->post()) && $model->save()) {
+                // print_r($sentCode);
+                // die();
+                if ($sentCode == $model->otp) {
+                    return $this->redirect(['password-register', 'id' => $model->id]);
+                } else {
+                    $model->addError('code', 'Incorrect OTP');
+                    Yii::$app->session->setFlash('error', 'Incorrect OTP');
+                }
             } else {
-                $model->addError('code', 'Incorrect OTP');
-                Yii::$app->session->setFlash('error', 'Incorrect OTP');
-            }
-        } else {
-            Yii::$app->session->setFlash('error', 'Validation failed');
-        }
-        return $this->render('otpCheck', ['id' => $model->id]);
-    }
+                Yii::$app->session->setFlash('error', 'Validation failed');
+            }}
+        return $this->render('otpCheck', [
+            'model' => $model,
+        ]);}
 
     public function actionPasswordRegister($id)
     {
         $this->layout = 'page';
         $model = $this->findModel($id);
-        $user = Users::findByUsername($model->username);
+        $user = $model->getUserById();
+ 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->newPassword == $model->newPasswordRepeat) {
-                $user->setPassword($model->newPassword);
+            $pass = Yii::$app->request->post()['VerifyCode']['newPassword'];;
+            $newPass = Yii::$app->request->post()['VerifyCode']['newPasswordRepeat'];
+            if ($pass == $newPass) {
+                $user->setPassword($pass);
                 if ($model->save()) {
                     Yii::$app->session->setFlash('success', 'Password changed successfully.');
-                    $this->$model->delete();
-                    $this->goHome();
+                    return $this->redirect(['delete', 'id' => $model->id]);
                 } else {
                     Yii::$app->session->setFlash('error', 'Error changing password.');
                 }
@@ -93,11 +97,14 @@ class VerifyCodeController extends \yii\web\Controller
                 $model->addError('newPasswordRepeat', 'رمز مطابقت ندارد');
             }
         }
+        return $this->render('passwordRegister', [
+            'model' => $model,
+        ]);
     }
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        return $this->redirect(Url::toRoute(['/site/login']));
     }
 
 }
