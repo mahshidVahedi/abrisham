@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'permission_edit',
             //'permission_delete',
             //'assign_permission_create',
-            //'assign_permisson_list',
+            //'assign_permission_list',
             //'assign_permission_edit',
             //'assign_permission_delete',
             [

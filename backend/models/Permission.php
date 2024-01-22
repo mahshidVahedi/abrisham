@@ -48,8 +48,8 @@ class Permission extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission_create', 'assign_permisson_list', 'assign_permission_edit', 'assign_permission_delete'], 'required'],
-            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission_create', 'assign_permisson_list', 'assign_permission_edit', 'assign_permission_delete'], 'integer'],
+            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission_create', 'assign_permission_list', 'assign_permission_edit', 'assign_permission_delete'], 'required'],
+            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission_create', 'assign_permission_list', 'assign_permission_edit', 'assign_permission_delete'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -78,8 +78,8 @@ class Permission extends \yii\db\ActiveRecord
             'permission_create' => ' ایجاد سطح دسترسی',
             'permission_edit' => ' ویرایش سطح دسترسی',
             'permission_delete' => ' حذف سطح دسترسی',
-            'assign_permission' => ' انتساب سطح دسترسی',
-            'assign_permisson_list' => 'لیست انتسابات',
+            'assign_permission_create' => ' انتساب سطح دسترسی',
+            'assign_permission_list' => 'لیست انتسابات',
             'assign_permission_edit' => 'ویرایش انتساب',
             'assign_permission_delete' => 'حذف انتساب',
         ];
