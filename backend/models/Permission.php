@@ -26,7 +26,7 @@ use Yii;
  * @property int $permission_edit
  * @property int $permission_delete
  * @property int $assign_permission_create
- * @property int $assign_permisson_list
+ * @property int $assign_permission_list
  * @property int $assign_permission_edit
  * @property int $assign_permission_delete
  *

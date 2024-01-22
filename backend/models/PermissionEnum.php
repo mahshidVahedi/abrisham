@@ -22,7 +22,7 @@ class PermissionEnum extends \tigrov\enum\EnumBehavior
     const PERMISSION_CREATE = 'permission_create';
     const PERMISSION_EDIT = 'permission_edit';
     const PERMISSION_DELETE = 'permission_delete';
-    const ASSIGN_PERMISSION_CREATE = 'assign_permission';
+    const ASSIGN_PERMISSION_CREATE = 'assign_permission_create';
     const ASSIGN_PERMISSION_LIST = 'assign_permission_list';
     const ASSIGN_PERMISSION_EDIT = 'assign_permission_edit';
     const ASSIGN_PERMISSION_DELETE = 'assign_permission_delete';
