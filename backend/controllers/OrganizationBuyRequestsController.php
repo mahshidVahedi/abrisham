@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\models\PermissionEnum;
+use backend\models\Users;
 use backend\models\OrganizationBuyRequests;
 use backend\models\OrganizationBuyRequestsSearch;
 use yii\web\Controller;
@@ -38,6 +40,10 @@ class OrganizationBuyRequestsController extends Controller
      */
     public function actionIndex()
     {
+        $request_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::REQUEST_LIST);
+        if(!$request_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         $searchModel = new OrganizationBuyRequestsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         // $this->layout = 'page';
@@ -56,6 +62,10 @@ class OrganizationBuyRequestsController extends Controller
      */
     public function actionView($id)
     {
+        $request_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::REQUEST_LIST);
+        if(!$request_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         // $this->layout = 'page';
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -64,6 +74,10 @@ class OrganizationBuyRequestsController extends Controller
 
     public function actionCreate()
     {
+        $request_create      =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::REQUEST_CREATE);
+        if(!$request_create){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = new OrganizationBuyRequests();
 
         $model->scenario = 'scenarioCreate';
@@ -112,6 +126,10 @@ class OrganizationBuyRequestsController extends Controller
 
     public function actionUpdate($id)
     {
+        $request_edit       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::REQUEST_EDIT);
+        if(!$request_edit){
+            $this->redirect(['site/Acsess-error']);
+        }
 
         $model = $this->findModel($id);
 
@@ -139,6 +157,10 @@ class OrganizationBuyRequestsController extends Controller
 
     public function actionUpdateCustomer($unique_key)
     {
+        $request_edit       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::REQUEST_EDIT);
+        if(!$request_edit){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = $this->findModelByUniqueKey($unique_key);
 
         $model->scenario = 'scenarioUpdate';
@@ -168,6 +190,10 @@ class OrganizationBuyRequestsController extends Controller
      */
     public function actionDelete($id)
     {
+        $request_delete      =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::REQUEST_DELETE);
+        if(!$request_delete){
+            $this->redirect(['site/Acsess-error']);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\PermissionEnum;
 use backend\models\Users;
 use backend\models\UsersSearch;
 use yii;
@@ -40,6 +41,10 @@ class UsersController extends Controller
      */
     public function actionIndex()
     {
+        $users_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::USERS_LIST);
+        if(!$users_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -57,6 +62,10 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
+        $users_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::USERS_LIST);
+        if(!$users_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -69,6 +78,10 @@ class UsersController extends Controller
      */
     public function actionCreate()
     {
+        $users_create      =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::USERS_CREATE);
+        if(!$users_create){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = new Users();
         if ($model->load(Yii::$app->request->post())) {
             $model->password = Yii::$app->security->generatePasswordHash($model->password);
@@ -91,6 +104,10 @@ class UsersController extends Controller
      */
     public function actionUpdate($id)
     {
+        $users_edit       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::USERS_EDIT);
+        if(!$users_edit){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -111,6 +128,10 @@ class UsersController extends Controller
      */
     public function actionDelete($id)
     {
+        $users_delete       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::USERS_DELETE);
+        if(!$users_delete){
+            $this->redirect(['site/Acsess-error']);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

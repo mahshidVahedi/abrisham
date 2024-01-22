@@ -36,10 +36,6 @@ class VerifyCodeController extends \yii\web\Controller
             $model->user_id = $user->id;
             if ($model->load($this->request->post()) && $model->save()) {
                 if ($user !== null) {
-                    // print_r($model->id );
-                    // print_r($model->user_id);
-                    // print_r($model);
-                    // die();
                     return $this->redirect(['otp-check', 'id' => $model->id]);
                 } else {
                     $model->addError('username', 'شماره همراه اشتباه است');
@@ -54,10 +50,6 @@ class VerifyCodeController extends \yii\web\Controller
     {
         $model = $this->findModel($id);
         $this->layout = 'page';
-        // print_r($model->otp);
-        // die();
-        // print_r($model);
-        // die();
         if ($this->request->isPost) {
             $sentCode = Yii::$app->request->post()['VerifyCode']['code'];
             if ($model->load($this->request->post()) && $model->save()) {

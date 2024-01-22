@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
+use backend\models\PermissionEnum;
+use backend\models\Users;
 use backend\models\Permission;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii;
 
 /**
  * PermissionController implements the CRUD actions for Permission model.
@@ -38,6 +41,10 @@ class PermissionController extends Controller
      */
     public function actionIndex()
     {
+        $permission_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::PERMISSION_LIST);
+        if(!$permission_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => Permission::find(),
             /*
@@ -65,6 +72,10 @@ class PermissionController extends Controller
      */
     public function actionView($id)
     {
+        $permission_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::PERMISSION_LIST);
+        if(!$permission_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -77,6 +88,10 @@ class PermissionController extends Controller
      */
     public function actionCreate()
     {
+        $permission_create       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::PERMISSION_CREATE);
+        if(!$permission_create){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = new Permission();
 
         if ($this->request->isPost) {
@@ -101,6 +116,10 @@ class PermissionController extends Controller
      */
     public function actionUpdate($id)
     {
+        $permission_edit       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::PERMISSION_EDIT);
+        if(!$permission_edit){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -121,6 +140,10 @@ class PermissionController extends Controller
      */
     public function actionDelete($id)
     {
+        $permission_delete       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::PERMISSION_DELETE);
+        if(!$permission_delete){
+            $this->redirect(['site/Acsess-error']);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -5,31 +5,19 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-use yii\widgets\Breadcrumbs;
-
 
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'سطوح دسترسی';
+$this->title = 'Permissions';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="permission-index" style="width:80%; margin: auto; margin-top:10px;">
+<div class="permission-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Breadcrumbs::widget([
-            'homeLink' => [
-                'label' => 'صفحه اصلی',
-                'url' => 'index.php'
-            ],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-    </p>
-
-    <p style="float:left;">
-        <?= Html::a('ایجاد سطح دسترسی', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Permission', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -40,33 +28,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'sellers-list',
-            'sellers-create',
-            'sellers-edit',
-            //'sellers-delete',
-            //'users-list',
-            //'users-create',
-            //'users-edit',
-            //'users-delete',
-            //'request-list',
-            //'request-create',
-            //'request-edit',
-            //'request-delete',
-            //'permission-list',
-            //'permission-create',
-            //'permission-edit',
-            //'permission-delete',
-            //'assign-permission',
+            'sellers_list',
+            'sellers_create',
+            'sellers_edit',
+            //'sellers_delete',
+            //'users_list',
+            //'users_create',
+            //'users_edit',
+            //'users_delete',
+            //'request_list',
+            //'request_create',
+            //'request_edit',
+            //'request_delete',
+            //'permission_list',
+            //'permission_create',
+            //'permission_edit',
+            //'permission_delete',
+            //'assign_permission_create',
+            //'assign_permisson_list',
+            //'assign_permission_edit',
+            //'assign_permission_delete',
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view}', // Only show the "view" button
-                'buttons' => [
-                    'view' => function ($url, $model, $key) {
-                        return Html::a('<span class="gl glyphicon-eye-open"></span>', $url, [
-                            'title' => Yii::t('yii', 'View'),
-                        ]);
-                    },
-                ],
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Permission $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                 }
             ],
         ],
     ]); ?>

@@ -25,7 +25,10 @@ use Yii;
  * @property int $permission_create
  * @property int $permission_edit
  * @property int $permission_delete
- * @property int $assign_permission
+ * @property int $assign_permission_create
+ * @property int $assign_permisson_list
+ * @property int $assign_permission_edit
+ * @property int $assign_permission_delete
  *
  * @property AssignPermissionToUser[] $assignPermissionToUsers
  */
@@ -45,8 +48,8 @@ class Permission extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission'], 'required'],
-            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission'], 'integer'],
+            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission_create', 'assign_permisson_list', 'assign_permission_edit', 'assign_permission_delete'], 'required'],
+            [['sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission_create', 'assign_permisson_list', 'assign_permission_edit', 'assign_permission_delete'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -76,6 +79,9 @@ class Permission extends \yii\db\ActiveRecord
             'permission_edit' => ' ویرایش سطح دسترسی',
             'permission_delete' => ' حذف سطح دسترسی',
             'assign_permission' => ' انتساب سطح دسترسی',
+            'assign_permisson_list' => 'لیست انتسابات',
+            'assign_permission_edit' => 'ویرایش انتساب',
+            'assign_permission_delete' => 'حذف انتساب',
         ];
     }
 
@@ -86,6 +92,6 @@ class Permission extends \yii\db\ActiveRecord
      */
     public function getAssignPermissionToUsers()
     {
-        return $this->hasMany(AssignPermissionToUser::class, ['pid' => 'id']);
+        return $this->hasMany(AssignPermissionToUser::class, ['permission_id' => 'id']);
     }
 }

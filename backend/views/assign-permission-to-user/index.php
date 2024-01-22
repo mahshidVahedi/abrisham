@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'uid',
-            'pid',
+            'user_id',
+            'permission_id',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}', // Only show the "view" button

@@ -1,7 +1,7 @@
 <?php
 
 namespace backend\controllers;
-
+use yii\helpers\Url;
 use backend\models\LoginForm;
 use Yii;
 use yii\filters\VerbFilter;
@@ -61,9 +61,20 @@ class SiteController extends Controller
      *
      * @return string
      */
+
+    //  public $defaultAction = 'default';
+
+    //  public function actionDefault(){
+    //     return $this->redirect(Url::toRoute(['/site/login']));
+    //  }
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionAccsessError()
+    {
+        return $this->render('403');
     }
 
     /**

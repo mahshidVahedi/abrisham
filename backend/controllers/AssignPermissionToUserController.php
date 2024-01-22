@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
+use backend\models\PermissionEnum;
+use backend\models\Users;
 use backend\models\AssignPermissionToUser;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii;
 
 /**
  * AssignPermissionToUserController implements the CRUD actions for AssignPermissionToUser model.
@@ -38,6 +41,10 @@ class AssignPermissionToUserController extends Controller
      */
     public function actionIndex()
     {
+        $assign_permission_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::ASSIGN_PERMISSION_LIST);
+        if(!$assign_permission_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => AssignPermissionToUser::find(),
             /*
@@ -65,6 +72,10 @@ class AssignPermissionToUserController extends Controller
      */
     public function actionView($id)
     {
+        $assign_permission_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::ASSIGN_PERMISSION_LIST);
+        if(!$assign_permission_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -77,6 +88,10 @@ class AssignPermissionToUserController extends Controller
      */
     public function actionCreate()
     {
+        $assign_permission_create       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::ASSIGN_PERMISSION_CREATE);
+        if(!$assign_permission_create){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = new AssignPermissionToUser();
 
         if ($this->request->isPost) {
@@ -101,6 +116,10 @@ class AssignPermissionToUserController extends Controller
      */
     public function actionUpdate($id)
     {
+        $assign_permission_edit       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::ASSIGN_PERMISSION_EDIT);
+        if(!$assign_permission_edit){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -121,6 +140,10 @@ class AssignPermissionToUserController extends Controller
      */
     public function actionDelete($id)
     {
+        $assign_permission_delete       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::ASSIGN_PERMISSION_DELETE);
+        if(!$assign_permission_delete){
+            $this->redirect(['site/Acsess-error']);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -34,6 +34,8 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
     public $newPassword;
     public $newPasswordRepeat;
 
+    public $accsessLevel;
+
     /**
      * {@inheritdoc}
      */
@@ -96,6 +98,10 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
             return $model;
         }
     }
+
+    public static function findById($id){
+        return static::findOne(['id' => $id]);
+    }
     
 
     public function validatePassword($password)
@@ -150,5 +156,22 @@ class Users extends \yii\db\ActiveRecord  implements IdentityInterface
     {
         return $this->hasMany(Sellers::class, ['user_id' => 'id']);
     }
+    public static function checkAccsess($userId, $access){
+        $findOnePermissionToUser          =   AssignPermissionToUser::findByUser($userId);
+        if(!empty($findOnePermissionToUser)){
+            $permission     =   Permission::findOne($findOnePermissionToUser-> permission_id);
+            return $permission->{$access};
+        }else{
+            return false;
+        }
+       
+        //$accsessLevel   =   $permission ->name;
+        //'sellers_list', 'sellers_create', 'sellers_edit', 'sellers_delete', 'users_list', 'users_create', 'users_edit', 'users_delete', 'request_list', 'request_create', 'request_edit', 'request_delete', 'permission_list', 'permission_create', 'permission_edit', 'permission_delete', 'assign_permission'
+   
+
+        
+    }
+  
+    
 
 }

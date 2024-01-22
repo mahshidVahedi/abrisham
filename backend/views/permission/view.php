@@ -2,37 +2,25 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\widgets\Breadcrumbs;
-
 
 /** @var yii\web\View $this */
 /** @var backend\models\Permission $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'سطوح دسترسی', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Permissions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="permission-view" style="width:80%; margin: auto; margin-top:10px;">
+<div class="permission-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Breadcrumbs::widget([
-            'homeLink' => [
-                'label' => 'صفحه اصلی',
-                'url' => 'index.php'
-            ],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-    </p>
-
-    <p style="float:left;">
-        <?= Html::a('ویرایش', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('حذف', ['delete', 'id' => $model->id], [
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'حذف شود؟',
+                'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -59,7 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'permission_create',
             'permission_edit',
             'permission_delete',
-            'assign_permission',
+            'assign_permission_create',
+            'assign_permisson_list',
+            'assign_permission_edit',
+            'assign_permission_delete',
         ],
     ]) ?>
 

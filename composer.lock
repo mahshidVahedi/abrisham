@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f756522efb22fd1dca263b681b8d615",
+    "content-hash": "77bb304704649981d2e5f5990ab1a989",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1437,6 +1437,52 @@
                 }
             ],
             "time": "2023-05-23T14:45:45+00:00"
+        },
+        {
+            "name": "tigrov/yii2-enum",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Tigrov/yii2-enum.git",
+                "reference": "5e8d8628d9de51cb851b55c386d40748e5b09f51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Tigrov/yii2-enum/zipball/5e8d8628d9de51cb851b55c386d40748e5b09f51",
+                "reference": "5e8d8628d9de51cb851b55c386d40748e5b09f51",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "tigrov\\enum\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergei Tigrov",
+                    "email": "rrr-r@ya.ru"
+                }
+            ],
+            "description": "Enum type behavior for Yii2 based on class constants",
+            "keywords": [
+                "enum",
+                "extension",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/Tigrov/yii2-enum/issues",
+                "source": "https://github.com/tigrov/yii2-enum"
+            },
+            "time": "2018-11-04T17:55:46+00:00"
         },
         {
             "name": "yiisoft/yii2",

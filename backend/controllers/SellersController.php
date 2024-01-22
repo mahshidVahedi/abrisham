@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
+use backend\models\PermissionEnum;
+use backend\models\Users;
 use backend\models\Sellers;
 use backend\models\SellersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii;
 
 /**
  * SellersController implements the CRUD actions for Sellers model.
@@ -38,6 +41,11 @@ class SellersController extends Controller
      */
     public function actionIndex()
     {
+        $sellers_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::SELLERS_LIST);
+        if(!$sellers_list){
+            $this->redirect(['site/Acsess-error']);
+        }
+        
         $searchModel = new SellersSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -55,6 +63,10 @@ class SellersController extends Controller
      */
     public function actionView($id)
     {
+        $sellers_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::SELLERS_LIST);
+        if(!$sellers_list){
+            $this->redirect(['site/Acsess-error']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,6 +79,10 @@ class SellersController extends Controller
      */
     public function actionCreate()
     {
+        $sellers_create       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::SELLERS_CREATE);
+        if(!$sellers_create){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = new Sellers();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -90,6 +106,10 @@ class SellersController extends Controller
      */
     public function actionUpdate($id)
     {
+        $sellers_edit       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::SELLERS_EDIT);
+        if(!$sellers_edit){
+            $this->redirect(['site/Acsess-error']);
+        }
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -110,6 +130,10 @@ class SellersController extends Controller
      */
     public function actionDelete($id)
     {
+        $sellers_delete       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::SELLERS_DELETE);
+        if(!$sellers_delete){
+            $this->redirect(['site/Acsess-error']);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

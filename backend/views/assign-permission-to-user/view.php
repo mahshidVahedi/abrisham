@@ -39,8 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
-                'uid',
-                'pid',
+                'user_id',
+                'permission_id',
             ],
         ])?>
     </div>

@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'uid')->textInput() ?>
+    <?= $form->field($model, 'user_id')->textInput() ?>
 
-    <?= $form->field($model, 'pid')->textInput() ?>
+    <?= $form->field($model, 'permission_id')->textInput() ?>
 
     <div class="form-group" dir="ltr">
     <?= Html::submitButton('ذخیره', ['class' => 'btn btn-primary waves-effect waves-light btn-lg']) ?>      
