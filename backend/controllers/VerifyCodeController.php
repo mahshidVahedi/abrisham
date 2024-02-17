@@ -84,6 +84,7 @@ class VerifyCodeController extends \yii\web\Controller
             if ($pass == $newPass) {
                 $user->setPassword($pass);
                 if ($model->save()) {
+                    $user->save();
                     Yii::$app->session->setFlash('success', 'Password changed successfully.');
                     return $this->redirect(['delete', 'id' => $model->id]);
                 } else {
