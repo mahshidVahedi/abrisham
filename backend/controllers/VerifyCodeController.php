@@ -33,7 +33,11 @@ class VerifyCodeController extends \yii\web\Controller
             $model->otp = substr(str_shuffle($str), 0, 6);
             $model->username = Yii::$app->request->post()['VerifyCode']['username'];
             $user = $model->getUserByUsername();
-            $model->user_id = $user->id;
+            if ($user !== null){
+                $model->user_id = $user->id;
+            }else {
+                $model->addError('username', 'شماره همراه اشتباه است');
+            }
             if ($model->load($this->request->post()) && $model->save()) {
                 if ($user !== null) {
                     return $this->redirect(['otp-check', 'id' => $model->id]);

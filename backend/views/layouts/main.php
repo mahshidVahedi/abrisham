@@ -116,16 +116,13 @@ if (!empty($_SESSION['isLoginByApp'])) {
                                 <li class="hidden-xs">
                                     <a href="#" id="btn-fullscreen" class="waves-effect waves-light" title="تمام صفحه"><i class="icon-size-fullscreen"></i></a>
                                 </li>
-                                <!-- <li class="top-menu-item-xs">
-                                    <a href="/new/backend/web/users/dashboard" class="right-bar-toggle- waves-effect waves-light" title="میزکار من"><i class="fa fa-calendar-check-o"></i></a>
-                                </li> -->
-                                <li class="dropdown top-menu-item-xs">
+                                <li class="dropdown top-menu-item-xs" <?= Yii::$app->user->isGuest ? 'style="display:none"' : '' ?>>
                                     <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" title="
 									<?php //= yii::$model["profile"]->name . $model["profile"]->lname ?>"><img src="<?php // yii::$app->fuser->getUserProfileImage(yii::$app->user->id ? yii::$app->user->id : 0); ?>" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
                                     <li><?= Html::a('تغییر گذرواژه', ['users/change-password', 'id' => yii::$app->user->id]) ?></li>
                                         <li class="divider"></li>
-                                        <li><a href="<?=yii::$app->urlManager->createUrl('site/logout')?>"><i class="gl gl-power m-l-10 text-danger"></i> خروج</a></li>
+                                        <li><a href="<?=yii::$app->urlManager->createUrl('site/logout')?>" <i class="gl gl-power m-l-10 text-danger"></i> خروج</a></li>
                                     </ul>
                                 </li>
                             </ul>

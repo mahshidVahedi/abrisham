@@ -12,7 +12,7 @@ $permission_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEn
 $permission_create       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::PERMISSION_CREATE);
 $assign_permission_list       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::ASSIGN_PERMISSION_CREATE);
 $assign_permission_create       =   Users::checkAccsess(Yii::$app->user->id, PermissionEnum::ASSIGN_PERMISSION_LIST);
-
+$isGuest      =      Yii::$app->user->isGuest;
 
 $_SESSION['nadia'] = Menu::widget([
     'items' => [
@@ -21,6 +21,12 @@ $_SESSION['nadia'] = Menu::widget([
             'url' => 'index.php',
             'visible' => true,
             'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-home "></i><span>{label}</span></a>'
+        ),
+        array(
+            'label' => 'ورود به حساب کاربری',
+            'url' => 'index.php?r=site%2Flogin',
+            'visible' => $isGuest,
+            'template' => '<a href="{url}" class="href_class check-login"><i class="gl  glyphicon-log-in  "></i><span>{label}</span></a>'
         ),
         array(
             'label' => ' فروشندگان',
